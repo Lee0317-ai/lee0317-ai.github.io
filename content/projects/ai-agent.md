@@ -11,7 +11,9 @@ highlights:
   - Harness 运行时：ReAct loop、工具快照、持久化子 Agent、长期记忆
 links: {}
 screenshots:
+  - assets/screenshots/ai-agent/admin-desktop.png
   - assets/screenshots/ai-agent/agent-ui-home-3101.png
+  - assets/screenshots/ai-agent/agent-ui-thread-3101.png
 order: 1
 biz: 在授权范围内自动跨系统取证定位根因，把工程师从多系统翻查中解放出来。
 ---

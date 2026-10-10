@@ -12,7 +12,8 @@ highlights:
   - FormProfile 低代码适配：YAML 声明表单字段语义与外键解析规则，新增表单不改代码
   - 39 个 hermetic 测试（SQLite + InMemorySaver）零 Postgres 依赖全量跑绿
 links: {}
-screenshots: []
+screenshots:
+  - assets/screenshots/placeholders/workoperator.svg
 order: 2
 biz:
   - 让业务人员少在多个系统间反复登录、手动填表：一句话说清要办的事，Agent 以本人身份起草操作，人确认后才真正提交，权限仍完全受被控系统约束。

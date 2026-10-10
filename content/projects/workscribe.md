@@ -12,7 +12,8 @@ highlights:
   - 飞书集成：待办同步 WorkLog 日历，带同步日志保留策略
   - 本地 SQLite + 自动备份（24 小时快照、保留最近 5 份）、导入导出与完整性检查
 links: {}
-screenshots: []
+screenshots:
+  - assets/screenshots/placeholders/workscribe.svg
 order: 4
 biz:
   - 零碎工作做完就忘、汇报前反复翻记录——一键记录加 AI 整理，把周报月报的准备压到几分钟，数据全部留在本机，不怕敏感信息出域。

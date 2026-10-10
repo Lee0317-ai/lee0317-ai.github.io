@@ -12,7 +12,8 @@ highlights:
   - 模块化协作规范：每个工具/游戏独立文档目录 + 独立代码目录，双人 + 多 AI 通过任务分片协作，`docs:sync` 自动汇总看板
   - 统一账号中心第一阶段完成：账号密码登录、找回/修改密码，TimePick 等产品同账号接入
 links: {}
-screenshots: []
+screenshots:
+  - assets/screenshots/placeholders/dreamchasers.svg
 order: 8
 biz:
   - 一个免费、好用、更新快的工具与小游戏门户：先用 PDF 工具箱拿搜索流量、用小游戏拉停留和回访，再接 AI 能力与订阅变现。

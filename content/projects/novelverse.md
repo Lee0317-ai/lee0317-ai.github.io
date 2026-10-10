@@ -12,7 +12,8 @@ highlights:
   - 本地优先与密钥安全：API Key 只存系统凭据库，数据库、导出与备份均不落密钥；macOS 版自带私有 PostgreSQL + pgvector 运行时
   - 多模型按任务路由：灵感/规划/正文/修订/审稿/Embedding 各设默认模型，支持单次临时切换，Embedding 索引原子激活
 links: {}
-screenshots: []
+screenshots:
+  - assets/screenshots/placeholders/novelverse.svg
 order: 9
 biz:
   - 给长篇创作者一个"设定不崩、过程可追溯"的写作底座：世界观、角色与章节版本集中管理，AI 只出候选、每一步由作者确认，长篇不因记忆丢失而崩设定。

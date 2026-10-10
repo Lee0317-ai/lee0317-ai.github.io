@@ -9,7 +9,7 @@ export default function App() {
     <>
       <header className="site-header">
         <a className="brand" href="#/">Lee <span className="muted">/ 作品集</span></a>
-        <nav><ThemeToggle /></nav>
+        <nav><a href="/">静态版</a><ThemeToggle /></nav>
       </header>
       <main>
         <Routes>

@@ -12,7 +12,8 @@ highlights:
   - 品牌迁移与数据兼容：LobsterAI 旧归档根目录在 WOS 品牌下可读可恢复，未知根目录拒绝并保留路径安全检查
   - P0 回归 270/270、Agent 编排 257/257、数据迁移 20/20 通过；未验证项在验收报告中如实留档
 links: {}
-screenshots: []
+screenshots:
+  - assets/screenshots/placeholders/wos.svg
 order: 5
 biz:
   - 在开源桌面 Agent 基础上改编出一套"做完必须有证据、高危必须人确认"的可控工作台：任务验收有据可查，适合真正拿来干活而不是演示。

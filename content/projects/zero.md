@@ -12,7 +12,8 @@ highlights:
   - 个人上下文底座：Flomo 只读导入去重、Obsidian 档案（USER.md / MEMORY.md），外部连接器默认只读、写入须老板确认并留审计
   - 桌面工作台：公司工作区、员工办公室、内容/反馈工作台、画布固定模板工作流与 ComfyUI 封面生成闭环
 links: {}
-screenshots: []
+screenshots:
+  - assets/screenshots/placeholders/zero.svg
 order: 3
 biz:
   - 把"一人公司"的日常运营拆成可审批的员工任务流：素材自动采集提炼、内容经老板审批后才产出，重要动作全部留痕、可回溯。

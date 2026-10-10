@@ -73,7 +73,9 @@
       ],
       "links": {},
       "screenshots": [
-        "assets/screenshots/ai-agent/agent-ui-home-3101.png"
+        "assets/screenshots/ai-agent/admin-desktop.png",
+        "assets/screenshots/ai-agent/agent-ui-home-3101.png",
+        "assets/screenshots/ai-agent/agent-ui-thread-3101.png"
       ],
       "order": 1,
       "biz": [
@@ -102,7 +104,9 @@
         "39 个 hermetic 测试（SQLite + InMemorySaver）零 Postgres 依赖全量跑绿"
       ],
       "links": {},
-      "screenshots": [],
+      "screenshots": [
+        "assets/screenshots/placeholders/workoperator.svg"
+      ],
       "order": 2,
       "biz": [
         "让业务人员少在多个系统间反复登录、手动填表：一句话说清要办的事，Agent 以本人身份起草操作，人确认后才真正提交，权限仍完全受被控系统约束。"
@@ -129,7 +133,9 @@
         "桌面工作台：公司工作区、员工办公室、内容/反馈工作台、画布固定模板工作流与 ComfyUI 封面生成闭环"
       ],
       "links": {},
-      "screenshots": [],
+      "screenshots": [
+        "assets/screenshots/placeholders/zero.svg"
+      ],
       "order": 3,
       "biz": [
         "把\"一人公司\"的日常运营拆成可审批的员工任务流：素材自动采集提炼、内容经老板审批后才产出，重要动作全部留痕、可回溯。"
@@ -157,7 +163,9 @@
         "本地 SQLite + 自动备份（24 小时快照、保留最近 5 份）、导入导出与完整性检查"
       ],
       "links": {},
-      "screenshots": [],
+      "screenshots": [
+        "assets/screenshots/placeholders/workscribe.svg"
+      ],
       "order": 4,
       "biz": [
         "零碎工作做完就忘、汇报前反复翻记录——一键记录加 AI 整理，把周报月报的准备压到几分钟，数据全部留在本机，不怕敏感信息出域。"
@@ -183,7 +191,9 @@
         "P0 回归 270/270、Agent 编排 257/257、数据迁移 20/20 通过；未验证项在验收报告中如实留档"
       ],
       "links": {},
-      "screenshots": [],
+      "screenshots": [
+        "assets/screenshots/placeholders/wos.svg"
+      ],
       "order": 5,
       "biz": [
         "在开源桌面 Agent 基础上改编出一套\"做完必须有证据、高危必须人确认\"的可控工作台：任务验收有据可查，适合真正拿来干活而不是演示。"
@@ -211,7 +221,9 @@
         "自助注册页按应用编码自动绑定成员角色，公开路由直接可用"
       ],
       "links": {},
-      "screenshots": [],
+      "screenshots": [
+        "assets/screenshots/placeholders/riley-auth.svg"
+      ],
       "order": 6,
       "biz": [
         "给自研的多个应用提供一套统一登录与权限底座：账号、角色、审计集中在一个后台管，新应用注册即接入，不用每个系统各写一套认证。"
@@ -242,7 +254,9 @@
         "demo": "https://shiguang.app",
         "repo": "https://github.com/Lee0317-ai/TimePick"
       },
-      "screenshots": [],
+      "screenshots": [
+        "assets/screenshots/timepick/home.png"
+      ],
       "order": 7,
       "biz": [
         "把散落在浏览器收藏夹和聊天记录里的资料收进一个可搜索的个人知识库，AI 自动分类省去手工整理，\"存下来\"的东西真的能被再次找到。"
@@ -270,7 +284,9 @@
         "统一账号中心第一阶段完成：账号密码登录、找回/修改密码，TimePick 等产品同账号接入"
       ],
       "links": {},
-      "screenshots": [],
+      "screenshots": [
+        "assets/screenshots/placeholders/dreamchasers.svg"
+      ],
       "order": 8,
       "biz": [
         "一个免费、好用、更新快的工具与小游戏门户：先用 PDF 工具箱拿搜索流量、用小游戏拉停留和回访，再接 AI 能力与订阅变现。"
@@ -300,7 +316,9 @@
         "多模型按任务路由：灵感/规划/正文/修订/审稿/Embedding 各设默认模型，支持单次临时切换，Embedding 索引原子激活"
       ],
       "links": {},
-      "screenshots": [],
+      "screenshots": [
+        "assets/screenshots/placeholders/novelverse.svg"
+      ],
       "order": 9,
       "biz": [
         "给长篇创作者一个\"设定不崩、过程可追溯\"的写作底座：世界观、角色与章节版本集中管理，AI 只出候选、每一步由作者确认，长篇不因记忆丢失而崩设定。"

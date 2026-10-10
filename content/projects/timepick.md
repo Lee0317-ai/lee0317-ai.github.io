@@ -14,7 +14,8 @@ highlights:
 links:
   demo: "https://shiguang.app"
   repo: "https://github.com/Lee0317-ai/TimePick"
-screenshots: []
+screenshots:
+  - assets/screenshots/timepick/home.png
 order: 7
 biz:
   - 把散落在浏览器收藏夹和聊天记录里的资料收进一个可搜索的个人知识库，AI 自动分类省去手工整理，"存下来"的东西真的能被再次找到。

@@ -12,7 +12,8 @@ highlights:
   - 个人改密保留当前会话、吊销其它设备会话，丢号风险可控
   - 自助注册页按应用编码自动绑定成员角色，公开路由直接可用
 links: {}
-screenshots: []
+screenshots:
+  - assets/screenshots/placeholders/riley-auth.svg
 order: 6
 biz:
   - 给自研的多个应用提供一套统一登录与权限底座：账号、角色、审计集中在一个后台管，新应用注册即接入，不用每个系统各写一套认证。
