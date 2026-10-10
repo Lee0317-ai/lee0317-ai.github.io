@@ -73,6 +73,7 @@ window.__DEMO_DATA__ = {
   weekTodos: [
     { id: 11, title: '提交二期消防验收资料清单', notes: '', state: 'todo', priority: 1, category: '研发', scope: 'work', tags: '', due_at: '2026-10-10 18:00', reminder_at: null, parent_id: null, depends_on: '', sort_order: 0, linked_record_id: null, source_record_id: null, created_at: '2026-10-10 09:45:00', updated_at: '2026-10-10 09:45:00', completed_at: null },
     { id: 12, title: 'review 新版报表导出代码', notes: '', state: 'doing', priority: 2, category: '研发', scope: 'work', tags: '', due_at: '2026-10-10', reminder_at: null, parent_id: null, depends_on: '', sort_order: 1, linked_record_id: null, source_record_id: null, created_at: '2026-10-10 08:30:00', updated_at: '2026-10-10 08:30:00', completed_at: null },
+    { id: 14, title: '监理对接会（二期消防验收）', notes: '', state: 'done', priority: 1, category: '会议', scope: 'work', tags: '', due_at: '2026-10-08 14:00', reminder_at: null, parent_id: null, depends_on: '', sort_order: 3, linked_record_id: null, source_record_id: null, created_at: '2026-10-07 18:00:00', updated_at: '2026-10-08 15:10:00', completed_at: '2026-10-08 15:10:00' },
     { id: 13, title: '准备季度复盘材料', notes: '先列提纲', state: 'todo', priority: 2, category: '会议', scope: 'work', tags: '', due_at: '2026-10-14', reminder_at: null, parent_id: null, depends_on: '', sort_order: 2, linked_record_id: null, source_record_id: null, created_at: '2026-10-09 18:00:00', updated_at: '2026-10-09 18:00:00', completed_at: null },
   ],
   sessions: [

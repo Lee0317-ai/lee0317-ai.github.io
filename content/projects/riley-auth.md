@@ -13,7 +13,10 @@ highlights:
   - 自助注册页按应用编码自动绑定成员角色，公开路由直接可用
 links: {}
 screenshots:
-  - assets/screenshots/placeholders/riley-auth.svg
+  - assets/screenshots/rileyauth/demo.gif
+  - assets/screenshots/rileyauth/02-accounts.png
+  - assets/screenshots/rileyauth/04-roles.png
+  - assets/screenshots/rileyauth/07-audit.png
 order: 6
 biz:
   - 给自研的多个应用提供一套统一登录与权限底座：账号、角色、审计集中在一个后台管，新应用注册即接入，不用每个系统各写一套认证。
@@ -35,4 +38,4 @@ biz:
 
 ## 当前状态
 
-M1（服务骨架：认证接口、自助注册、应用作用域校验、审计埋点与查询）与 M3（Web 管理后台全模块）完成，已作为 agent-os 等应用的统一登录入口运行；M4（微信/飞书登录）在规划中。
+M1（服务骨架：认证接口、自助注册、应用作用域校验、审计埋点与查询）与 M3（Web 管理后台全模块）完成，已作为 agent-os 等应用的统一登录入口运行；M4（微信/飞书登录）在规划中。线上作品集演示为示例数据。

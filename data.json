@@ -146,7 +146,7 @@
       "name": "workscribe",
       "title": "工作记叙 WorkScribe",
       "tagline": "本地优先的工作记录与汇报工具",
-      "status": "wip",
+      "status": "shipped",
       "role": "独立开发",
       "stack": [
         "TypeScript",
@@ -166,14 +166,14 @@
       "screenshots": [
         "assets/screenshots/workscribe/demo.gif",
         "assets/screenshots/workscribe/03-ai-result.png",
-        "assets/screenshots/workscribe/07-report-preview.png",
-        "assets/screenshots/workscribe/05-todos.png"
+        "assets/screenshots/workscribe/08-schedule.png",
+        "assets/screenshots/workscribe/07-report-preview.png"
       ],
       "order": 4,
       "biz": [
         "零碎工作做完就忘、汇报前反复翻记录——一键记录加 AI 整理，把周报月报的准备压到几分钟，数据全部留在本机，不怕敏感信息出域。"
       ],
-      "narrativeHtml": "<p>日常工作零碎：做完就忘，月底回忆成本高；待办、日程、工作记录分散在各处，周会汇报前要反复整理；报告内容还要排除个人事项。工作记叙（WorkScribe）把&quot;记 → 理 → 报&quot;做成一条本地流水线：随手记下工作片段，AI 整理成结构化事项，再一键生成日报、周报、月报、绩效报告和会议汇报。</p>\n<h2>它解决什么问题</h2>\n<p>工作记录工具的通病是&quot;记了不看、看了不用&quot;：记录和待办两张皮，和汇报更是断开的。WorkScribe 让记录直接长成汇报——每次随手记的内容都被 AI 拆进待办/已完成/待澄清，生成报告时按时间范围汇总，还能屏蔽不需要的条目；数据本地存储，适合对数据出域敏感的团队和个人。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>快速记录</strong>：全局快捷键 Ctrl+Shift+L 唤出，支持文字与截图输入；AI 先整理，用户确认后才保存，避免 AI 自作主张。</li>\n<li><strong>任务与日程</strong>：待办支持优先级、分类、截止日期、重复任务与完成/重开；日程视图按日/周/月排布，dnd-kit 拖拽调整日期与时间，状态与优先级颜色区分。</li>\n<li><strong>报告与汇报</strong>：生成日报、周报、月报和绩效 HTML 报告，支持报告模板、应用内预览、保存 HTML；独立&quot;工作汇报&quot;模式整理&quot;正在做 / 已完成 / 下周继续&quot;，可手动补充与屏蔽记录。</li>\n<li><strong>飞书集成</strong>：账号绑定、待办同步到 WorkLog 日历（只同步有截止时间的顶层待办）、同步日志只保留最近 10 条、报告发布。</li>\n<li><strong>本地优先与模型</strong>：Tauri v2 + Rust，SQLite（rusqlite）存储；启动时距上次备份超 24 小时自动快照并保留最近 5 份，支持导入导出与 <code>PRAGMA integrity_check</code> 完整性检查；LLM 层统一封装 OpenAI 兼容与 Claude 原生格式，支持 Ollama、通义等多模型配置与默认切换。</li>\n</ul>\n<h2>当前状态</h2>\n<p>Windows 桌面端持续迭代中：飞书日历同步、日程日/周/月视图、工作汇报独立模式、周报任务摘要与已完成任务时间排序、同步日志保留策略等近期重点能力已落地；打包走版本号自动更新 + release notes 流程（<code>npm run package</code>）。线上作品集演示为示例数据。</p>\n"
+      "narrativeHtml": "<p>日常工作零碎：做完就忘，月底回忆成本高；待办、日程、工作记录分散在各处，周会汇报前要反复整理；报告内容还要排除个人事项。工作记叙（WorkScribe）把&quot;记 → 理 → 报&quot;做成一条本地流水线：随手记下工作片段，AI 整理成结构化事项，再一键生成日报、周报、月报、绩效报告和会议汇报。</p>\n<h2>它解决什么问题</h2>\n<p>工作记录工具的通病是&quot;记了不看、看了不用&quot;：记录和待办两张皮，和汇报更是断开的。WorkScribe 让记录直接长成汇报——每次随手记的内容都被 AI 拆进待办/已完成/待澄清，生成报告时按时间范围汇总，还能屏蔽不需要的条目；数据本地存储，适合对数据出域敏感的团队和个人。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>快速记录</strong>：全局快捷键 Ctrl+Shift+L 唤出，支持文字与截图输入；AI 先整理，用户确认后才保存，避免 AI 自作主张。</li>\n<li><strong>任务与日程</strong>：待办支持优先级、分类、截止日期、重复任务与完成/重开；日程视图按日/周/月排布，dnd-kit 拖拽调整日期与时间，状态与优先级颜色区分。</li>\n<li><strong>报告与汇报</strong>：生成日报、周报、月报和绩效 HTML 报告，支持报告模板、应用内预览、保存 HTML；独立&quot;工作汇报&quot;模式整理&quot;正在做 / 已完成 / 下周继续&quot;，可手动补充与屏蔽记录。</li>\n<li><strong>飞书集成</strong>：账号绑定、待办同步到 WorkLog 日历（只同步有截止时间的顶层待办）、同步日志只保留最近 10 条、报告发布。</li>\n<li><strong>本地优先与模型</strong>：Tauri v2 + Rust，SQLite（rusqlite）存储；启动时距上次备份超 24 小时自动快照并保留最近 5 份，支持导入导出与 <code>PRAGMA integrity_check</code> 完整性检查；LLM 层统一封装 OpenAI 兼容与 Claude 原生格式，支持 Ollama、通义等多模型配置与默认切换。</li>\n</ul>\n<h2>当前状态</h2>\n<p>开发已完成：记录、待办、日程（日/周/月视图与拖拽排期）、搜索、报告、工作汇报、报告模板、知识库、飞书集成与本地数据保障全部落地，打包走版本号自动更新 + release notes 流程（<code>npm run package</code>）。线上作品集演示为示例数据。</p>\n"
     },
     {
       "name": "wos",
@@ -225,13 +225,16 @@
       ],
       "links": {},
       "screenshots": [
-        "assets/screenshots/placeholders/riley-auth.svg"
+        "assets/screenshots/rileyauth/demo.gif",
+        "assets/screenshots/rileyauth/02-accounts.png",
+        "assets/screenshots/rileyauth/04-roles.png",
+        "assets/screenshots/rileyauth/07-audit.png"
       ],
       "order": 6,
       "biz": [
         "给自研的多个应用提供一套统一登录与权限底座：账号、角色、审计集中在一个后台管，新应用注册即接入，不用每个系统各写一套认证。"
       ],
-      "narrativeHtml": "<p>自研应用一多，每个系统各写一套登录、角色、审计很快就失控。睿狸账号中心（Riley Auth）是一套独立的账号认证服务 + Web 管理后台：账号、科室、团队、角色、审计集中管理，agent-os、ai-agent 等应用按&quot;应用编码&quot;接入，用户一次注册、按角色决定能进哪些应用。</p>\n<h2>它解决什么问题</h2>\n<p>多应用共用账号的常见做法是把用户表复制来复制去，权限口径很快对不上。Riley Auth 把&quot;谁能登录哪个应用&quot;做成显式建模：角色绑定应用，登录时校验用户角色是否覆盖目标应用（<code>APP_NOT_ALLOWED</code> 直接拒绝）；所有管理动作进审计日志，改密、重置、启停都有据可查。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>认证设计</strong>：不透明双令牌——accessToken 2 小时、refreshToken 30 天且轮换作废；数据库只存 SHA-256 哈希，令牌可即时吊销；统一错误码（INVALID_CREDENTIALS / ACCOUNT_DISABLED / APP_NOT_ALLOWED / TOKEN_EXPIRED 等）中文化返回。</li>\n<li><strong>应用作用域授权</strong>：注册应用 → 角色关联应用 → 用户绑定角色三步接入新应用，不改认证代码；自助注册页 <code>/#/register?app=&lt;编码&gt;</code> 为公开路由，注册即自动绑定对应成员角色。</li>\n<li><strong>管理后台</strong>（React 18 + Vite）：账号管理（分页搜索、新建/编辑/重置密码/启停）、角色与权限点配置、应用注册、科室树与团队、审计日志、顶栏个人改密与退出。</li>\n<li><strong>设计系统</strong>：oklch 设计 token、浅色/深色一键切换、品牌 Logo，最低适配 1024px。</li>\n<li><strong>部署形态</strong>：Fastify API 无构建步骤（tsx 直跑 TypeScript），管理后台构建为静态站点；Nginx 统一入口，静态文件直出、<code>/auth</code> <code>/admin</code> <code>/api</code> 前缀反代到 API。</li>\n</ul>\n<h2>当前状态</h2>\n<p>M1（服务骨架：认证接口、自助注册、应用作用域校验、审计埋点与查询）与 M3（Web 管理后台全模块）完成，已作为 agent-os 等应用的统一登录入口运行；M4（微信/飞书登录）在规划中。</p>\n"
+      "narrativeHtml": "<p>自研应用一多，每个系统各写一套登录、角色、审计很快就失控。睿狸账号中心（Riley Auth）是一套独立的账号认证服务 + Web 管理后台：账号、科室、团队、角色、审计集中管理，agent-os、ai-agent 等应用按&quot;应用编码&quot;接入，用户一次注册、按角色决定能进哪些应用。</p>\n<h2>它解决什么问题</h2>\n<p>多应用共用账号的常见做法是把用户表复制来复制去，权限口径很快对不上。Riley Auth 把&quot;谁能登录哪个应用&quot;做成显式建模：角色绑定应用，登录时校验用户角色是否覆盖目标应用（<code>APP_NOT_ALLOWED</code> 直接拒绝）；所有管理动作进审计日志，改密、重置、启停都有据可查。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>认证设计</strong>：不透明双令牌——accessToken 2 小时、refreshToken 30 天且轮换作废；数据库只存 SHA-256 哈希，令牌可即时吊销；统一错误码（INVALID_CREDENTIALS / ACCOUNT_DISABLED / APP_NOT_ALLOWED / TOKEN_EXPIRED 等）中文化返回。</li>\n<li><strong>应用作用域授权</strong>：注册应用 → 角色关联应用 → 用户绑定角色三步接入新应用，不改认证代码；自助注册页 <code>/#/register?app=&lt;编码&gt;</code> 为公开路由，注册即自动绑定对应成员角色。</li>\n<li><strong>管理后台</strong>（React 18 + Vite）：账号管理（分页搜索、新建/编辑/重置密码/启停）、角色与权限点配置、应用注册、科室树与团队、审计日志、顶栏个人改密与退出。</li>\n<li><strong>设计系统</strong>：oklch 设计 token、浅色/深色一键切换、品牌 Logo，最低适配 1024px。</li>\n<li><strong>部署形态</strong>：Fastify API 无构建步骤（tsx 直跑 TypeScript），管理后台构建为静态站点；Nginx 统一入口，静态文件直出、<code>/auth</code> <code>/admin</code> <code>/api</code> 前缀反代到 API。</li>\n</ul>\n<h2>当前状态</h2>\n<p>M1（服务骨架：认证接口、自助注册、应用作用域校验、审计埋点与查询）与 M3（Web 管理后台全模块）完成，已作为 agent-os 等应用的统一登录入口运行；M4（微信/飞书登录）在规划中。线上作品集演示为示例数据。</p>\n"
     },
     {
       "name": "timepick",

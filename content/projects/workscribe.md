@@ -2,7 +2,7 @@
 name: workscribe
 title: 工作记叙 WorkScribe
 tagline: 本地优先的工作记录与汇报工具
-status: wip
+status: shipped
 role: 独立开发
 stack: [TypeScript, React 19, Tauri 2, Rust, SQLite]
 highlights:
@@ -15,8 +15,8 @@ links: {}
 screenshots:
   - assets/screenshots/workscribe/demo.gif
   - assets/screenshots/workscribe/03-ai-result.png
+  - assets/screenshots/workscribe/08-schedule.png
   - assets/screenshots/workscribe/07-report-preview.png
-  - assets/screenshots/workscribe/05-todos.png
 order: 4
 biz:
   - 零碎工作做完就忘、汇报前反复翻记录——一键记录加 AI 整理，把周报月报的准备压到几分钟，数据全部留在本机，不怕敏感信息出域。
@@ -38,4 +38,4 @@ biz:
 
 ## 当前状态
 
-Windows 桌面端持续迭代中：飞书日历同步、日程日/周/月视图、工作汇报独立模式、周报任务摘要与已完成任务时间排序、同步日志保留策略等近期重点能力已落地；打包走版本号自动更新 + release notes 流程（`npm run package`）。线上作品集演示为示例数据。
+开发已完成：记录、待办、日程（日/周/月视图与拖拽排期）、搜索、报告、工作汇报、报告模板、知识库、飞书集成与本地数据保障全部落地，打包走版本号自动更新 + release notes 流程（`npm run package`）。线上作品集演示为示例数据。
