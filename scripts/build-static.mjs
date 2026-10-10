@@ -92,7 +92,7 @@ ${data.profile.skills.map(s => `<p><strong>${s.group}</strong>：${s.items.join(
 ${proj.map(p => `
   <h3 style="margin:14px 0 4px">${p.title} <span class="muted" style="font-weight:400">— ${p.tagline}</span></h3>
   <ul class="highlights">${(tech ? p.highlights : p.biz).map(h => `<li>${h}</li>`).join('')}</ul>`).join('\n')}`;
-  return renderPage(title, body);
+  return renderPage(title, body).replace('</head>', '<link rel="stylesheet" href="/assets/resume.css"></head>');
 }
 
 // ---------- 主流程 ----------
@@ -109,6 +109,7 @@ async function main() {
   await writeFile(path.resolve('dist/resume/resume-tech.html'), renderResume(data, 'tech'));
   await writeFile(path.resolve('dist/resume/resume-biz.html'), renderResume(data, 'biz'));
   await cp(path.resolve('sites/static/src/styles.css'), path.resolve('dist/assets/styles.css'));
+  await cp(path.resolve('sites/static/src/resume.css'), path.resolve('dist/assets/resume.css'));
   await cp(path.resolve('sites/static/src/theme.js'), path.resolve('dist/assets/theme.js'));
   if (await exists('assets/screenshots')) {
     await cp(path.resolve('assets/screenshots'), path.resolve('dist/assets/screenshots'), { recursive: true });

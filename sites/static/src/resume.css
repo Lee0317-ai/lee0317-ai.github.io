@@ -1,0 +1,16 @@
+/* 简历页：屏幕阅读舒适 + A4 打印分页 */
+main { max-width: 800px; }
+.hero h1 { font-size: 24px; }
+.highlights { margin: 4px 0 8px; }
+.highlights li { margin: 2px 0; }
+h2.section { margin: 18px 0 8px; font-size: 17px; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
+h3 { font-size: 15.5px; }
+@media print {
+  @page { size: A4; margin: 14mm 16mm; }
+  body { font-size: 12.5px; line-height: 1.55; background: #fff; }
+  a { color: inherit; text-decoration: none; }
+  h2.section { break-after: avoid; }
+  h3 { break-after: avoid; }
+  .highlights { break-inside: avoid; }
+  .biz-box, .card { break-inside: avoid; }
+}
