@@ -12,8 +12,11 @@ export function parseProject(source) {
   if (!STATUSES.has(meta.status)) throw new Error(`非法 status: ${meta.status}（${meta.name}）`);
   const biz = meta.biz == null ? [] : (Array.isArray(meta.biz) ? meta.biz : [meta.biz]);
   return {
-    links: {}, screenshots: [], stack: [], highlights: [],
     ...meta,
+    links: meta.links == null ? {} : meta.links,
+    screenshots: meta.screenshots == null ? [] : meta.screenshots,
+    stack: meta.stack == null ? [] : meta.stack,
+    highlights: meta.highlights == null ? [] : meta.highlights,
     biz,
     narrativeHtml: marked.parse(m[2].trim()),
   };

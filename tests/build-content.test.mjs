@@ -37,6 +37,14 @@ test('parseProject 解析 frontmatter 与正文', () => {
   assert.ok(p.narrativeHtml.includes('<p>正文第一段。</p>'));
 });
 
+test('parseProject 对裸键 null 值归一化为默认空值', () => {
+  const src = SAMPLE.replace('stack: [React, Vite]', 'stack:').replace('links:\n  demo: https://example.com', 'links:');
+  const p = parseProject(src);
+  assert.deepEqual(p.stack, []);
+  assert.deepEqual(p.links, {});
+  assert.deepEqual(p.highlights, ['亮点一', '亮点二']);
+});
+
 test('parseProject 拒绝非法 status', () => {
   assert.throws(() => parseProject(SAMPLE.replace('status: shipped', 'status: done')), /status/);
 });
