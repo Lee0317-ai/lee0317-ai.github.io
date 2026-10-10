@@ -13,7 +13,10 @@ highlights:
   - 本地 SQLite + 自动备份（24 小时快照、保留最近 5 份）、导入导出与完整性检查
 links: {}
 screenshots:
-  - assets/screenshots/placeholders/workscribe.svg
+  - assets/screenshots/workscribe/demo.gif
+  - assets/screenshots/workscribe/03-ai-result.png
+  - assets/screenshots/workscribe/07-report-preview.png
+  - assets/screenshots/workscribe/05-todos.png
 order: 4
 biz:
   - 零碎工作做完就忘、汇报前反复翻记录——一键记录加 AI 整理，把周报月报的准备压到几分钟，数据全部留在本机，不怕敏感信息出域。
@@ -35,4 +38,4 @@ biz:
 
 ## 当前状态
 
-Windows 桌面端持续迭代中：飞书日历同步、日程日/周/月视图、工作汇报独立模式、周报任务摘要与已完成任务时间排序、同步日志保留策略等近期重点能力已落地；打包走版本号自动更新 + release notes 流程（`npm run package`）。
+Windows 桌面端持续迭代中：飞书日历同步、日程日/周/月视图、工作汇报独立模式、周报任务摘要与已完成任务时间排序、同步日志保留策略等近期重点能力已落地；打包走版本号自动更新 + release notes 流程（`npm run package`）。线上作品集演示为示例数据。

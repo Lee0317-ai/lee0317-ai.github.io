@@ -164,13 +164,16 @@
       ],
       "links": {},
       "screenshots": [
-        "assets/screenshots/placeholders/workscribe.svg"
+        "assets/screenshots/workscribe/demo.gif",
+        "assets/screenshots/workscribe/03-ai-result.png",
+        "assets/screenshots/workscribe/07-report-preview.png",
+        "assets/screenshots/workscribe/05-todos.png"
       ],
       "order": 4,
       "biz": [
         "零碎工作做完就忘、汇报前反复翻记录——一键记录加 AI 整理，把周报月报的准备压到几分钟，数据全部留在本机，不怕敏感信息出域。"
       ],
-      "narrativeHtml": "<p>日常工作零碎：做完就忘，月底回忆成本高；待办、日程、工作记录分散在各处，周会汇报前要反复整理；报告内容还要排除个人事项。工作记叙（WorkScribe）把&quot;记 → 理 → 报&quot;做成一条本地流水线：随手记下工作片段，AI 整理成结构化事项，再一键生成日报、周报、月报、绩效报告和会议汇报。</p>\n<h2>它解决什么问题</h2>\n<p>工作记录工具的通病是&quot;记了不看、看了不用&quot;：记录和待办两张皮，和汇报更是断开的。WorkScribe 让记录直接长成汇报——每次随手记的内容都被 AI 拆进待办/已完成/待澄清，生成报告时按时间范围汇总，还能屏蔽不需要的条目；数据本地存储，适合对数据出域敏感的团队和个人。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>快速记录</strong>：全局快捷键 Ctrl+Shift+L 唤出，支持文字与截图输入；AI 先整理，用户确认后才保存，避免 AI 自作主张。</li>\n<li><strong>任务与日程</strong>：待办支持优先级、分类、截止日期、重复任务与完成/重开；日程视图按日/周/月排布，dnd-kit 拖拽调整日期与时间，状态与优先级颜色区分。</li>\n<li><strong>报告与汇报</strong>：生成日报、周报、月报和绩效 HTML 报告，支持报告模板、应用内预览、保存 HTML；独立&quot;工作汇报&quot;模式整理&quot;正在做 / 已完成 / 下周继续&quot;，可手动补充与屏蔽记录。</li>\n<li><strong>飞书集成</strong>：账号绑定、待办同步到 WorkLog 日历（只同步有截止时间的顶层待办）、同步日志只保留最近 10 条、报告发布。</li>\n<li><strong>本地优先与模型</strong>：Tauri v2 + Rust，SQLite（rusqlite）存储；启动时距上次备份超 24 小时自动快照并保留最近 5 份，支持导入导出与 <code>PRAGMA integrity_check</code> 完整性检查；LLM 层统一封装 OpenAI 兼容与 Claude 原生格式，支持 Ollama、通义等多模型配置与默认切换。</li>\n</ul>\n<h2>当前状态</h2>\n<p>Windows 桌面端持续迭代中：飞书日历同步、日程日/周/月视图、工作汇报独立模式、周报任务摘要与已完成任务时间排序、同步日志保留策略等近期重点能力已落地；打包走版本号自动更新 + release notes 流程（<code>npm run package</code>）。</p>\n"
+      "narrativeHtml": "<p>日常工作零碎：做完就忘，月底回忆成本高；待办、日程、工作记录分散在各处，周会汇报前要反复整理；报告内容还要排除个人事项。工作记叙（WorkScribe）把&quot;记 → 理 → 报&quot;做成一条本地流水线：随手记下工作片段，AI 整理成结构化事项，再一键生成日报、周报、月报、绩效报告和会议汇报。</p>\n<h2>它解决什么问题</h2>\n<p>工作记录工具的通病是&quot;记了不看、看了不用&quot;：记录和待办两张皮，和汇报更是断开的。WorkScribe 让记录直接长成汇报——每次随手记的内容都被 AI 拆进待办/已完成/待澄清，生成报告时按时间范围汇总，还能屏蔽不需要的条目；数据本地存储，适合对数据出域敏感的团队和个人。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>快速记录</strong>：全局快捷键 Ctrl+Shift+L 唤出，支持文字与截图输入；AI 先整理，用户确认后才保存，避免 AI 自作主张。</li>\n<li><strong>任务与日程</strong>：待办支持优先级、分类、截止日期、重复任务与完成/重开；日程视图按日/周/月排布，dnd-kit 拖拽调整日期与时间，状态与优先级颜色区分。</li>\n<li><strong>报告与汇报</strong>：生成日报、周报、月报和绩效 HTML 报告，支持报告模板、应用内预览、保存 HTML；独立&quot;工作汇报&quot;模式整理&quot;正在做 / 已完成 / 下周继续&quot;，可手动补充与屏蔽记录。</li>\n<li><strong>飞书集成</strong>：账号绑定、待办同步到 WorkLog 日历（只同步有截止时间的顶层待办）、同步日志只保留最近 10 条、报告发布。</li>\n<li><strong>本地优先与模型</strong>：Tauri v2 + Rust，SQLite（rusqlite）存储；启动时距上次备份超 24 小时自动快照并保留最近 5 份，支持导入导出与 <code>PRAGMA integrity_check</code> 完整性检查；LLM 层统一封装 OpenAI 兼容与 Claude 原生格式，支持 Ollama、通义等多模型配置与默认切换。</li>\n</ul>\n<h2>当前状态</h2>\n<p>Windows 桌面端持续迭代中：飞书日历同步、日程日/周/月视图、工作汇报独立模式、周报任务摘要与已完成任务时间排序、同步日志保留策略等近期重点能力已落地；打包走版本号自动更新 + release notes 流程（<code>npm run package</code>）。线上作品集演示为示例数据。</p>\n"
     },
     {
       "name": "wos",
@@ -324,6 +327,41 @@
         "给长篇创作者一个\"设定不崩、过程可追溯\"的写作底座：世界观、角色与章节版本集中管理，AI 只出候选、每一步由作者确认，长篇不因记忆丢失而崩设定。"
       ],
       "narrativeHtml": "<p>NovelVerse 是一个本地优先、面向中文小说创作的 AI 写作工作台。它的核心不是让 AI 一次写完一本书，而是把每一步的意图、草稿、确认版本和后续影响放在同一条可追溯的创作链上：章节计划、正文、角色决策、监督报告、记忆和模型调用记录全部存为可追踪的版本。不配置模型也能完整手写、自动保存、锁章、恢复和导出。</p>\n<h2>它解决什么问题</h2>\n<p>长篇创作的两个老大难：设定崩坏（写着写着忘了伏笔、角色状态漂移）和 AI 代写失控（生成内容静默覆盖作者文本）。NovelVerse 用&quot;记忆层 + 版本快照 + 确认关卡&quot;正面处理这两件事——AI 结果一律以工作草稿/变体出现、由作者挑选采用，已锁定的正文和正史绝不被自动重写。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>写作台</strong>：短篇、架构师（总纲 → 卷纲 → 章卡 → 正文）、园丁（先写场景再回填结构）三种模式共享同一套资产；&quot;当前最重要的一步&quot;作为唯一主入口驱动推进，离开时保护现场、异常退出可恢复本地未保存内容。</li>\n<li><strong>版本与回滚</strong>：每章锁定时保存记忆层快照（摘要 + 角色状态 + 伏笔台账），回滚到第 N 章即加载该快照、其后章节进归档分支保留可对比，不破坏主线；上游设定修改会提示受影响的下游内容，由作者决定同步或保留。</li>\n<li><strong>角色 Agent</strong>：角色作为带人格档案的 sub-agent 可自主决策，决策按绿/黄/红三级确认（红级如角色生死、主线节点必须执行前确认）；叙事层（作者）优先级高于角色层（按设计）。</li>\n<li><strong>长篇记忆</strong>：章节摘要、角色状态、伏笔与时间线入记忆中心，PostgreSQL + pgvector 向量检索支撑超长篇上下文；Prompt 版本管理、模型用量与费用记录。</li>\n<li><strong>工程形态</strong>：FastAPI Core + React/TypeScript/Vite 前端 + Tauri 2 桌面壳；模型密钥只存系统凭据库（macOS Keychain / Windows Credential Manager），macOS 发行版自带私有 PostgreSQL + pgvector 运行时，无需用户自行装库。</li>\n</ul>\n<h2>当前状态</h2>\n<p>架构底座与小说创作闭环已实现：中文小说初始化、章节规划、生成、修订、监督与锁定，构思资产（作品 DNA / 角色 / 世界观 / 情节蓝图）逐项确认后原子创建作品，短篇/架构师/园丁三模式、章节回滚与分支、pgvector 记忆检索、Markdown/TXT 导出与备份恢复均可用，配套 P1 统一验证脚本。汇聚宇宙、去 AI 味层等能力已在领域设计文档中定稿，属后续方向。</p>\n"
+    },
+    {
+      "name": "workevidence",
+      "title": "workEvidence 工程资料证据链引擎",
+      "tagline": "合同解析、版式级比对、风险审查与证据报告的桌面引擎",
+      "status": "wip",
+      "role": "独立开发",
+      "stack": [
+        "Tauri 2",
+        "Rust",
+        "React",
+        "TypeScript",
+        "pdf.js",
+        "PaddleOCR",
+        "LLM"
+      ],
+      "highlights": [
+        "双文档版式级比对：PDF/Word 解析、页面对齐、段落与条款级差异高亮，layout / text / LLM 三引擎可切换",
+        "规则引擎驱动风险审查：付款、工期、质保、变更签证等规则命中生成风险清单，复核结论全流程留痕（待复核 / 已确认 / 误报 / 需法务）",
+        "条款审查模式：单份合同条款级 AI 审查，与双文档比对互补，覆盖无标准范本的场景",
+        "合同模板库与比对参数预设：范本版本管理、参数 schema 化调参、试运行预览命中统计",
+        "本地优先：资料、中间结果与报告全部落本地，OCR 支持本地服务（gooyoo-ocr / PaddleOCR）与 LLM 兜底"
+      ],
+      "links": {},
+      "screenshots": [
+        "assets/screenshots/workevidence/demo.gif",
+        "assets/screenshots/workevidence/diff.png",
+        "assets/screenshots/workevidence/risk.png",
+        "assets/screenshots/workevidence/dashboard.png"
+      ],
+      "order": 10,
+      "biz": [
+        "把工程师\"多版本合同反复肉眼比对\"的数小时工作压到几分钟，差异可追溯、风险可复核、报告可直接交付，产出结果供 workOperator 回写业务系统。"
+      ],
+      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>施工企业的合同与工程资料管理里有一个高频痛点：投标稿、补充协议、变更单在标准范本之间反复横跳，\n人工比对既慢又容易漏——而漏掉的那一条付款比例改动，可能就是结算时几十万的争议。</p>\n<p>workEvidence 专门做这件事：把两份合同（或任意工程资料）解析成结构化文本，做页面对齐和条款级差异，\n再由规则引擎和 LLM 标注风险等级，最后生成可复核、可追溯的证据报告。它不做个人工作台，也不替代业务系统，\n只产出&quot;可追溯的证据和结构化结果&quot;——下游由 workOperator 回写业务系统，或在 WorkScribe 工作流里被引用。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>Tauri 2 + Rust 桌面引擎</strong>：文档解析、页面对齐、比对流水线在本地 Rust 侧运行，资料不出本机；\n前端 React + React Router，比对进度通过事件通道（compare:event）实时推送。</li>\n<li><strong>三比对引擎</strong>：gooyoo-ocr 本地 OCR 版式比对（默认）、PaddleOCR 云端比对、LLM 兜底比对，\n按 <code>check_ocr_health</code> 健康探测自动感知可用性；差异按页配对（PagePair）组织，支持重新对齐。</li>\n<li><strong>规则与审查流</strong>：规则中心管理 PAY/QUA/CHG 等规则包（作用域、条款类型、严重度、版本、发布态），\n命中结果进入风险复核面板——系统规则解释、AI 建议、联网参考、复核结论四段式，复核动作写审计记录。</li>\n<li><strong>报告链</strong>：比对完成一键生成 HTML 报告（报告中心版本化管理），&quot;完成并出报告&quot;把差异复核状态收敛进报告。</li>\n</ul>\n<h2>当前状态</h2>\n<p>MVP 可用（v0.1）：双文档比对、风险审查、规则中心、报告中心、条款审查主链路已跑通；\n图纸（CAD）证据与计量证据在路线图中，是刻意避开的深水区（见项目 PRD 的分阶段策略）。\n当前为私有仓库，界面演示为示例数据。</p>\n"
     }
   ]
 }
