@@ -3,6 +3,7 @@ name: workoperator
 title: 企业系统操作 Agent
 tagline: 自然语言操作业务系统，人机协同确认后执行
 status: wip
+category: ai
 role: 独立开发
 stack: [Python, FastAPI, LangGraph, SQLAlchemy, PostgreSQL]
 highlights:

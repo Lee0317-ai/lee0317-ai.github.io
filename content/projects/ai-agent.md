@@ -3,6 +3,7 @@ name: ai-agent
 title: 调查型 AI Agent
 tagline: 面向研发团队的根因取证 Agent
 status: shipped
+category: ai
 role: 独立开发
 stack: [Next.js 14, LangGraph, pgvector, Prisma, PostgreSQL]
 highlights:

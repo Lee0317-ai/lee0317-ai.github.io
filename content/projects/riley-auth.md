@@ -3,6 +3,7 @@ name: riley-auth
 title: 睿狸账号中心 Riley Auth
 tagline: 独立账号认证服务与 Web 管理后台
 status: shipped
+category: ai
 role: 独立开发
 stack: [Fastify, TypeScript, Prisma, PostgreSQL, React 18]
 highlights:

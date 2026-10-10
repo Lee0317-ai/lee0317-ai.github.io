@@ -3,6 +3,7 @@ name: workevidence
 title: workEvidence 工程资料证据链引擎
 tagline: 合同解析、版式级比对、风险审查与证据报告的桌面引擎
 status: wip
+category: ai
 role: 独立开发
 stack: [Tauri 2, Rust, React, TypeScript, pdf.js, PaddleOCR, LLM]
 highlights:

@@ -3,6 +3,7 @@ name: novelverse
 title: NovelVerse 小说宇宙创作引擎
 tagline: 长篇小说世界的设定管理与创作引擎
 status: wip
+category: ai
 role: 独立开发
 stack: [Python, FastAPI, PostgreSQL, pgvector, React, TypeScript, Tauri 2]
 highlights:

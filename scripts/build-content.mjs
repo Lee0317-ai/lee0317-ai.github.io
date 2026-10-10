@@ -4,6 +4,7 @@ import { readFile, readdir, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
 const STATUSES = new Set(['shipped', 'wip', 'planned', 'adapted']);
+const CATEGORIES = new Set(['ai', 'java']);
 
 export function parseProject(source) {
   const m = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
@@ -11,9 +12,11 @@ export function parseProject(source) {
   const meta = parse(m[1]);
   if (!meta || typeof meta !== 'object') throw new Error('frontmatter 解析结果为空或非对象');
   if (!STATUSES.has(meta.status)) throw new Error(`非法 status: ${meta.status}（${meta.name}）`);
+  if (meta.category != null && !CATEGORIES.has(meta.category)) throw new Error(`非法 category: ${meta.category}（${meta.name}）`);
   const biz = meta.biz == null ? [] : (Array.isArray(meta.biz) ? meta.biz : [meta.biz]);
   return {
     ...meta,
+    category: meta.category == null ? 'ai' : meta.category,
     links: meta.links == null ? {} : meta.links,
     screenshots: meta.screenshots == null ? [] : (Array.isArray(meta.screenshots) ? meta.screenshots : [meta.screenshots]),
     stack: meta.stack == null ? [] : (Array.isArray(meta.stack) ? meta.stack : [meta.stack]),
@@ -31,7 +34,8 @@ export async function buildData(contentDir) {
   for (const f of files) {
     projects.push(parseProject(await readFile(path.join(dir, f), 'utf8')));
   }
-  projects.sort((a, b) => a.order - b.order);
+  const catRank = (c) => (c === 'ai' ? 0 : 1);
+  projects.sort((a, b) => catRank(a.category) - catRank(b.category) || a.order - b.order);
   return { profile, projects };
 }
 

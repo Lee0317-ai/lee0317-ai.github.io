@@ -4,7 +4,7 @@
     "handle": "Lee0317-ai",
     "github": "https://github.com/Lee0317-ai",
     "headline": "AI 全栈独立开发者",
-    "intro": "独立完成从需求、设计、前后端开发到部署上线的完整闭环， 擅长把 AI Agent 能力（LangGraph、RAG、HITL、Multi-Agent）落成真实可用的产品。 已独立交付 10+ 个项目，覆盖企业 Agent、开发者工具、效率软件与线上站点。",
+    "intro": "独立完成从需求、设计、前后端开发到部署上线的完整闭环， 擅长把 AI Agent 能力（LangGraph、RAG、HITL、Multi-Agent）落成真实可用的产品。 同时具备企业级 Java 全栈交付经验：作为核心开发交付过多客户的企业业务平台， 并独立完成拍卖系统与数据同步系统从需求到上线。已交付 14+ 个项目，覆盖 企业平台、AI Agent、开发者工具、效率软件与线上站点。",
     "skills": [
       {
         "group": "Agent 工程",
@@ -26,6 +26,17 @@
           "Tailwind CSS",
           "Tauri",
           "Electron"
+        ]
+      },
+      {
+        "group": "企业级 Java",
+        "items": [
+          "Spring Boot 3",
+          "JDK 17/21",
+          "MySQL",
+          "Redis",
+          "uni-app",
+          "企业交付"
         ]
       },
       {
@@ -58,6 +69,7 @@
       "title": "调查型 AI Agent",
       "tagline": "面向研发团队的根因取证 Agent",
       "status": "shipped",
+      "category": "ai",
       "role": "独立开发",
       "stack": [
         "Next.js 14",
@@ -88,6 +100,7 @@
       "title": "企业系统操作 Agent",
       "tagline": "自然语言操作业务系统，人机协同确认后执行",
       "status": "wip",
+      "category": "ai",
       "role": "独立开发",
       "stack": [
         "Python",
@@ -118,6 +131,7 @@
       "title": "Zero 个人智能工作台",
       "tagline": "一人公司 OS / 本地优先的个人成长引擎",
       "status": "wip",
+      "category": "ai",
       "role": "独立开发",
       "stack": [
         "Tauri 2",
@@ -147,6 +161,7 @@
       "title": "工作记叙 WorkScribe",
       "tagline": "本地优先的工作记录与汇报工具",
       "status": "shipped",
+      "category": "ai",
       "role": "独立开发",
       "stack": [
         "TypeScript",
@@ -180,6 +195,7 @@
       "title": "WOS 桌面 Agent",
       "tagline": "基于 LobsterAI 深度改编的桌面 Agent 工作台",
       "status": "adapted",
+      "category": "ai",
       "role": "改编维护",
       "stack": [
         "Electron 40",
@@ -208,6 +224,7 @@
       "title": "睿狸账号中心 Riley Auth",
       "tagline": "独立账号认证服务与 Web 管理后台",
       "status": "shipped",
+      "category": "ai",
       "role": "独立开发",
       "stack": [
         "Fastify",
@@ -241,6 +258,7 @@
       "title": "拾光 TimePick",
       "tagline": "个人知识与资源管理系统",
       "status": "shipped",
+      "category": "ai",
       "role": "独立开发",
       "stack": [
         "React 19",
@@ -274,6 +292,7 @@
       "title": "DreamChasers 梦想启航",
       "tagline": "免费工具与小游戏门户",
       "status": "wip",
+      "category": "ai",
       "role": "独立开发",
       "stack": [
         "TypeScript",
@@ -304,6 +323,7 @@
       "title": "NovelVerse 小说宇宙创作引擎",
       "tagline": "长篇小说世界的设定管理与创作引擎",
       "status": "wip",
+      "category": "ai",
       "role": "独立开发",
       "stack": [
         "Python",
@@ -336,6 +356,7 @@
       "title": "workEvidence 工程资料证据链引擎",
       "tagline": "合同解析、版式级比对、风险审查与证据报告的桌面引擎",
       "status": "wip",
+      "category": "ai",
       "role": "独立开发",
       "stack": [
         "Tauri 2",
@@ -365,6 +386,135 @@
         "把工程师\"多版本合同反复肉眼比对\"的数小时工作压到几分钟，差异可追溯、风险可复核、报告可直接交付，产出结果供 workOperator 回写业务系统。"
       ],
       "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>施工企业的合同与工程资料管理里有一个高频痛点：投标稿、补充协议、变更单在标准范本之间反复横跳，\n人工比对既慢又容易漏——而漏掉的那一条付款比例改动，可能就是结算时几十万的争议。</p>\n<p>workEvidence 专门做这件事：把两份合同（或任意工程资料）解析成结构化文本，做页面对齐和条款级差异，\n再由规则引擎和 LLM 标注风险等级，最后生成可复核、可追溯的证据报告。它不做个人工作台，也不替代业务系统，\n只产出&quot;可追溯的证据和结构化结果&quot;——下游由 workOperator 回写业务系统，或在 WorkScribe 工作流里被引用。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>Tauri 2 + Rust 桌面引擎</strong>：文档解析、页面对齐、比对流水线在本地 Rust 侧运行，资料不出本机；\n前端 React + React Router，比对进度通过事件通道（compare:event）实时推送。</li>\n<li><strong>三比对引擎</strong>：gooyoo-ocr 本地 OCR 版式比对（默认）、PaddleOCR 云端比对、LLM 兜底比对，\n按 <code>check_ocr_health</code> 健康探测自动感知可用性；差异按页配对（PagePair）组织，支持重新对齐。</li>\n<li><strong>规则与审查流</strong>：规则中心管理 PAY/QUA/CHG 等规则包（作用域、条款类型、严重度、版本、发布态），\n命中结果进入风险复核面板——系统规则解释、AI 建议、联网参考、复核结论四段式，复核动作写审计记录。</li>\n<li><strong>报告链</strong>：比对完成一键生成 HTML 报告（报告中心版本化管理），&quot;完成并出报告&quot;把差异复核状态收敛进报告。</li>\n</ul>\n<h2>当前状态</h2>\n<p>MVP 可用（v0.1）：双文档比对、风险审查、规则中心、报告中心、条款审查主链路已跑通；\n图纸（CAD）证据与计量证据在路线图中，是刻意避开的深水区（见项目 PRD 的分阶段策略）。\n当前为私有仓库，界面演示为示例数据。</p>\n"
+    },
+    {
+      "name": "gooyoo-platform",
+      "title": "gooyoo 企业级业务平台",
+      "tagline": "Spring Boot 3 + Vue3 + uni-app 的多模块企业平台与多客户交付体系",
+      "status": "shipped",
+      "category": "java",
+      "role": "团队项目 · 核心全栈开发（约 90% 开发独立承担）",
+      "stack": [
+        "Spring Boot 3.4",
+        "JDK 17/21",
+        "Vue 3",
+        "Element Plus",
+        "uni-app",
+        "MySQL",
+        "Redis",
+        "Docker"
+      ],
+      "highlights": [
+        "18+ 业务模块：系统管理、BPM 工作流、CRM、ERP、招投标、证书、巡检、IoT、商城、会员、支付、报表、门户、文档解析等",
+        "多客户定制交付体系：客户级构建脚本与环境变量，同一代码库交付多家企业客户",
+        "三端覆盖：Web 管理端（Vue3）+ 移动端（uni-app，一份代码适配 APP/小程序/H5）",
+        "综合门户：跨系统核心指标、风险预警汇总、审批中心与系统入口统一编排",
+        "多租户与细粒度权限：租户隔离、角色权限、数据权限与审计贯穿全部模块"
+      ],
+      "links": {},
+      "screenshots": [
+        "assets/screenshots/gooyoo/demo.gif",
+        "assets/screenshots/gooyoo/02-home.png",
+        "assets/screenshots/gooyoo/01-login.png",
+        "assets/screenshots/gooyoo/10-m-workbench.png"
+      ],
+      "order": 1,
+      "biz": [
+        "为多家企业客户交付的统一业务底座：一套平台承载客户的核心业务流程，按客户定制扩展，交付后持续迭代——替代客户自建多套孤立系统的老路。"
+      ],
+      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>成长型企业常见困境：业务系统一堆，账号不互通、数据不互通、流程跑在纸面上。gooyoo 平台把企业需要的\n系统能力（组织权限、流程审批、客户与项目、招投标、证书、巡检、设备、商城支付等）收进一个模块化底座，\n按客户选择模块组合交付，再通过门户把跨系统的指标、待办和风险汇总到一个入口。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>后端</strong>：Spring Boot 3.4 + JDK 17/21 多模块单体（22 个业务模块），MySQL + Redis，\n多租户隔离、数据权限、操作审计全链路内建。</li>\n<li><strong>Web 管理端</strong>：Vue 3 + Element Plus，动态菜单 + 组件级权限；综合门户聚合各子系统指标、\n风险预警与审批中心。</li>\n<li><strong>移动端</strong>：uni-app 一份代码适配 APP / 微信小程序 / H5，工作台、审批、通讯录等高频场景移动化。</li>\n<li><strong>交付体系</strong>：客户级构建脚本与环境变量管理，同一代码库衍生多客户版本；Docker 化部署。</li>\n</ul>\n<h2>当前状态</h2>\n<p>已上线交付多家企业客户（客户名称已脱敏），持续迭代中。以上截图为示例数据演示。</p>\n"
+    },
+    {
+      "name": "gooyoo-ocr",
+      "title": "gooyoo-ocr 合同 OCR 比对服务",
+      "tagline": "三层架构的合同 OCR 解析与差异比对引擎",
+      "status": "shipped",
+      "category": "java",
+      "role": "全栈开发（gooyoo 团队项目）",
+      "stack": [
+        "Spring Boot",
+        "FastAPI",
+        "Python",
+        "Vue 3",
+        "OCR"
+      ],
+      "highlights": [
+        "三层架构：Vue3 前端工作台 → Spring Boot Java 网关（鉴权/参数校验/产物代理）→ FastAPI Python 服务",
+        "双入口：合同对比（双文档差异）与单文件解析共用一个前端入口",
+        "OCR、文档预处理、差异比对、风险判定、坐标精修全链路在 Python 服务内完成",
+        "前端所有接口统一走 Java 网关，前端不直接访问 Python 服务，边界清晰",
+        "是 workEvidence 工程资料证据链引擎的比对引擎底座"
+      ],
+      "links": {},
+      "screenshots": [
+        "assets/screenshots/gooyoo-ocr/01-workbench.png"
+      ],
+      "order": 2,
+      "biz": [
+        "把人工逐页比对合同的过程变成\"上传两份文件 → 自动差异定位\"，解析与比对能力以服务形式供上层系统复用。"
+      ],
+      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>合同审阅里最耗时的环节是&quot;找不同&quot;：两份几十页的合同，人工逐页比对既慢又容易漏。gooyoo-ocr\n把这件事服务化——上传标准合同与待审合同，OCR 解析、预处理、差异比对、风险判定一次完成，\n并给出带坐标的差异定位，供上层系统（如 workEvidence）直接渲染差异视图。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>前端工作台</strong>：Vue 3，&quot;合同对比&quot;与&quot;单文件解析&quot;两个入口；比对结果支持滚轮缩放、\n左键拖动、两侧同步滚动。</li>\n<li><strong>Java 网关</strong>：Spring Boot 负责参数校验、鉴权、调用 Python 服务并代理产物文件——\n前端所有接口统一走网关，Python 服务不对前端暴露。</li>\n<li><strong>Python 服务</strong>：FastAPI 承载 OCR、文档预处理、差异比对、风险判定与坐标精修的计算主链。</li>\n</ul>\n<h2>当前状态</h2>\n<p>已随 gooyoo 平台交付使用（客户名称已脱敏），并作为 workEvidence 的比对引擎底座持续演进。</p>\n"
+    },
+    {
+      "name": "gooyoo-sync",
+      "title": "gooyoo-sync 组织人员同步系统",
+      "tagline": "客户 OA 与业务平台间的组织人员数据同步管道",
+      "status": "shipped",
+      "category": "java",
+      "role": "独立开发（需求到上线）",
+      "stack": [
+        "Spring Boot",
+        "MySQL",
+        "Docker"
+      ],
+      "highlights": [
+        "快照式同步：先把源端组织人员数据拉取为本地快照，再按同步任务配置推送目标端",
+        "全量执行明细：记录执行阶段、成功、跳过、失败与重试明细，问题可追溯",
+        "Docker 化部署，独立于业务平台运行，源端与目标端解耦",
+        "源端与目标端均为客户自有系统（名称已脱敏）"
+      ],
+      "links": {},
+      "screenshots": [
+        "assets/screenshots/placeholders/gooyoo-sync.svg"
+      ],
+      "order": 3,
+      "biz": [
+        "消除客户 OA 与业务平台之间组织人员数据的手工维护：人员入职、调岗、离职自动同步到位，差异可查、失败可重试。"
+      ],
+      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>客户的组织架构与人员在 OA 和业务平台两套系统里各自维护，手工同步迟早出错：人离职了系统里还在，\n新部门建了平台里没有。gooyoo-sync 把这条链路自动化——从客户 OA 拉取组织人员数据存为本地快照，\n按同步任务配置推送到目标平台，每一步执行都有明细记录。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>快照机制</strong>：源端数据先落地为本地快照，推送基于快照进行，源端波动不影响同步过程，也便于对账。</li>\n<li><strong>任务配置</strong>：同步任务按需配置推送范围与映射规则，执行记录分阶段（拉取/推送）留存\n成功、跳过、失败与重试明细。</li>\n<li><strong>部署</strong>：Spring Boot 单体 + Docker 化部署，独立运行，不侵入两端系统。</li>\n</ul>\n<h2>当前状态</h2>\n<p>已在客户内网环境上线运行。系统需在客户内网连接源端与目标端运行，线上作品集暂以占位图展示，\n实际界面素材将在可访问环境时补充。</p>\n"
+    },
+    {
+      "name": "rhein-auction",
+      "title": "rhein 拍卖系统",
+      "tagline": "从需求到上线的企业级艺术品拍卖业务系统",
+      "status": "shipped",
+      "category": "java",
+      "role": "独立开发（需求 → 上线）",
+      "stack": [
+        "Spring Boot 3",
+        "Vue 3",
+        "uni-app",
+        "MySQL"
+      ],
+      "highlights": [
+        "竞拍大厅：实时出价、竞价倒计时、延时周期、关注拍品分组（进行中/即将开始/已完成）",
+        "业务闭环：专场 → 拍品 → 竞价 → 成交结果 → 提货管理全流程覆盖",
+        "客户自有系统接口集成：与客户平台打通注册、会员与消息链路",
+        "生产数据脱敏体系：备份 → 脱敏 → 校验 → 人工确认 → 回滚预案的标准化 runbook",
+        "沿用 gooyoo 平台架构（boot + vue3 + uniapp 三仓），独立部署、独立品牌交付"
+      ],
+      "links": {},
+      "screenshots": [
+        "assets/screenshots/auction/demo.gif",
+        "assets/screenshots/auction/03-hall-list.png",
+        "assets/screenshots/auction/02-hall-home.png",
+        "assets/screenshots/auction/01-login.png"
+      ],
+      "order": 4,
+      "biz": [
+        "为客户交付的线上拍卖业务系统：竞买人从关注、出价到提货的完整线上体验，运营方从专场搭建到成交归档的管理闭环。"
+      ],
+      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>传统拍卖行的线上化不只是&quot;把拍卖搬上网&quot;：专场编排、拍品管理、竞价规则（延时周期、加价幅度）、\n竞买人资格、成交后的提货与结算，每一环都有自己的业务规则。rhein 拍卖系统以 gooyoo 平台架构为底座，\n针对拍卖业务做了一整套领域建模与流程实现，并从需求分析一路交付到客户环境上线。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>竞拍大厅</strong>：拍品按进行中/即将开始/已完成分组展示，实时刷新当前价与竞价人数，\n出价与倒计时联动，支持关注拍品。</li>\n<li><strong>业务管理</strong>：专场管理、拍品管理（含导入与错误重试导出）、竞价记录、成交结果、提货管理，\n审批环节接入 BPM 工作流。</li>\n<li><strong>接口集成</strong>：与客户自有平台打通注册、会员与消息链路（客户名称已脱敏为&quot;莱茵置地集团&quot;示例品牌）。</li>\n<li><strong>数据脱敏</strong>：建立生产数据脱敏 runbook——备份、脱敏脚本（MySQL 8 REGEXP_REPLACE）、\n校验、人工确认与回滚预案，保证演示与测试环境不含真实客户数据。</li>\n</ul>\n<h2>当前状态</h2>\n<p>已交付客户上线运行（客户品牌已脱敏为示例名称）。以上截图为示例数据演示。</p>\n"
     }
   ]
 }

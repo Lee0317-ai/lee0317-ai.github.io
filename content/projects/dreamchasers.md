@@ -3,6 +3,7 @@ name: dreamchasers
 title: DreamChasers 梦想启航
 tagline: 免费工具与小游戏门户
 status: wip
+category: ai
 role: 独立开发
 stack: [TypeScript, Next.js, PostgreSQL, Prisma, Cocos Creator]
 highlights:

@@ -3,6 +3,7 @@ name: zero
 title: Zero 个人智能工作台
 tagline: 一人公司 OS / 本地优先的个人成长引擎
 status: wip
+category: ai
 role: 独立开发
 stack: [Tauri 2, Rust, TypeScript, React]
 highlights:

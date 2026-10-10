@@ -3,6 +3,7 @@ name: timepick
 title: 拾光 TimePick
 tagline: 个人知识与资源管理系统
 status: shipped
+category: ai
 role: 独立开发
 stack: [React 19, TypeScript, Vite, Supabase, Tailwind CSS]
 highlights:

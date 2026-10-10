@@ -53,6 +53,11 @@ test('parseProject 拒绝缺失 frontmatter', () => {
   assert.throws(() => parseProject('没有 frontmatter'), /frontmatter/);
 });
 
+test('category 缺省为 ai，非法值报错', () => {
+  assert.equal(parseProject(SAMPLE).category, 'ai');
+  assert.throws(() => parseProject(SAMPLE.replace('order: 3', 'category: go\norder: 3')), /category/);
+});
+
 test('buildData 按 order 升序排列并带 profile', async () => {
   const dir = await mkdtemp(path.join(tmpdir(), 'content-'));
   await mkdir(path.join(dir, 'projects'));

@@ -3,6 +3,7 @@ name: wos
 title: WOS 桌面 Agent
 tagline: 基于 LobsterAI 深度改编的桌面 Agent 工作台
 status: adapted
+category: ai
 role: 改编维护
 stack: [Electron 40, React 18, TypeScript]
 highlights:

@@ -3,6 +3,7 @@ name: workscribe
 title: 工作记叙 WorkScribe
 tagline: 本地优先的工作记录与汇报工具
 status: shipped
+category: ai
 role: 独立开发
 stack: [TypeScript, React 19, Tauri 2, Rust, SQLite]
 highlights:

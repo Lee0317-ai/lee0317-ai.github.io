@@ -33,9 +33,17 @@ function card(p) {
     </div></a>`;
 }
 
+const CATEGORY_LABELS = { ai: 'AI 应用与智能体', java: '企业级 Java 全栈' };
+
 export function renderHome(data) {
   const skills = data.profile.skills.map(s =>
     s.items.map(i => `<span class="chip">${i}</span>`).join('')).join('');
+  const groups = Object.entries(CATEGORY_LABELS)
+    .map(([key, label]) => ({ key, label, items: data.projects.filter(p => (p.category ?? 'ai') === key) }))
+    .filter(g => g.items.length > 0);
+  const sections = groups.map((g, i) => `
+<h2 class="section"${i === 0 ? ' id="projects"' : ''}>${g.label}（${g.items.length}）</h2>
+<div class="grid">${g.items.map(card).join('\n')}</div>`).join('\n');
   const body = `
 <section class="hero">
   <h1>${data.profile.name} · ${data.profile.headline}</h1>
@@ -45,8 +53,7 @@ export function renderHome(data) {
     <a href="/resume/resume-tech.html" target="_blank">技术深度版</a> ·
     <a href="/resume/resume-biz.html" target="_blank">产品业务版</a></p>
 </section>
-<h2 class="section" id="projects">作品（${data.projects.length}）</h2>
-<div class="grid">${data.projects.map(card).join('\n')}</div>`;
+${sections}`;
   return renderPage(`${data.profile.name} · ${data.profile.headline}`, body);
 }
 

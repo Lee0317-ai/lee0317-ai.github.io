@@ -5,12 +5,16 @@ headline: AI 全栈独立开发者
 intro: >-
   独立完成从需求、设计、前后端开发到部署上线的完整闭环，
   擅长把 AI Agent 能力（LangGraph、RAG、HITL、Multi-Agent）落成真实可用的产品。
-  已独立交付 10+ 个项目，覆盖企业 Agent、开发者工具、效率软件与线上站点。
+  同时具备企业级 Java 全栈交付经验：作为核心开发交付过多客户的企业业务平台，
+  并独立完成拍卖系统与数据同步系统从需求到上线。已交付 14+ 个项目，覆盖
+  企业平台、AI Agent、开发者工具、效率软件与线上站点。
 skills:
   - group: Agent 工程
     items: [LangGraph, LangChain, RAG / pgvector, HITL 人机协同, Multi-Agent, MCP]
   - group: 前端
     items: [React, TypeScript, Vite, Tailwind CSS, Tauri, Electron]
+  - group: 企业级 Java
+    items: [Spring Boot 3, JDK 17/21, MySQL, Redis, uni-app, 企业交付]
   - group: 后端与数据
     items: [Node.js, Python, Fastify, FastAPI, PostgreSQL, Prisma, Docker]
   - group: 工程实践
