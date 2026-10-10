@@ -19,6 +19,8 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
       - run: npm ci
         working-directory: sites/react
       - run: npm test

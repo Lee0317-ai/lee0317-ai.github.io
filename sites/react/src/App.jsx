@@ -9,7 +9,13 @@ export default function App() {
     <>
       <header className="site-header">
         <a className="brand" href="#/">Lee <span className="muted">/ 作品集</span></a>
-        <nav><a href="/">静态版</a><ThemeToggle /></nav>
+        <nav>
+          <a href="/">静态版</a>
+          <a href="/resume/resume-tech.html" target="_blank" rel="noopener">简历·技术版</a>
+          <a href="/resume/resume-biz.html" target="_blank" rel="noopener">简历·业务版</a>
+          <a href="https://github.com/Lee0317-ai" target="_blank" rel="noopener">GitHub</a>
+          <ThemeToggle />
+        </nav>
       </header>
       <main>
         <Routes>

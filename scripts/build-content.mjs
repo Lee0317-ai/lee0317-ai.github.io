@@ -9,14 +9,15 @@ export function parseProject(source) {
   const m = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
   if (!m) throw new Error('缺少 frontmatter');
   const meta = parse(m[1]);
+  if (!meta || typeof meta !== 'object') throw new Error('frontmatter 解析结果为空或非对象');
   if (!STATUSES.has(meta.status)) throw new Error(`非法 status: ${meta.status}（${meta.name}）`);
   const biz = meta.biz == null ? [] : (Array.isArray(meta.biz) ? meta.biz : [meta.biz]);
   return {
     ...meta,
     links: meta.links == null ? {} : meta.links,
-    screenshots: meta.screenshots == null ? [] : meta.screenshots,
-    stack: meta.stack == null ? [] : meta.stack,
-    highlights: meta.highlights == null ? [] : meta.highlights,
+    screenshots: meta.screenshots == null ? [] : (Array.isArray(meta.screenshots) ? meta.screenshots : [meta.screenshots]),
+    stack: meta.stack == null ? [] : (Array.isArray(meta.stack) ? meta.stack : [meta.stack]),
+    highlights: meta.highlights == null ? [] : (Array.isArray(meta.highlights) ? meta.highlights : [meta.highlights]),
     biz,
     narrativeHtml: marked.parse(m[2].trim()),
   };

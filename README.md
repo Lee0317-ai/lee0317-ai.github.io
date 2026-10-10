@@ -10,6 +10,8 @@ Lee 的个人作品集。**content/ 是唯一内容源**——改项目介绍只
     npm run build       # 产出 dist/
     npx serve dist      # 本地预览（/ 为静态版，/react/ 为 React 版）
 
+改 content/ 后需重跑 npm run build 才会更新 React 版用的 data.json。
+
 ## 结构
 
 - `content/` 内容源（profile.yaml + projects/*.md）

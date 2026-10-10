@@ -5,7 +5,7 @@ const STATUS_LABEL = { shipped: '已上线', wip: '开发中', planned: '规划�
 const template = await readFile(path.resolve('sites/static/src/templates/page.template.html'), 'utf8');
 
 export function renderPage(title, body) {
-  return template.replace('{{title}}', title).replace('{{body}}', body);
+  return template.replace('{{title}}', () => title).replace('{{body}}', () => body);
 }
 
 function badge(status) {
