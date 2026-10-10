@@ -1,0 +1,18 @@
+name: Lee
+handle: Lee0317-ai
+github: https://github.com/Lee0317-ai
+headline: AI 全栈独立开发者
+intro: >-
+  独立完成从需求、设计、前后端开发到部署上线的完整闭环，
+  擅长把 AI Agent 能力（LangGraph、RAG、HITL、Multi-Agent）落成真实可用的产品。
+  已独立交付 10+ 个项目，覆盖企业 Agent、开发者工具、效率软件与线上站点。
+skills:
+  - group: Agent 工程
+    items: [LangGraph, LangChain, RAG / pgvector, HITL 人机协同, Multi-Agent, MCP]
+  - group: 前端
+    items: [React, TypeScript, Vite, Tailwind CSS, Tauri, Electron]
+  - group: 后端与数据
+    items: [Node.js, Python, Fastify, FastAPI, PostgreSQL, Prisma, Docker]
+  - group: 工程实践
+    items: [TDD, GitHub Actions, 需求分析 / PRD, 系统设计]
+resumeNote: 完整项目细节见作品集网站
