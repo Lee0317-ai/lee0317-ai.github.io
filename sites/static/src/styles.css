@@ -1,0 +1,60 @@
+:root {
+  color-scheme: light dark;
+  --bg: light-dark(#fafaf9, #0c0a09);
+  --fg: light-dark(#1c1917, #f5f5f4);
+  --muted: light-dark(#78716c, #a8a29e);
+  --card: light-dark(#ffffff, #1c1917);
+  --border: light-dark(#e7e5e4, #292524);
+  --accent: light-dark(#0f766e, #2dd4bf);
+  --badge-shipped: light-dark(#15803d, #4ade80);
+  --badge-wip: light-dark(#b45309, #fbbf24);
+  --badge-planned: light-dark(#57534e, #a8a29e);
+  --badge-adapted: light-dark(#1d4ed8, #60a5fa);
+  --maxw: 1080px;
+}
+:root[data-theme='dark'] { color-scheme: dark; }
+:root[data-theme='light'] { color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 16px/1.7 -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.muted { color: var(--muted); }
+.site-header { display: flex; justify-content: space-between; align-items: center;
+  max-width: var(--maxw); margin: 0 auto; padding: 20px 24px; }
+.site-header nav { display: flex; gap: 18px; align-items: center; }
+.brand { font-weight: 700; font-size: 18px; color: var(--fg); }
+.theme-toggle { background: none; border: 1px solid var(--border); border-radius: 8px;
+  color: var(--fg); cursor: pointer; padding: 2px 10px; font-size: 14px; }
+main { max-width: var(--maxw); margin: 0 auto; padding: 0 24px 60px; }
+.hero { padding: 48px 0 32px; }
+.hero h1 { font-size: 34px; margin: 0 0 12px; }
+.hero .intro { max-width: 640px; color: var(--muted); }
+.skill-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.chip { border: 1px solid var(--border); border-radius: 999px; padding: 2px 12px; font-size: 13px; color: var(--muted); }
+h2.section { margin: 36px 0 16px; font-size: 22px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+.card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; overflow: hidden; color: var(--fg); transition: transform .15s ease; }
+.card:hover { transform: translateY(-3px); text-decoration: none; }
+.card img.shot { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; border-bottom: 1px solid var(--border); }
+.card .card-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; }
+.card h3 { margin: 0; font-size: 17px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.badge { flex: none; font-size: 12px; padding: 1px 10px; border-radius: 999px; border: 1px solid currentColor; }
+.badge.shipped { color: var(--badge-shipped); }
+.badge.wip { color: var(--badge-wip); }
+.badge.planned { color: var(--badge-planned); }
+.badge.adapted { color: var(--badge-adapted); }
+.stack-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.stack-chips .chip { font-size: 12px; padding: 1px 9px; }
+.detail img.shot { width: 100%; border: 1px solid var(--border); border-radius: 12px; margin: 10px 0; }
+.detail .meta { display: flex; flex-wrap: wrap; gap: 10px 22px; color: var(--muted); margin: 14px 0; }
+.highlights { padding-left: 20px; }
+.highlights li { margin: 6px 0; }
+.biz-box { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+  border-radius: 10px; padding: 12px 18px; margin: 18px 0; }
+.site-footer { max-width: var(--maxw); margin: 0 auto; padding: 24px; color: var(--muted);
+  border-top: 1px solid var(--border); }
+@media (max-width: 640px) { .hero h1 { font-size: 26px; } .site-header nav a { display: none; }
+  .site-header nav .theme-toggle { display: block; } }
+@media print { .site-header, .site-footer, .theme-toggle { display: none !important; } }
