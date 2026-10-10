@@ -6,7 +6,7 @@ status: shipped
 role: 独立开发
 stack: [Next.js 14, LangGraph, pgvector, Prisma, PostgreSQL]
 highlights:
-  - 以 Run → TaskBoard → Task → Evidence → Answer 为主回答链，调查过程可回放
+  - 以 Run → TaskBoard → Task → Retrieval → Evidence → Answer 为主回答链，调查过程可回放
   - KnowledgeSpace + 资源授权快照约束调查范围，证据不足拒答
   - Harness 运行时：ReAct loop、工具快照、持久化子 Agent、长期记忆
 links: {}
