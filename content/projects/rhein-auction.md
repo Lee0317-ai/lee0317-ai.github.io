@@ -1,6 +1,6 @@
 ---
 name: rhein-auction
-title: rhein 拍卖系统
+title: 拍卖系统
 tagline: 从需求到上线的企业级艺术品拍卖业务系统
 status: shipped
 category: java
@@ -15,10 +15,11 @@ highlights:
 links: {}
 screenshots:
   - assets/screenshots/auction/demo.gif
+  - assets/screenshots/auction/05-lot-detail.png
   - assets/screenshots/auction/03-hall-list.png
   - assets/screenshots/auction/02-hall-home.png
   - assets/screenshots/auction/01-login.png
-order: 4
+order: 3
 biz: 为客户交付的线上拍卖业务系统：竞买人从关注、出价到提货的完整线上体验，运营方从专场搭建到成交归档的管理闭环。
 ---
 

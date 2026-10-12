@@ -10,6 +10,7 @@ highlights:
   - 七大子系统统一门户：证书管理、物电一体、投标管理、项目管理、资料管理、检测系统、系统管理中心，一次登录跨系统流转
   - 跨系统核心指标总览：证书台账、投标项目、合同额、产值/回款/开票、风险预警在综合门户聚合呈现
   - 18+ 业务模块：BPM 工作流、CRM、ERP、IoT、商城、会员、支付、报表、文档解析等可插拔扩展
+  - 内置 CRM 销售管理：线索 → 客户 → 商机 → 合同 → 回款全流程 + 公海池机制 + 合同数据看板
   - 多客户定制交付体系：客户级构建脚本与环境变量，同一代码库交付多家企业客户
   - 三端覆盖：Web 管理端（Vue3）+ 移动端（uni-app，一份代码适配 APP/小程序/H5）
 links: {}
@@ -23,6 +24,8 @@ screenshots:
   - assets/screenshots/gooyoo/sys-document.png
   - assets/screenshots/gooyoo/sys-inspection.png
   - assets/screenshots/gooyoo/sys-platform.png
+  - assets/screenshots/gooyoo/crm-customer.png
+  - assets/screenshots/gooyoo/crm-contract.png
   - assets/screenshots/gooyoo/10-m-workbench.png
 order: 1
 biz: 为建筑工程企业交付的数字化底座：从投标拿单、项目立项、产值回款，到证书资质、工程检测、资料归档，全业务链条一个平台管到底，并按客户需求模块化定制交付。
@@ -49,6 +52,8 @@ biz: 为建筑工程企业交付的数字化底座：从投标拿单、项目立
 - **资料管理系统**：工程资料归档台账、归档完成度、归档趋势与待归档清单。
 - **检测系统**：检测报告台账、在办检测、检测类别 TopN 与异常统计。
 - **物电一体系统**：物电一体化业务场景专属子系统。
+- **CRM 客户关系管理**（内置模块，按需开通）：线索 / 客户 / 联系人 / 商机 / 合同 / 回款 / 发票全流程，
+  公海池流转（转移 / 领取 / 分配）、合同数据看板与开票欠款预警、跟进记录与操作日志全程留痕。
 - **系统管理中心**：用户、科室、角色、租户、审计等平台治理能力。
 
 ## 技术实现

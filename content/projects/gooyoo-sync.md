@@ -13,8 +13,11 @@ highlights:
   - 源端与目标端均为客户自有系统（名称已脱敏）
 links: {}
 screenshots:
-  - assets/screenshots/placeholders/gooyoo-sync.svg
-order: 3
+  - assets/screenshots/gooyoo-sync/demo.gif
+  - assets/screenshots/gooyoo-sync/01-workbench.png
+  - assets/screenshots/gooyoo-sync/03-executions.png
+  - assets/screenshots/gooyoo-sync/04-connections.png
+order: 2
 biz: 消除客户 OA 与业务平台之间组织人员数据的手工维护：人员入职、调岗、离职自动同步到位，差异可查、失败可重试。
 ---
 
@@ -33,5 +36,5 @@ biz: 消除客户 OA 与业务平台之间组织人员数据的手工维护：�
 
 ## 当前状态
 
-已在客户内网环境上线运行。系统需在客户内网连接源端与目标端运行，线上作品集暂以占位图展示，
-实际界面素材将在可访问环境时补充。
+已在客户内网环境上线运行（客户名称已脱敏为示例名称）。
+截图来自开发环境真实控制台：工作台、同步任务、执行记录与连接配置，连接凭据已打码。
