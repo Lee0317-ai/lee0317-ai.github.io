@@ -16,11 +16,13 @@ links: {}
 screenshots:
   - assets/screenshots/gooyoo/demo.gif
   - assets/screenshots/gooyoo/02-home.png
-  - assets/screenshots/gooyoo/s1-cert-home.png
-  - assets/screenshots/gooyoo/04-tab-证书管理系统.png
-  - assets/screenshots/gooyoo/s4-project-home.png
-  - assets/screenshots/gooyoo/s6-document-home.png
-  - assets/screenshots/gooyoo/03-home-charts.png
+  - assets/screenshots/gooyoo/sys-certificate.png
+  - assets/screenshots/gooyoo/sys-LOT.png
+  - assets/screenshots/gooyoo/sys-bidding.png
+  - assets/screenshots/gooyoo/sys-project.png
+  - assets/screenshots/gooyoo/sys-document.png
+  - assets/screenshots/gooyoo/sys-inspection.png
+  - assets/screenshots/gooyoo/sys-platform.png
   - assets/screenshots/gooyoo/10-m-workbench.png
 order: 1
 biz: 为建筑工程企业交付的数字化底座：从投标拿单、项目立项、产值回款，到证书资质、工程检测、资料归档，全业务链条一个平台管到底，并按客户需求模块化定制交付。
