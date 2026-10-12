@@ -4,7 +4,7 @@ import { readFile, readdir, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
 const STATUSES = new Set(['shipped', 'wip', 'planned', 'adapted']);
-const CATEGORIES = new Set(['ai', 'java']);
+const CATEGORIES = new Set(['ai', 'java', 'dotnet']);
 
 export function parseProject(source) {
   const m = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);

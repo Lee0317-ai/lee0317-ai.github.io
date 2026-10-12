@@ -33,7 +33,7 @@ function card(p) {
     </div></a>`;
 }
 
-const CATEGORY_LABELS = { ai: 'AI 应用与智能体', java: '企业级 Java 全栈' };
+const CATEGORY_LABELS = { ai: 'AI 应用与智能体', java: '企业级 Java 全栈', dotnet: '.NET 医疗行业产品' };
 
 export function renderHome(data) {
   const skills = data.profile.skills.map(s =>
