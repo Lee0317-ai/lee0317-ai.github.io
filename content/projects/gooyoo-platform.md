@@ -1,6 +1,6 @@
 ---
 name: gooyoo-platform
-title: gooyoo 企业级业务平台
+title: 集成平台 · 企业级业务系统
 tagline: Spring Boot 3 + Vue3 + uni-app 的多模块企业平台与多客户交付体系
 status: shipped
 category: java
@@ -16,6 +16,7 @@ links: {}
 screenshots:
   - assets/screenshots/gooyoo/demo.gif
   - assets/screenshots/gooyoo/02-home.png
+  - assets/screenshots/gooyoo/04-tab-证书管理系统.png
   - assets/screenshots/gooyoo/01-login.png
   - assets/screenshots/gooyoo/10-m-workbench.png
 order: 1
@@ -39,4 +40,4 @@ biz: 为多家企业客户交付的统一业务底座：一套平台承载客户
 
 ## 当前状态
 
-已上线交付多家企业客户（客户名称已脱敏），持续迭代中。以上截图为示例数据演示。
+已上线交付多家企业客户，持续迭代中。截图来自开发环境真实系统，平台品牌与客户名称已脱敏。

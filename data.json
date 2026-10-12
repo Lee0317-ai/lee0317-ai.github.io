@@ -389,7 +389,7 @@
     },
     {
       "name": "gooyoo-platform",
-      "title": "gooyoo 企业级业务平台",
+      "title": "集成平台 · 企业级业务系统",
       "tagline": "Spring Boot 3 + Vue3 + uni-app 的多模块企业平台与多客户交付体系",
       "status": "shipped",
       "category": "java",
@@ -415,6 +415,7 @@
       "screenshots": [
         "assets/screenshots/gooyoo/demo.gif",
         "assets/screenshots/gooyoo/02-home.png",
+        "assets/screenshots/gooyoo/04-tab-证书管理系统.png",
         "assets/screenshots/gooyoo/01-login.png",
         "assets/screenshots/gooyoo/10-m-workbench.png"
       ],
@@ -422,7 +423,7 @@
       "biz": [
         "为多家企业客户交付的统一业务底座：一套平台承载客户的核心业务流程，按客户定制扩展，交付后持续迭代——替代客户自建多套孤立系统的老路。"
       ],
-      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>成长型企业常见困境：业务系统一堆，账号不互通、数据不互通、流程跑在纸面上。gooyoo 平台把企业需要的\n系统能力（组织权限、流程审批、客户与项目、招投标、证书、巡检、设备、商城支付等）收进一个模块化底座，\n按客户选择模块组合交付，再通过门户把跨系统的指标、待办和风险汇总到一个入口。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>后端</strong>：Spring Boot 3.4 + JDK 17/21 多模块单体（22 个业务模块），MySQL + Redis，\n多租户隔离、数据权限、操作审计全链路内建。</li>\n<li><strong>Web 管理端</strong>：Vue 3 + Element Plus，动态菜单 + 组件级权限；综合门户聚合各子系统指标、\n风险预警与审批中心。</li>\n<li><strong>移动端</strong>：uni-app 一份代码适配 APP / 微信小程序 / H5，工作台、审批、通讯录等高频场景移动化。</li>\n<li><strong>交付体系</strong>：客户级构建脚本与环境变量管理，同一代码库衍生多客户版本；Docker 化部署。</li>\n</ul>\n<h2>当前状态</h2>\n<p>已上线交付多家企业客户（客户名称已脱敏），持续迭代中。以上截图为示例数据演示。</p>\n"
+      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>成长型企业常见困境：业务系统一堆，账号不互通、数据不互通、流程跑在纸面上。gooyoo 平台把企业需要的\n系统能力（组织权限、流程审批、客户与项目、招投标、证书、巡检、设备、商城支付等）收进一个模块化底座，\n按客户选择模块组合交付，再通过门户把跨系统的指标、待办和风险汇总到一个入口。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>后端</strong>：Spring Boot 3.4 + JDK 17/21 多模块单体（22 个业务模块），MySQL + Redis，\n多租户隔离、数据权限、操作审计全链路内建。</li>\n<li><strong>Web 管理端</strong>：Vue 3 + Element Plus，动态菜单 + 组件级权限；综合门户聚合各子系统指标、\n风险预警与审批中心。</li>\n<li><strong>移动端</strong>：uni-app 一份代码适配 APP / 微信小程序 / H5，工作台、审批、通讯录等高频场景移动化。</li>\n<li><strong>交付体系</strong>：客户级构建脚本与环境变量管理，同一代码库衍生多客户版本；Docker 化部署。</li>\n</ul>\n<h2>当前状态</h2>\n<p>已上线交付多家企业客户，持续迭代中。截图来自开发环境真实系统，平台品牌与客户名称已脱敏。</p>\n"
     },
     {
       "name": "gooyoo-ocr",
