@@ -390,7 +390,7 @@
     {
       "name": "gooyoo-platform",
       "title": "集成平台 · 企业级业务系统",
-      "tagline": "Spring Boot 3 + Vue3 + uni-app 的多模块企业平台与多客户交付体系",
+      "tagline": "面向建筑工程企业的多系统数字化平台（Spring Boot 3 + Vue3 + uni-app，18+ 业务模块）",
       "status": "shipped",
       "category": "java",
       "role": "团队项目 · 核心全栈开发（约 90% 开发独立承担）",
@@ -405,25 +405,28 @@
         "Docker"
       ],
       "highlights": [
-        "18+ 业务模块：系统管理、BPM 工作流、CRM、ERP、招投标、证书、巡检、IoT、商城、会员、支付、报表、门户、文档解析等",
+        "七大子系统统一门户：证书管理、物电一体、投标管理、项目管理、资料管理、检测系统、系统管理中心，一次登录跨系统流转",
+        "跨系统核心指标总览：证书台账、投标项目、合同额、产值/回款/开票、风险预警在综合门户聚合呈现",
+        "18+ 业务模块：BPM 工作流、CRM、ERP、IoT、商城、会员、支付、报表、文档解析等可插拔扩展",
         "多客户定制交付体系：客户级构建脚本与环境变量，同一代码库交付多家企业客户",
-        "三端覆盖：Web 管理端（Vue3）+ 移动端（uni-app，一份代码适配 APP/小程序/H5）",
-        "综合门户：跨系统核心指标、风险预警汇总、审批中心与系统入口统一编排",
-        "多租户与细粒度权限：租户隔离、角色权限、数据权限与审计贯穿全部模块"
+        "三端覆盖：Web 管理端（Vue3）+ 移动端（uni-app，一份代码适配 APP/小程序/H5）"
       ],
       "links": {},
       "screenshots": [
         "assets/screenshots/gooyoo/demo.gif",
         "assets/screenshots/gooyoo/02-home.png",
+        "assets/screenshots/gooyoo/s1-cert-home.png",
         "assets/screenshots/gooyoo/04-tab-证书管理系统.png",
-        "assets/screenshots/gooyoo/01-login.png",
+        "assets/screenshots/gooyoo/s4-project-home.png",
+        "assets/screenshots/gooyoo/s6-document-home.png",
+        "assets/screenshots/gooyoo/03-home-charts.png",
         "assets/screenshots/gooyoo/10-m-workbench.png"
       ],
       "order": 1,
       "biz": [
-        "为多家企业客户交付的统一业务底座：一套平台承载客户的核心业务流程，按客户定制扩展，交付后持续迭代——替代客户自建多套孤立系统的老路。"
+        "为建筑工程企业交付的数字化底座：从投标拿单、项目立项、产值回款，到证书资质、工程检测、资料归档，全业务链条一个平台管到底，并按客户需求模块化定制交付。"
       ],
-      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>成长型企业常见困境：业务系统一堆，账号不互通、数据不互通、流程跑在纸面上。gooyoo 平台把企业需要的\n系统能力（组织权限、流程审批、客户与项目、招投标、证书、巡检、设备、商城支付等）收进一个模块化底座，\n按客户选择模块组合交付，再通过门户把跨系统的指标、待办和风险汇总到一个入口。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>后端</strong>：Spring Boot 3.4 + JDK 17/21 多模块单体（22 个业务模块），MySQL + Redis，\n多租户隔离、数据权限、操作审计全链路内建。</li>\n<li><strong>Web 管理端</strong>：Vue 3 + Element Plus，动态菜单 + 组件级权限；综合门户聚合各子系统指标、\n风险预警与审批中心。</li>\n<li><strong>移动端</strong>：uni-app 一份代码适配 APP / 微信小程序 / H5，工作台、审批、通讯录等高频场景移动化。</li>\n<li><strong>交付体系</strong>：客户级构建脚本与环境变量管理，同一代码库衍生多客户版本；Docker 化部署。</li>\n</ul>\n<h2>当前状态</h2>\n<p>已上线交付多家企业客户，持续迭代中。截图来自开发环境真实系统，平台品牌与客户名称已脱敏。</p>\n"
+      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>建筑工程企业的数字化痛点是&quot;系统林立、数据孤岛&quot;：投标在一个系统、项目在另一个系统、证书资质靠 Excel、\n检测报告在检测机构手里、资料归档靠人工。集成平台把这条业务链收进一个多系统门户：</p>\n<p><strong>投标管理系统</strong>负责投标项目台账、开标跟踪与中标统计；中标后进入<strong>项目管理系统</strong>管理项目台账、\n合同额、产值/回款/开票与超期预警；企业经营需要的<strong>证书管理系统</strong>（企业资质证书 + 个人执业证书）\n提供台账、到期预警与印章风险管理；工地侧的检测业务由<strong>检测系统</strong>承接，工程资料由<strong>资料管理系统</strong>\n统一归档；<strong>物电一体系统</strong>服务物电一体化业务场景；底层的账号、租户、权限与审计由<strong>系统管理中心</strong>统一治理。\n综合门户把七个系统的核心指标、风险预警和待办聚合到一个入口。</p>\n<h2>七大子系统</h2>\n<ul>\n<li><strong>证书管理系统</strong>：企业证书与个人执业证书双台账，30 天内到期 / 已过期预警，\n证书状态分布与企业 vs 个人对比分析，到期趋势与临期预警清单。</li>\n<li><strong>投标管理系统</strong>：投标项目台账、开标跟踪、中标/废标统计、投标金额汇总、本月投标视图。</li>\n<li><strong>项目管理系统</strong>：项目台账（总数/进行中）、合同总额与结算、行业分布（房建/市政/钢结构/电力等）、\n产值/回款/开票趋势、项目超期预警。</li>\n<li><strong>资料管理系统</strong>：工程资料归档台账、归档完成度、归档趋势与待归档清单。</li>\n<li><strong>检测系统</strong>：检测报告台账、在办检测、检测类别 TopN 与异常统计。</li>\n<li><strong>物电一体系统</strong>：物电一体化业务场景专属子系统。</li>\n<li><strong>系统管理中心</strong>：用户、科室、角色、租户、审计等平台治理能力。</li>\n</ul>\n<h2>技术实现</h2>\n<ul>\n<li><strong>后端</strong>：Spring Boot 3.4 + JDK 17/21 多模块单体（22 个业务模块），MySQL + Redis，\n多租户隔离、数据权限、操作审计全链路内建。</li>\n<li><strong>前端</strong>：Vue 3 + Element Plus，动态菜单 + 组件级权限；综合门户聚合七大子系统的指标、\n风险预警与审批中心，子系统以 portalAppCode 维度隔离进入。</li>\n<li><strong>移动端</strong>：uni-app 一份代码适配 APP / 微信小程序 / H5（工作台、审批、通讯录）。</li>\n<li><strong>交付体系</strong>：客户级构建脚本与环境变量管理，同一代码库衍生多客户版本；Docker 化部署。</li>\n</ul>\n<h2>当前状态</h2>\n<p>已上线交付多家企业客户，持续迭代中。截图来自开发环境真实系统，平台品牌与客户名称已脱敏。</p>\n"
     },
     {
       "name": "gooyoo-ocr",
