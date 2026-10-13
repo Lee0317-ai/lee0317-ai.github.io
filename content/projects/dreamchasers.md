@@ -1,39 +1,103 @@
 ---
 name: dreamchasers
 title: DreamChasers 梦想启航
-tagline: 免费工具与小游戏门户
+tagline: 免费工具与小游戏的 monorepo 门户，工具站与游戏站独立分流
 status: wip
 category: software
-role: 独立开发
-stack: [TypeScript, Next.js, PostgreSQL, Prisma, Cocos Creator]
+role: 团队开发（参与）
+stack: [Next.js 16, React 19, TypeScript, Prisma, PostgreSQL, NextAuth, Tailwind, Cocos Creator 3.8, GDevelop]
 highlights:
-  - Monorepo 门户：Next.js 工具站 / 游戏站双入口分流，独立导航与视觉，部署在 Vercel
-  - PDF 工具箱 MVP 第一轮落地：上传/预览/旋转/排序/拆分/下载，外加文字水印、签名、PDF 转 Word Beta、区域遮盖、图片扫描成 PDF
-  - 麻将 Roguelike「胡了卜」：从最小可玩 HTML 验证原型推进到 Cocos 正式工程（模板化牌山生成器、渐进难度试玩 Demo）
-  - 模块化协作规范：每个工具/游戏独立文档目录 + 独立代码目录，双人 + 多 AI 通过任务分片协作，`docs:sync` 自动汇总看板
-  - 统一账号中心第一阶段完成：账号密码登录、找回/修改密码，TimePick 等产品同账号接入
+  - 免费 PDF 工具箱 MVP：合并/拆分/旋转/排序/删除/文字水印/签名/PDF 转 Word Beta/区域遮盖/图片扫描成 PDF，浏览器内完成不上传服务器
+  - 麻将 Roguelike「胡了卜」：手动吃碰杠组合 + 槽位成长 + 铜钱/体力经济 + 20 关主线（第 10 关终局试炼、第 20 关 Boss），已上线 Web 试玩版
+  - 统一账号中心：邮箱验证登录 + 产品 token 交换骨架，已接入内部产品 TimePick（拾光）实现跨产品单点登录
+  - Monorepo 工程规范：每个工具/游戏独立模块目录 + 独立文档夹，路由层只做入口，便于多人协作与逐项验收
 links: {}
 screenshots:
-  - assets/screenshots/placeholders/dreamchasers.svg
+  - assets/screenshots/dreamchasers/demo.gif
+  - assets/screenshots/dreamchasers/home.png
+  - assets/screenshots/dreamchasers/tools.png
+  - assets/screenshots/dreamchasers/pdf-toolbox.png
+  - assets/screenshots/dreamchasers/hulebu.png
+  - assets/screenshots/dreamchasers/hulebu-ingame.png
 order: 1
 biz:
-  - 一个免费、好用、更新快的工具与小游戏门户：先用 PDF 工具箱拿搜索流量、用小游戏拉停留和回访，再接 AI 能力与订阅变现。
+  - 给普通用户提供完全免费、无需注册、浏览器内处理的 PDF 与图像小工具
+  - 给碎片时间玩家提供打开即玩的休闲小游戏入口
+  - 给团队一个能持续上架新工具/新游戏的门户底座
 ---
-
-DreamChasers（梦想启航）是一个免费工具 / 小游戏门户，用 monorepo 同时承载工具站和游戏站：第一阶段以"免费、好用、更新快"拿流量和停留，后续再接 AI 能力、订阅与 API 等变现能力。工具和游戏平级，每个小工具或游戏都按模块独立归档——独立的文档目录与独立的代码目录，支持多人多 AI 并行开发。
 
 ## 它解决什么问题
 
-门户类产品的冷启动靠的是单点刚需和回访理由。DreamChasers 把第一阶段收敛成三个交付：PDF 工具箱吃搜索刚需（不调用模型的能力尽量免费）、AI 修图工具展示 AI 能力与付费空间（基础修图免费、AI 能力限次收费）、麻将 Roguelike 消除小游戏提升停留时长和回访。三件事共用一套平台底座和账号体系，避免每个小产品各起一套炉灶。
+免费工具站和小游戏站这两类产品，常见的痛点是：
+
+- 要么服务器处理，文件被上传、隐私不可控；
+- 要么工具散落各处，每个都单建仓库、单建账号、单做部署，维护成本随数量线性增长；
+- 小游戏做出来一个就单独买一个域名，推广和复用都难。
+
+DreamChasers 想把这两件事合在一个 monorepo 里做掉：**工具在浏览器内完成（PDF 用 pdf-lib / pdfjs 本地处理，不上传服务器），游戏提供 Web 试玩 + Cocos 正式包双形态，账号中心给所有产品共用**。门户首页直接把用户分流到「效率工具箱」或「休闲游戏馆」，两边视觉独立、互不干扰。
 
 ## 技术实现
 
-- **平台底座**：Monorepo + Next.js 主站 + PostgreSQL/Prisma + Docker Compose，Web 部署在 Vercel（含 standalone 自托管构建开关）；首页按工具站/游戏站左右分流，`/tools` 与 `/games` 独立导航。
-- **PDF 工具箱**：页面级处理第一轮完成——上传、预览、旋转、排序、删除、拆分、下载，并补齐文字水印、签名图片、PDF 转 Word Beta、区域遮盖和图片扫描成 PDF；完整在线编辑按边界规划不做。
-- **麻将 Roguelike「胡了卜」**：玩法为麻将消除 + 手动吃碰杠 + Roguelike 奖励构筑（槽位成长、能力池、体力与救场、词缀与 Boss）。推进路径是先用 HTML 验证原型跑通最小可玩闭环和观察指标，再进 Cocos Creator 正式工程：模板注册表与参数化牌山生成器、渐进难度 10 关朋友试玩 Demo；GDevelop 只作为 Web H5 原型通道。
-- **账号与产品协同**：统一账号中心第一阶段完成（账号密码登录、找回/修改密码），TimePick 等产品逐步切换到同账号 PostgreSQL 基座。
-- **协作机制**：双人 + 多 AI 的文档驱动协作——任务必须先领取、文件范围显式声明，任务分片落盘后由 `docs:sync` 脚本自动汇总主看板，降低多人提交冲突。
+### Monorepo 结构
+
+```
+apps/
+  web/                    # Next.js 16 门户 + 全部 Web 工具
+    src/app/tools/        # /tools/pdf-toolbox、/tools/ai-photo-editor 等
+    src/app/games/        # /games/hulebu 等
+    src/app/account/      # 账号中心
+    src/modules/          # 每个工具/游戏独立业务模块（路由层只做入口）
+  game/
+    mahjong-roguelike/
+      cocos/              # Cocos Creator 3.8 正式工程
+      prototypes/         # HTML 验证原型
+packages/
+  shared/                 # 共享领域类型与玩法配置
+```
+
+关键工程约定（写死在 AGENTS.md 里）：
+
+- 每个小工具/游戏必须有独立模块目录 `apps/web/src/modules/tools/<slug>/` 或 `games/<slug>/`；
+- 每个模块必须配套独立文档夹 `docs/modules/<slug>/{README,IMPLEMENTATION_PLAN,PROGRESS,DECISIONS,HANDOFF}.md`；
+- 路由层 `app/**/page.tsx` 只做入口、不承载业务逻辑。
+
+### PDF 工具箱 MVP
+
+基于 pdf-lib（写入）+ pdfjs-dist（渲染）做纯浏览器内 PDF 处理：
+
+- **已完成**：合并、拆分、旋转、排序、删除、文字水印、签名图片、PDF 转 Word（Beta）、区域遮盖、图片扫描成 PDF；
+- **进行中**：PDF 转图片、基础压缩；
+- **规划中**：扫描件 OCR。
+
+文件全程留在浏览器里，隐私边界清晰。
+
+### 胡了卜（麻将 Roguelike 消除）
+
+- **Web 试玩版**：Next.js 内嵌于 `/games/hulebu`，纯 HTML + 共享配置，已开放 20 关主线（第 10 关终局试炼、第 20 关胡了卜王 Boss），并支持无尽牌山、每日牌局、成就图鉴与高阶周目；
+- **Cocos 正式工程**：`apps/game/mahjong-roguelike/cocos/hulebu-cocos-3.8.8`，为微信/抖音小游戏发布准备，当前在做音频链路与局外 UI 回归；
+- **共享配置**：`packages/shared/` 承载关卡、奖励与规则配置，Web 与 Cocos 两端同源，避免数值漂移。
+
+### 统一账号中心
+
+基于 NextAuth v5 + Prisma + PostgreSQL：
+
+- 邮箱验证码登录（T110–T111）；
+- 产品 token 交换骨架（T112–T113），允许内部产品拿到当前登录态；
+- 已接入团队内另一款产品 TimePick（拾光）的前端登录壳、文件夹、资源、标签、搜索、灵感抽屉、角色选择等 12 个 API 切换任务（T114–T128），实现跨产品单点登录。
+
+### 部署形态
+
+- 默认部署到 Vercel（`apps/web/package.json` 已声明 next / react / react-dom，解决子目录识别）；
+- 可选 `STANDALONE_BUILD=1` 切换到 Next.js standalone 自托管（Docker / Nginx 配置在 `deploy/`）。
 
 ## 当前状态
 
-平台基础（Monorepo 外壳、Next.js 应用、数据库与 Prisma、门户 UI、账号中心第一阶段）已完成；PDF 工具箱 MVP 核心功能第一轮落地、转图片与压缩在补；「胡了卜」推进到 Cocos 试玩 Demo 与模板化牌山生成器，正式 MVP 尚未冻结；AI 修图工具未开始。整体处于持续开发中（wip）。
+**状态：进行中（wip）。** 门户骨架、PDF 工具箱 MVP、胡了卜 Web 试玩版、统一账号中心都已可用，但都还在持续打磨：
+
+- PDF 工具箱在补 PDF 转图片和压缩；
+- 胡了卜 Cocos 端在修实测反馈的素材映射、按钮黑底和音频链路；
+- 账号中心 T110–T128 系列任务处于「待验收」阶段；
+- AI 修图工具仅有占位页面，未开始实质开发；
+- 规划中的 AI 内容转换工具箱（参考 qiaomu-anything-to-notebooklm）尚未排期。
+
+整体节奏是双人协作 + AI 结对开发，每个任务都有独立的 `docs/tasks/items/T*` 任务书、允许修改文件清单和验证命令，所有完成项在 `docs/status/CURRENT_STATUS.md` 里可追溯。

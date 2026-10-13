@@ -273,36 +273,47 @@
     },
     {
       "name": "novelverse",
-      "title": "NovelVerse 小说宇宙创作引擎",
-      "tagline": "长篇小说世界的设定管理与创作引擎",
+      "title": "NovelVerse",
+      "tagline": "本地优先的中文小说 AI 写作工作台，每一步意图都可追溯",
       "status": "wip",
       "category": "app",
-      "role": "独立开发",
+      "role": "团队开发（参与）",
       "stack": [
-        "Python",
+        "Python 3.12",
         "FastAPI",
-        "PostgreSQL",
+        "SQLAlchemy 2",
+        "Alembic",
+        "PostgreSQL 18",
         "pgvector",
-        "React",
-        "TypeScript",
-        "Tauri 2"
+        "React 19",
+        "Vite",
+        "TipTap",
+        "Tauri 2",
+        "Rust"
       ],
       "highlights": [
-        "短篇 / 架构师 / 园丁三种写作模式，模式只影响引导顺序，随时可切换、不限制手写或 AI 共创",
-        "创作链可追溯：章节计划、正文、角色决策、监督报告与模型调用记录存为可追踪版本，锁定章节沉淀摘要、角色状态、伏笔与时间线记忆",
-        "角色 Agent 决策分级：绿/黄/红三级确认规则，角色可自主决策，作者保留最终否决与回滚权",
-        "本地优先与密钥安全：API Key 只存系统凭据库，数据库、导出与备份均不落密钥；macOS 版自带私有 PostgreSQL + pgvector 运行时",
-        "多模型按任务路由：灵感/规划/正文/修订/审稿/Embedding 各设默认模型，支持单次临时切换，Embedding 索引原子激活"
+        "三种写作模式：短篇 / 架构师 / 园丁，对应不同的章节规划路径，支持随时切换",
+        "章节锁定 + 记忆快照 + 分支回滚：每章锁定后沉淀摘要、角色状态、伏笔、时间线，可从任意章节拉分支尝试另一走向",
+        "角色 Agent 绿/黄/红三级决策：低影响自主、中影响建议、高影响必须作者确认",
+        "长篇记忆检索：PostgreSQL pgvector 向量索引，支撑跨章节的事实连续性校验",
+        "不配模型也能用：纯手写、自动保存、离页保护、本地恢复、Markdown/TXT 导出全可用"
       ],
       "links": {},
       "screenshots": [
-        "assets/screenshots/placeholders/novelverse.svg"
+        "assets/screenshots/novelverse/demo.gif",
+        "assets/screenshots/novelverse/library.png",
+        "assets/screenshots/novelverse/writing-desk.png",
+        "assets/screenshots/novelverse/chapter-prose.png",
+        "assets/screenshots/novelverse/character-decisions.png",
+        "assets/screenshots/novelverse/memory.png"
       ],
       "order": 5,
       "biz": [
-        "给长篇创作者一个\"设定不崩、过程可追溯\"的写作底座：世界观、角色与章节版本集中管理，AI 只出候选、每一步由作者确认，长篇不因记忆丢失而崩设定。"
+        "给中文小说作者一个不被 AI 抢方向盘的写作台——AI 给候选，作者做决定",
+        "把「写到第 30 章发现第 5 章设定崩了」这种事在锁定前拦住",
+        "所有数据在本机，卸载应用不删稿"
       ],
-      "narrativeHtml": "<p>NovelVerse 是一个本地优先、面向中文小说创作的 AI 写作工作台。它的核心不是让 AI 一次写完一本书，而是把每一步的意图、草稿、确认版本和后续影响放在同一条可追溯的创作链上：章节计划、正文、角色决策、监督报告、记忆和模型调用记录全部存为可追踪的版本。不配置模型也能完整手写、自动保存、锁章、恢复和导出。</p>\n<h2>它解决什么问题</h2>\n<p>长篇创作的两个老大难：设定崩坏（写着写着忘了伏笔、角色状态漂移）和 AI 代写失控（生成内容静默覆盖作者文本）。NovelVerse 用&quot;记忆层 + 版本快照 + 确认关卡&quot;正面处理这两件事——AI 结果一律以工作草稿/变体出现、由作者挑选采用，已锁定的正文和正史绝不被自动重写。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>写作台</strong>：短篇、架构师（总纲 → 卷纲 → 章卡 → 正文）、园丁（先写场景再回填结构）三种模式共享同一套资产；&quot;当前最重要的一步&quot;作为唯一主入口驱动推进，离开时保护现场、异常退出可恢复本地未保存内容。</li>\n<li><strong>版本与回滚</strong>：每章锁定时保存记忆层快照（摘要 + 角色状态 + 伏笔台账），回滚到第 N 章即加载该快照、其后章节进归档分支保留可对比，不破坏主线；上游设定修改会提示受影响的下游内容，由作者决定同步或保留。</li>\n<li><strong>角色 Agent</strong>：角色作为带人格档案的 sub-agent 可自主决策，决策按绿/黄/红三级确认（红级如角色生死、主线节点必须执行前确认）；叙事层（作者）优先级高于角色层（按设计）。</li>\n<li><strong>长篇记忆</strong>：章节摘要、角色状态、伏笔与时间线入记忆中心，PostgreSQL + pgvector 向量检索支撑超长篇上下文；Prompt 版本管理、模型用量与费用记录。</li>\n<li><strong>工程形态</strong>：FastAPI Core + React/TypeScript/Vite 前端 + Tauri 2 桌面壳；模型密钥只存系统凭据库（macOS Keychain / Windows Credential Manager），macOS 发行版自带私有 PostgreSQL + pgvector 运行时，无需用户自行装库。</li>\n</ul>\n<h2>当前状态</h2>\n<p>架构底座与小说创作闭环已实现：中文小说初始化、章节规划、生成、修订、监督与锁定，构思资产（作品 DNA / 角色 / 世界观 / 情节蓝图）逐项确认后原子创建作品，短篇/架构师/园丁三模式、章节回滚与分支、pgvector 记忆检索、Markdown/TXT 导出与备份恢复均可用，配套 P1 统一验证脚本。汇聚宇宙、去 AI 味层等能力已在领域设计文档中定稿，属后续方向。</p>\n"
+      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>中文长篇小说的 AI 辅助写作，常见两个极端：</p>\n<ol>\n<li><strong>AI 一把梭</strong>：让模型一口气写完整本书，结果是开头惊艳、三章后设定崩塌、人物 OOC、伏笔丢失；</li>\n<li><strong>AI 只当润色</strong>：只用 AI 改语句，那它对结构、人物弧光、世界观一致性毫无帮助。</li>\n</ol>\n<p>NovelVerse 走的是中间路：<strong>把写作拆成可追溯的创作链——作品 DNA → 角色与世界 → 卷纲 → 章卡 → 正文 → 监督 → 锁定 → 记忆沉淀</strong>。AI 在每一环都只产出&quot;候选草稿&quot;，由作者确认后才写入正史；作者的每一次手写、修改、回滚也都进版本。这样长篇写到第 30 章时，第 5 章埋下的伏笔仍然能被记住、被校验、被兑现。</p>\n<h2>技术实现</h2>\n<h3>三种写作模式</h3>\n<ul>\n<li><strong>短篇</strong>：有明确篇幅和结尾；默认可直接从作品总纲跳到首章章卡；</li>\n<li><strong>架构师</strong>：长篇或强结构；按&quot;作品总纲 → 当前卷纲 → 章卡 → 正文&quot;推进，只要求准备当前卷和下一章，不要求拆完所有卷；</li>\n<li><strong>园丁</strong>：先写场景与人物，后由系统回填章卡与卷纲草稿，再由作者确认。</li>\n</ul>\n<p>模式只影响默认引导顺序，不限制手写、AI 对话或切换模式。</p>\n<h3>创作链与可追溯性</h3>\n<ul>\n<li><strong>章卡</strong>：系统根据总纲、当前卷、已锁定事实、上一章收束和本次要求生成草稿；作者可手改、可让 AI 重做、补强冲突或调整节奏；确认后才进入正文；</li>\n<li><strong>正文</strong>：手写自动保存 + 离页保护 + 本地未保存恢复；AI 结果以工作草稿/变体呈现，不静默覆盖；</li>\n<li><strong>监督</strong>：连续性、事实冲突、风险交给作者审阅；锁定前可继续改；</li>\n<li><strong>锁定</strong>：沉淀章节摘要、角色状态、伏笔、时间线与其他故事事实；</li>\n<li><strong>分支与版本</strong>：从任意章节创建分支、比较差异、回滚或归档，不破坏主线；</li>\n<li><strong>记忆中心</strong>：查看正史、角色/物品/势力状态、时间线与待裁决冲突。</li>\n</ul>\n<h3>角色 Agent 的三级决策</h3>\n<p>角色不被 AI 直接驱动，而是分级：</p>\n<ul>\n<li><strong>绿</strong>：低影响（日常行为、对白），Agent 可自主；</li>\n<li><strong>黄</strong>：中影响（关系推进、小决策），Agent 给建议，作者采纳与否；</li>\n<li><strong>红</strong>：高影响（死亡、重大关系转折、核心秘密揭露），必须作者显式确认。</li>\n</ul>\n<h3>底层栈</h3>\n<ul>\n<li><strong>Core</strong>：Python 3.12 + FastAPI + SQLAlchemy 2 + Alembic；</li>\n<li><strong>数据库</strong>：PostgreSQL 18 + pgvector（长篇记忆向量检索）；桌面版内嵌私有 PostgreSQL，不监听 TCP；</li>\n<li><strong>前端</strong>：React 19 + Vite + TipTap 富文本编辑器；</li>\n<li><strong>桌面</strong>：Tauri 2（Rust），macOS DMG 发行，应用启动时拉起私有 Core 与数据库；</li>\n<li><strong>模型接入</strong>：OpenAI-compatible 与 Anthropic 双协议，密钥存系统凭据库（keyring），不写进作品或备份；</li>\n<li><strong>Prompt 工程</strong>：每个任务的 Prompt 都有版本管理，支持按功能分配默认模型、单次临时切换，并记录用量与费用。</li>\n</ul>\n<h3>隐私边界</h3>\n<ul>\n<li>不配模型也能完整手写、自动保存、离页保护、锁章、恢复、导出 Markdown/TXT；</li>\n<li>AI 共创、生成、审稿功能在没有可用模型时自动禁用；</li>\n<li>密钥走系统凭据库；作品、数据库导出、备份中不含 API Key；</li>\n<li>桌面版数据库只绑定 localhost 不监听外部 TCP。</li>\n</ul>\n<h2>当前状态</h2>\n<p><strong>状态：进行中（wip）。</strong> Web 工作台可直接开发模式运行，macOS DMG 已能打包；本机库中已有 23 部测试作品持续使用，验证了作品库、构思工作流、章卡/正文编辑、锁定与记忆沉淀的主流程。</p>\n<p>已实现的完整能力清单（与 README 对齐）：</p>\n<ul>\n<li>中文小说初始化、章节规划、生成、修订、监督与锁定；</li>\n<li>作品 DNA、角色、世界观、情节蓝图与定名的可恢复构思资产；</li>\n<li>构思确认后原子创建正式作品并按蓝图章节数初始化；</li>\n<li>无模型手写、自动保存、离页保护、本地恢复与草稿导出；</li>\n<li>短篇、架构师、园丁三种写作模式；</li>\n<li>角色自主决策与绿/黄/红三级确认规则；</li>\n<li>章节回滚、活动分支切换、历史归档；</li>\n<li>章节摘要、角色状态、伏笔、时间线记忆；</li>\n<li>OpenAI-compatible 与 Anthropic 模型调用、按功能默认模型与单次临时切换；</li>\n<li>Prompt 版本管理、模型用量与费用记录；</li>\n<li>长篇记忆回填与 pgvector 向量检索；</li>\n<li>文件或粘贴文本导入，Markdown/TXT 导出；</li>\n<li>本地备份、恢复与完整迁移验证。</li>\n</ul>\n<p><strong>设计定稿、尚未实现</strong>的后续方向：</p>\n<ul>\n<li><strong>汇聚宇宙</strong>：多部作品共享世界观与角色的能力；</li>\n<li><strong>去 AI 味</strong>：识别并弱化模型生成的常见腔调与套话。</li>\n</ul>\n<p><strong>已知的保守表述</strong>：DMG 发行版在 Apple Silicon 上可正常安装运行；Windows / Linux 桌面版暂未打包。Web 开发模式需要本机已有 PostgreSQL 18 与 pgvector，这是面向开发者的形态，不是面向终端用户的安装包路径。</p>\n"
     },
     {
       "name": "gooyoo-platform",
@@ -463,33 +474,43 @@
     {
       "name": "dreamchasers",
       "title": "DreamChasers 梦想启航",
-      "tagline": "免费工具与小游戏门户",
+      "tagline": "免费工具与小游戏的 monorepo 门户，工具站与游戏站独立分流",
       "status": "wip",
       "category": "software",
-      "role": "独立开发",
+      "role": "团队开发（参与）",
       "stack": [
+        "Next.js 16",
+        "React 19",
         "TypeScript",
-        "Next.js",
-        "PostgreSQL",
         "Prisma",
-        "Cocos Creator"
+        "PostgreSQL",
+        "NextAuth",
+        "Tailwind",
+        "Cocos Creator 3.8",
+        "GDevelop"
       ],
       "highlights": [
-        "Monorepo 门户：Next.js 工具站 / 游戏站双入口分流，独立导航与视觉，部署在 Vercel",
-        "PDF 工具箱 MVP 第一轮落地：上传/预览/旋转/排序/拆分/下载，外加文字水印、签名、PDF 转 Word Beta、区域遮盖、图片扫描成 PDF",
-        "麻将 Roguelike「胡了卜」：从最小可玩 HTML 验证原型推进到 Cocos 正式工程（模板化牌山生成器、渐进难度试玩 Demo）",
-        "模块化协作规范：每个工具/游戏独立文档目录 + 独立代码目录，双人 + 多 AI 通过任务分片协作，`docs:sync` 自动汇总看板",
-        "统一账号中心第一阶段完成：账号密码登录、找回/修改密码，TimePick 等产品同账号接入"
+        "免费 PDF 工具箱 MVP：合并/拆分/旋转/排序/删除/文字水印/签名/PDF 转 Word Beta/区域遮盖/图片扫描成 PDF，浏览器内完成不上传服务器",
+        "麻将 Roguelike「胡了卜」：手动吃碰杠组合 + 槽位成长 + 铜钱/体力经济 + 20 关主线（第 10 关终局试炼、第 20 关 Boss），已上线 Web 试玩版",
+        "统一账号中心：邮箱验证登录 + 产品 token 交换骨架，已接入内部产品 TimePick（拾光）实现跨产品单点登录",
+        "Monorepo 工程规范：每个工具/游戏独立模块目录 + 独立文档夹，路由层只做入口，便于多人协作与逐项验收"
       ],
       "links": {},
       "screenshots": [
-        "assets/screenshots/placeholders/dreamchasers.svg"
+        "assets/screenshots/dreamchasers/demo.gif",
+        "assets/screenshots/dreamchasers/home.png",
+        "assets/screenshots/dreamchasers/tools.png",
+        "assets/screenshots/dreamchasers/pdf-toolbox.png",
+        "assets/screenshots/dreamchasers/hulebu.png",
+        "assets/screenshots/dreamchasers/hulebu-ingame.png"
       ],
       "order": 1,
       "biz": [
-        "一个免费、好用、更新快的工具与小游戏门户：先用 PDF 工具箱拿搜索流量、用小游戏拉停留和回访，再接 AI 能力与订阅变现。"
+        "给普通用户提供完全免费、无需注册、浏览器内处理的 PDF 与图像小工具",
+        "给碎片时间玩家提供打开即玩的休闲小游戏入口",
+        "给团队一个能持续上架新工具/新游戏的门户底座"
       ],
-      "narrativeHtml": "<p>DreamChasers（梦想启航）是一个免费工具 / 小游戏门户，用 monorepo 同时承载工具站和游戏站：第一阶段以&quot;免费、好用、更新快&quot;拿流量和停留，后续再接 AI 能力、订阅与 API 等变现能力。工具和游戏平级，每个小工具或游戏都按模块独立归档——独立的文档目录与独立的代码目录，支持多人多 AI 并行开发。</p>\n<h2>它解决什么问题</h2>\n<p>门户类产品的冷启动靠的是单点刚需和回访理由。DreamChasers 把第一阶段收敛成三个交付：PDF 工具箱吃搜索刚需（不调用模型的能力尽量免费）、AI 修图工具展示 AI 能力与付费空间（基础修图免费、AI 能力限次收费）、麻将 Roguelike 消除小游戏提升停留时长和回访。三件事共用一套平台底座和账号体系，避免每个小产品各起一套炉灶。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>平台底座</strong>：Monorepo + Next.js 主站 + PostgreSQL/Prisma + Docker Compose，Web 部署在 Vercel（含 standalone 自托管构建开关）；首页按工具站/游戏站左右分流，<code>/tools</code> 与 <code>/games</code> 独立导航。</li>\n<li><strong>PDF 工具箱</strong>：页面级处理第一轮完成——上传、预览、旋转、排序、删除、拆分、下载，并补齐文字水印、签名图片、PDF 转 Word Beta、区域遮盖和图片扫描成 PDF；完整在线编辑按边界规划不做。</li>\n<li><strong>麻将 Roguelike「胡了卜」</strong>：玩法为麻将消除 + 手动吃碰杠 + Roguelike 奖励构筑（槽位成长、能力池、体力与救场、词缀与 Boss）。推进路径是先用 HTML 验证原型跑通最小可玩闭环和观察指标，再进 Cocos Creator 正式工程：模板注册表与参数化牌山生成器、渐进难度 10 关朋友试玩 Demo；GDevelop 只作为 Web H5 原型通道。</li>\n<li><strong>账号与产品协同</strong>：统一账号中心第一阶段完成（账号密码登录、找回/修改密码），TimePick 等产品逐步切换到同账号 PostgreSQL 基座。</li>\n<li><strong>协作机制</strong>：双人 + 多 AI 的文档驱动协作——任务必须先领取、文件范围显式声明，任务分片落盘后由 <code>docs:sync</code> 脚本自动汇总主看板，降低多人提交冲突。</li>\n</ul>\n<h2>当前状态</h2>\n<p>平台基础（Monorepo 外壳、Next.js 应用、数据库与 Prisma、门户 UI、账号中心第一阶段）已完成；PDF 工具箱 MVP 核心功能第一轮落地、转图片与压缩在补；「胡了卜」推进到 Cocos 试玩 Demo 与模板化牌山生成器，正式 MVP 尚未冻结；AI 修图工具未开始。整体处于持续开发中（wip）。</p>\n"
+      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>免费工具站和小游戏站这两类产品，常见的痛点是：</p>\n<ul>\n<li>要么服务器处理，文件被上传、隐私不可控；</li>\n<li>要么工具散落各处，每个都单建仓库、单建账号、单做部署，维护成本随数量线性增长；</li>\n<li>小游戏做出来一个就单独买一个域名，推广和复用都难。</li>\n</ul>\n<p>DreamChasers 想把这两件事合在一个 monorepo 里做掉：<strong>工具在浏览器内完成（PDF 用 pdf-lib / pdfjs 本地处理，不上传服务器），游戏提供 Web 试玩 + Cocos 正式包双形态，账号中心给所有产品共用</strong>。门户首页直接把用户分流到「效率工具箱」或「休闲游戏馆」，两边视觉独立、互不干扰。</p>\n<h2>技术实现</h2>\n<h3>Monorepo 结构</h3>\n<pre><code>apps/\n  web/                    # Next.js 16 门户 + 全部 Web 工具\n    src/app/tools/        # /tools/pdf-toolbox、/tools/ai-photo-editor 等\n    src/app/games/        # /games/hulebu 等\n    src/app/account/      # 账号中心\n    src/modules/          # 每个工具/游戏独立业务模块（路由层只做入口）\n  game/\n    mahjong-roguelike/\n      cocos/              # Cocos Creator 3.8 正式工程\n      prototypes/         # HTML 验证原型\npackages/\n  shared/                 # 共享领域类型与玩法配置\n</code></pre>\n<p>关键工程约定（写死在 AGENTS.md 里）：</p>\n<ul>\n<li>每个小工具/游戏必须有独立模块目录 <code>apps/web/src/modules/tools/&lt;slug&gt;/</code> 或 <code>games/&lt;slug&gt;/</code>；</li>\n<li>每个模块必须配套独立文档夹 <code>docs/modules/&lt;slug&gt;/{README,IMPLEMENTATION_PLAN,PROGRESS,DECISIONS,HANDOFF}.md</code>；</li>\n<li>路由层 <code>app/**/page.tsx</code> 只做入口、不承载业务逻辑。</li>\n</ul>\n<h3>PDF 工具箱 MVP</h3>\n<p>基于 pdf-lib（写入）+ pdfjs-dist（渲染）做纯浏览器内 PDF 处理：</p>\n<ul>\n<li><strong>已完成</strong>：合并、拆分、旋转、排序、删除、文字水印、签名图片、PDF 转 Word（Beta）、区域遮盖、图片扫描成 PDF；</li>\n<li><strong>进行中</strong>：PDF 转图片、基础压缩；</li>\n<li><strong>规划中</strong>：扫描件 OCR。</li>\n</ul>\n<p>文件全程留在浏览器里，隐私边界清晰。</p>\n<h3>胡了卜（麻将 Roguelike 消除）</h3>\n<ul>\n<li><strong>Web 试玩版</strong>：Next.js 内嵌于 <code>/games/hulebu</code>，纯 HTML + 共享配置，已开放 20 关主线（第 10 关终局试炼、第 20 关胡了卜王 Boss），并支持无尽牌山、每日牌局、成就图鉴与高阶周目；</li>\n<li><strong>Cocos 正式工程</strong>：<code>apps/game/mahjong-roguelike/cocos/hulebu-cocos-3.8.8</code>，为微信/抖音小游戏发布准备，当前在做音频链路与局外 UI 回归；</li>\n<li><strong>共享配置</strong>：<code>packages/shared/</code> 承载关卡、奖励与规则配置，Web 与 Cocos 两端同源，避免数值漂移。</li>\n</ul>\n<h3>统一账号中心</h3>\n<p>基于 NextAuth v5 + Prisma + PostgreSQL：</p>\n<ul>\n<li>邮箱验证码登录（T110–T111）；</li>\n<li>产品 token 交换骨架（T112–T113），允许内部产品拿到当前登录态；</li>\n<li>已接入团队内另一款产品 TimePick（拾光）的前端登录壳、文件夹、资源、标签、搜索、灵感抽屉、角色选择等 12 个 API 切换任务（T114–T128），实现跨产品单点登录。</li>\n</ul>\n<h3>部署形态</h3>\n<ul>\n<li>默认部署到 Vercel（<code>apps/web/package.json</code> 已声明 next / react / react-dom，解决子目录识别）；</li>\n<li>可选 <code>STANDALONE_BUILD=1</code> 切换到 Next.js standalone 自托管（Docker / Nginx 配置在 <code>deploy/</code>）。</li>\n</ul>\n<h2>当前状态</h2>\n<p><strong>状态：进行中（wip）。</strong> 门户骨架、PDF 工具箱 MVP、胡了卜 Web 试玩版、统一账号中心都已可用，但都还在持续打磨：</p>\n<ul>\n<li>PDF 工具箱在补 PDF 转图片和压缩；</li>\n<li>胡了卜 Cocos 端在修实测反馈的素材映射、按钮黑底和音频链路；</li>\n<li>账号中心 T110–T128 系列任务处于「待验收」阶段；</li>\n<li>AI 修图工具仅有占位页面，未开始实质开发；</li>\n<li>规划中的 AI 内容转换工具箱（参考 qiaomu-anything-to-notebooklm）尚未排期。</li>\n</ul>\n<p>整体节奏是双人协作 + AI 结对开发，每个任务都有独立的 <code>docs/tasks/items/T*</code> 任务书、允许修改文件清单和验证命令，所有完成项在 <code>docs/status/CURRENT_STATUS.md</code> 里可追溯。</p>\n"
     },
     {
       "name": "dotnet-medical",
