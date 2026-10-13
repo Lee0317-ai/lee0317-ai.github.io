@@ -3,7 +3,7 @@ name: riley-auth
 title: 睿狸账号中心 Riley Auth
 tagline: 独立账号认证服务与 Web 管理后台
 status: shipped
-category: ai
+category: java
 role: 独立开发
 stack: [Fastify, TypeScript, Prisma, PostgreSQL, React 18]
 highlights:
@@ -18,7 +18,7 @@ screenshots:
   - assets/screenshots/rileyauth/02-accounts.png
   - assets/screenshots/rileyauth/04-roles.png
   - assets/screenshots/rileyauth/07-audit.png
-order: 6
+order: 4
 biz:
   - 给自研的多个应用提供一套统一登录与权限底座：账号、角色、审计集中在一个后台管，新应用注册即接入，不用每个系统各写一套认证。
 ---

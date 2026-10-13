@@ -69,7 +69,7 @@
       "title": "调查型 AI Agent",
       "tagline": "面向研发团队的根因取证 Agent",
       "status": "shipped",
-      "category": "ai",
+      "category": "agent",
       "role": "独立开发",
       "stack": [
         "Next.js 14",
@@ -96,42 +96,40 @@
       "narrativeHtml": "<p>系统出了问题，工程师往往要先猜&quot;该去哪查&quot;：Git 提交、禅道缺陷、飞书讨论、Jenkins 构建、日志与监控分散在各处，来回切换、逐个翻找。Internal AI Agent 让用户直接用自然语言描述问题：Agent 在当前用户已授权的资源范围内，跨 Git、禅道、飞书、Jenkins、日志、监控和知识库取证，输出可复查的根因、证据、业务解释和修改方向——不用先判断该去哪个系统查。</p>\n<h2>它解决什么问题</h2>\n<p>面向研发团队的调查型 Agent，核心难点不在&quot;会回答&quot;，而在&quot;答得有据、边界可控&quot;。团队排查一个线上问题常要在五六个系统之间反复横跳，每人查到的信息还受各自权限限制。这个项目把&quot;跨系统取证&quot;做成一条结构化的调查链：范围先被授权约束住，结论必须挂在证据上，过程可回放、可复查。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>主回答链</strong>：Run → TaskBoard → Task → Retrieval → Evidence → Answer。KnowledgeSpace、DataProvider 与资源授权快照先把调查范围限制在授权边界内；EvidenceGate 与 Verification Gate 判断证据是否充分，证据不足宁可拒答，不硬编结论。</li>\n<li><strong>过程可回放</strong>：通过 SSE、Task snapshot 与 RunEvent 呈现调查过程；工具的原始大输出不直接注入模型上下文，而是转成 Observation、Evidence 或句柄，控制上下文成本。</li>\n<li><strong>Harness 运行时</strong>：按开关独立灰度——任务内带预算的 ReAct loop、工具快照与 Observation、持久化子 Agent 执行器、长期记忆读取与审核型记忆巩固；配套固定评测与灰度门槛、回滚条件，本地回归不依赖数据库和真实 provider。</li>\n<li><strong>技术栈</strong>：Next.js 14 + React + TypeScript，LangGraph / LangChain 编排，PostgreSQL + Prisma + pgvector 存储与向量检索；用户资源凭据（如 GitLab）通过产品界面绑定，不要求全局配置。</li>\n</ul>\n<h2>当前状态</h2>\n<p>主回答链、授权边界、证据闸门与 Harness 运行时等核心能力已落地，知识库、代码索引、RAG、provider 调查骨架与失败样本复盘均可用；<code>eval:harness-runtime</code> 评测与类型检查构成固定回归，评测报告与灰度门槛在文档中留档。项目持续沿&quot;更多 provider 接入 + 记忆巩固质量&quot;方向迭代。</p>\n"
     },
     {
-      "name": "workoperator",
-      "title": "企业系统操作 Agent",
-      "tagline": "自然语言操作业务系统，人机协同确认后执行",
-      "status": "wip",
-      "category": "ai",
-      "role": "独立开发",
+      "name": "wos",
+      "title": "WOS 桌面 Agent",
+      "tagline": "基于 LobsterAI 深度改编的桌面 Agent 工作台",
+      "status": "adapted",
+      "category": "agent",
+      "role": "改编维护",
       "stack": [
-        "Python",
-        "FastAPI",
-        "LangGraph",
-        "SQLAlchemy",
-        "PostgreSQL"
+        "Electron 40",
+        "React 18",
+        "TypeScript"
       ],
       "highlights": [
-        "LangGraph HITL 图（draft → interrupt 暂停 → 确认后执行）：模型只能产草稿、永不能决定提交，提示注入越不过确认闸门",
-        "写工具与出站连接器物理隔离：写工具零 HTTP import，出站唯一出口是确认后的 provider.submit，由源码级测试锁死",
-        "凭证中心：PAT 只存 Fernet 密文 + sha256 哈希，审计只记 credential_id，明文不落日志、不入响应",
-        "FormProfile 低代码适配：YAML 声明表单字段语义与外键解析规则，新增表单不改代码",
-        "39 个 hermetic 测试（SQLite + InMemorySaver）零 Postgres 依赖全量跑绿"
+        "证据定验收：run 必须走完 finalize 并集齐必需证据才进入 accepted，缺证据停在 partial，失败证据不会被标成通过",
+        "权限与审批边界：生产部署等高危能力必须 confirm，工作区外文件操作直接拒绝，拒绝经真实路由边界返回、不推进状态",
+        "事件持久化与恢复投影：中断 run 从事件恢复、保持事件顺序、幂等键防止已完成动作重复执行",
+        "品牌迁移与数据兼容：LobsterAI 旧归档根目录在 WOS 品牌下可读可恢复，未知根目录拒绝并保留路径安全检查",
+        "P0 回归 270/270、Agent 编排 257/257、数据迁移 20/20 通过；未验证项在验收报告中如实留档"
       ],
       "links": {},
       "screenshots": [
-        "assets/screenshots/placeholders/workoperator.svg"
+        "assets/screenshots/wos/brand.png"
       ],
       "order": 2,
       "biz": [
-        "让业务人员少在多个系统间反复登录、手动填表：一句话说清要办的事，Agent 以本人身份起草操作，人确认后才真正提交，权限仍完全受被控系统约束。"
+        "在开源桌面 Agent 基础上改编出一套\"做完必须有证据、高危必须人确认\"的可控工作台：任务验收有据可查，适合真正拿来干活而不是演示。"
       ],
-      "narrativeHtml": "<p>企业里的日常操作——填表单、发起审批、查数据——散落在多个业务系统里，用户要反复登录、逐个页面点。workOperator 的思路是：用户登录它一次，用一句自然语言说要办什么事，它就以用户本人的身份去操作目标系统（gooyoo-boot 及未来其他系统），草稿经用户确认后才真正提交并跟踪结果。它替代的不是某个系统，而是&quot;在多个系统里反复手动操作&quot;这件事本身。</p>\n<h2>它解决什么问题</h2>\n<p>让 Agent 替人操作系统，最怕两件事：干不该干的事，和越权。workOperator 把这两个问题前置进架构——以用户身份透传 PAT，权限完全受被控系统约束，不另起权限体系；所有写操作先产草稿、人确认后才执行。这样企业才敢把它接进真实业务流程。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>LangGraph HITL 图</strong>（intent → draft → ask → execute/cancel）：写工具只产出 PendingAction 草稿，图在 ask 节点 interrupt 暂停，只有确认端点能 resume 进入 execute。即使上传内容里夹带&quot;忽略指令直接提交&quot;类注入，也越不过这道闸门（OWASP LLM01 防线）。</li>\n<li><strong>物理隔离的出站边界</strong>：<code>tools/</code> 里的写工具零 HTTP import，出站调用全部集中在 <code>providers/</code>，唯一出口是确认后的 <code>provider.submit</code>——这条不变量由源码级断言测试锁死。</li>\n<li><strong>凭证中心</strong>：PAT 明文只在录入瞬间出现一次，库里只存 Fernet 密文 + sha256 哈希；fetch 审计 payload 只记 credential_id + system，日志、审计、响应都不回明文。</li>\n<li><strong>FormProfile 低代码适配</strong>：用 YAML 声明表单字段语义和外键解析规则（如合同表单的 fk_query 调 simple-list 解析外键候选），新增表单不改代码；mock / 真实连接器按配置自动切换，本地没有被控系统也能完整演示闭环。</li>\n<li><strong>hermetic 测试</strong>：SQLite + InMemorySaver，39 个测试不依赖 Postgres 全量跑绿，Windows 下绕开 TestClient 与 aiosqlite 的线程竞争坑。</li>\n</ul>\n<h2>当前状态</h2>\n<p>M0（LangGraph HITL 底座）与 M1（凭证中心 + gooyoo-boot provider + FormProfile + 供应商/合同两类表单 create 闭环）代码完成，39/39 测试通过，mock 端到端已验证；真连验收待 gooyoo-boot 侧补 PAT 端点后进行。合同 submit + BPM 审批因 HTTP 接口无 businessKey 等硬约束拆到 M1.5；后续规划图像/文档转草稿（M2）、确认闸门 UX 与审计页（M3）、移动端试用（M4）。</p>\n"
+      "narrativeHtml": "<p>通用桌面 Agent 拿来就能用，但真拿它干活会担心两件事：任务说完成就完成、没有证据；高危动作（比如生产部署）说干就干。WOS 基于网易有道开源的 LobsterAI（MIT 协议）深度改编，目标是一个改编可控、验收有据的桌面 Agent 工作台：品牌、数据目录与验收体系完整迁移到 WOS，同时完整保留上游许可与署名。</p>\n<h2>它解决什么问题</h2>\n<p>fork 一个开源项目容易，让它在自己的场景里&quot;可信任&quot;难。WOS 的改编围绕一条主线：把&quot;Agent 说做完了&quot;变成&quot;证据齐了才算做完&quot;——执行、等待复核、部分完成的状态边界由验收报告单一事实源定义，凡是没验证过的能力一律如实列为未验证，不冒充已完成。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>证据定验收</strong>：run 走完 finalize 并集齐必需证据才进入 accepted；缺必需证据停在 partial，失败的证据同样不会被标成 accepted，<code>run.completed</code> 不直接等于验收通过。</li>\n<li><strong>权限与审批边界</strong>：生产部署等高危能力必须 confirm；工作区之外的文件操作直接拒绝。拒绝经真实路由边界返回，不推进 <code>startSession</code> / <code>continueSession</code>，非法审批响应在路由前被拦截。</li>\n<li><strong>事件持久化与恢复</strong>：从持久化事件恢复被中断的 run、保持事件顺序，幂等键防止已完成的动作重复执行。</li>\n<li><strong>数据迁移兼容</strong>：LobsterAI 旧归档根目录在 WOS 品牌下可读可恢复，未知根目录拒绝并保留路径安全检查；新备份写入 WOS 根目录。</li>\n<li><strong>安全基线</strong>：渲染进程启用上下文隔离、禁用 Node 集成、开启沙箱，渲染层访问主进程只走 preload IPC；应用数据存本地 userData。</li>\n<li><strong>自建认证接入（实验）</strong>：已实验性接入睿狸账号中心（riley-auth）账号密码登录，令牌经 Electron safeStorage 加密存储，与登录态体系打通。</li>\n<li><strong>可选外部 Agent</strong>：Codex / Claude Code 是可选扩展而非运行前提，测试层同时覆盖&quot;有 Codex 用外部 Agent&quot;与&quot;无 Codex 回退原生执行&quot;两条路径。</li>\n</ul>\n<h2>当前状态</h2>\n<p>P0 验收结论&quot;有条件通过&quot;：固定 P0 回归 270/270、Agent 编排 257/257、数据迁移 20/20 通过，Electron 主进程编译与渲染层构建通过，首页、高级执行选项与 Sidebar&quot;运行中/待复核&quot;投影有真实启动截图佐证。未验证项如实列在验收报告中：真实任务端到端（缺 provider 与运行时）、Windows 安装包、签名与自动更新、Computer Use 与紧急停止、会话页端到端等——这些是进入 P1 前必须补齐的清单。当前截图为品牌视觉稿，应用界面截图将在 P1 后补充。</p>\n"
     },
     {
       "name": "zero",
       "title": "Zero 个人智能工作台",
       "tagline": "一人公司 OS / 本地优先的个人成长引擎",
       "status": "wip",
-      "category": "ai",
+      "category": "app",
       "role": "独立开发",
       "stack": [
         "Tauri 2",
@@ -150,213 +148,18 @@
       "screenshots": [
         "assets/screenshots/placeholders/zero.svg"
       ],
-      "order": 3,
+      "order": 1,
       "biz": [
         "把\"一人公司\"的日常运营拆成可审批的员工任务流：素材自动采集提炼、内容经老板审批后才产出，重要动作全部留痕、可回溯。"
       ],
       "narrativeHtml": "<p>一个人做一家公司的事，最大的瓶颈不是不会用工具，而是上下文散落：做过的决策、聊过的想法、写过的文章、各平台的反馈互不相通，AI 助手每次都要从零理解你。Zero 想做的是本地优先的个人智能工作台：把个人上下文沉淀成本地底座，再用一支&quot;员工 Agent&quot;队伍在受控流程里干活——采集、提炼、撰稿、分析各有其人，重要动作必须老板审批。</p>\n<h2>它解决什么问题</h2>\n<p>把工作交给 AI，人最担心的是失控：它改了什么、凭什么这么改、出错了能不能查。Zero 用&quot;公司组织&quot;的隐喻把 AI 工作流结构化——每个员工有岗位、有私有记忆、有运行档案，老板有审批关卡，每一步有事件留痕。个人数据则守住本地优先的边界：SQLite 管运行状态，Obsidian 管人工可读内容，密钥进系统凭据管理器。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>员工 Agent 组织</strong>：公司/部门/岗位/角色模板落库（SQLite schema v8），内置 10 名员工，每人有独立认知版本与运行档案；支持同岗多人、负责人任命与更换，员工私有记忆在 SQL 查询层隔离，不把全量记忆交给 Prompt 过滤。</li>\n<li><strong>通用 Agent Runtime</strong>：ReAct 与 Plan-and-Execute 双模式、按 token 估算触发上下文压缩（保留系统约束与最近工具结果）、Tool/Skill/MCP/Subagent 全走 allowlist 与权限范围校验，模型能力不满足时明确失败而非硬跑。</li>\n<li><strong>完整事实链</strong>：Ticket → Assignment → 不可变 EmployeeSnapshot → Run → AgentTurn → Artifact → 事件；产物路径由服务端生成、拒绝路径穿越与覆盖，非法 JSON 与越权记忆引用落 <code>anomaly_detected</code>，不登记伪产物。</li>\n<li><strong>个人上下文底座</strong>：Flomo 导出文件只读导入并按 hash 去重，Obsidian Vault 保存人工可读档案；外部连接器默认只读，任何写入须老板确认并留下审计事件。</li>\n<li><strong>桌面端</strong>：Tauri 2 + React 提供公司工作区、员工办公室、内容/反馈工作台、画布固定模板工作流；媒体制作员用 Rust 构造固定 ComfyUI 封面工作流，非法远端路径不能决定本地输出位置。</li>\n</ul>\n<h2>当前状态</h2>\n<p>切片 1-9 与员工 Agent 地基升级均通过自动化验收：Rust 136 个单元测试与端到端场景全绿，前端 Vitest、生产构建与 Playwright 桌面/移动用例通过。尚未验证的部分如实保留：真实 LLM / Flomo / ComfyUI 服务下的输出质量、连续 7 天真实使用反馈与&quot;80% 内容值得保留&quot;的人工质量门槛——这些是反哺 spec、驱动下一轮切片的输入。</p>\n"
     },
     {
-      "name": "workscribe",
-      "title": "工作记叙 WorkScribe",
-      "tagline": "本地优先的工作记录与汇报工具",
-      "status": "shipped",
-      "category": "ai",
-      "role": "独立开发",
-      "stack": [
-        "TypeScript",
-        "React 19",
-        "Tauri 2",
-        "Rust",
-        "SQLite"
-      ],
-      "highlights": [
-        "全局快捷键 Ctrl+Shift+L 随手记录文字与截图，AI 先整理、用户确认后才保存",
-        "任务梳理 Agent 自动拆分待办/已完成/待澄清，模糊事项可追问确认",
-        "日报/周报/月报/绩效 HTML 报告生成，支持模板、应用内预览与下载；独立工作汇报模式",
-        "飞书集成：待办同步 WorkLog 日历，带同步日志保留策略",
-        "本地 SQLite + 自动备份（24 小时快照、保留最近 5 份）、导入导出与完整性检查"
-      ],
-      "links": {},
-      "screenshots": [
-        "assets/screenshots/workscribe/demo.gif",
-        "assets/screenshots/workscribe/03-ai-result.png",
-        "assets/screenshots/workscribe/08-schedule.png",
-        "assets/screenshots/workscribe/07-report-preview.png"
-      ],
-      "order": 4,
-      "biz": [
-        "零碎工作做完就忘、汇报前反复翻记录——一键记录加 AI 整理，把周报月报的准备压到几分钟，数据全部留在本机，不怕敏感信息出域。"
-      ],
-      "narrativeHtml": "<p>日常工作零碎：做完就忘，月底回忆成本高；待办、日程、工作记录分散在各处，周会汇报前要反复整理；报告内容还要排除个人事项。工作记叙（WorkScribe）把&quot;记 → 理 → 报&quot;做成一条本地流水线：随手记下工作片段，AI 整理成结构化事项，再一键生成日报、周报、月报、绩效报告和会议汇报。</p>\n<h2>它解决什么问题</h2>\n<p>工作记录工具的通病是&quot;记了不看、看了不用&quot;：记录和待办两张皮，和汇报更是断开的。WorkScribe 让记录直接长成汇报——每次随手记的内容都被 AI 拆进待办/已完成/待澄清，生成报告时按时间范围汇总，还能屏蔽不需要的条目；数据本地存储，适合对数据出域敏感的团队和个人。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>快速记录</strong>：全局快捷键 Ctrl+Shift+L 唤出，支持文字与截图输入；AI 先整理，用户确认后才保存，避免 AI 自作主张。</li>\n<li><strong>任务与日程</strong>：待办支持优先级、分类、截止日期、重复任务与完成/重开；日程视图按日/周/月排布，dnd-kit 拖拽调整日期与时间，状态与优先级颜色区分。</li>\n<li><strong>报告与汇报</strong>：生成日报、周报、月报和绩效 HTML 报告，支持报告模板、应用内预览、保存 HTML；独立&quot;工作汇报&quot;模式整理&quot;正在做 / 已完成 / 下周继续&quot;，可手动补充与屏蔽记录。</li>\n<li><strong>飞书集成</strong>：账号绑定、待办同步到 WorkLog 日历（只同步有截止时间的顶层待办）、同步日志只保留最近 10 条、报告发布。</li>\n<li><strong>本地优先与模型</strong>：Tauri v2 + Rust，SQLite（rusqlite）存储；启动时距上次备份超 24 小时自动快照并保留最近 5 份，支持导入导出与 <code>PRAGMA integrity_check</code> 完整性检查；LLM 层统一封装 OpenAI 兼容与 Claude 原生格式，支持 Ollama、通义等多模型配置与默认切换。</li>\n</ul>\n<h2>当前状态</h2>\n<p>开发已完成：记录、待办、日程（日/周/月视图与拖拽排期）、搜索、报告、工作汇报、报告模板、知识库、飞书集成与本地数据保障全部落地，打包走版本号自动更新 + release notes 流程（<code>npm run package</code>）。线上作品集演示为示例数据。</p>\n"
-    },
-    {
-      "name": "wos",
-      "title": "WOS 桌面 Agent",
-      "tagline": "基于 LobsterAI 深度改编的桌面 Agent 工作台",
-      "status": "adapted",
-      "category": "ai",
-      "role": "改编维护",
-      "stack": [
-        "Electron 40",
-        "React 18",
-        "TypeScript"
-      ],
-      "highlights": [
-        "证据定验收：run 必须走完 finalize 并集齐必需证据才进入 accepted，缺证据停在 partial，失败证据不会被标成通过",
-        "权限与审批边界：生产部署等高危能力必须 confirm，工作区外文件操作直接拒绝，拒绝经真实路由边界返回、不推进状态",
-        "事件持久化与恢复投影：中断 run 从事件恢复、保持事件顺序、幂等键防止已完成动作重复执行",
-        "品牌迁移与数据兼容：LobsterAI 旧归档根目录在 WOS 品牌下可读可恢复，未知根目录拒绝并保留路径安全检查",
-        "P0 回归 270/270、Agent 编排 257/257、数据迁移 20/20 通过；未验证项在验收报告中如实留档"
-      ],
-      "links": {},
-      "screenshots": [
-        "assets/screenshots/placeholders/wos.svg"
-      ],
-      "order": 5,
-      "biz": [
-        "在开源桌面 Agent 基础上改编出一套\"做完必须有证据、高危必须人确认\"的可控工作台：任务验收有据可查，适合真正拿来干活而不是演示。"
-      ],
-      "narrativeHtml": "<p>通用桌面 Agent 拿来就能用，但真拿它干活会担心两件事：任务说完成就完成、没有证据；高危动作（比如生产部署）说干就干。WOS 基于网易有道开源的 LobsterAI（MIT 协议）深度改编，目标是一个改编可控、验收有据的桌面 Agent 工作台：品牌、数据目录与验收体系完整迁移到 WOS，同时完整保留上游许可与署名。</p>\n<h2>它解决什么问题</h2>\n<p>fork 一个开源项目容易，让它在自己的场景里&quot;可信任&quot;难。WOS 的改编围绕一条主线：把&quot;Agent 说做完了&quot;变成&quot;证据齐了才算做完&quot;——执行、等待复核、部分完成的状态边界由验收报告单一事实源定义，凡是没验证过的能力一律如实列为未验证，不冒充已完成。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>证据定验收</strong>：run 走完 finalize 并集齐必需证据才进入 accepted；缺必需证据停在 partial，失败的证据同样不会被标成 accepted，<code>run.completed</code> 不直接等于验收通过。</li>\n<li><strong>权限与审批边界</strong>：生产部署等高危能力必须 confirm；工作区之外的文件操作直接拒绝。拒绝经真实路由边界返回，不推进 <code>startSession</code> / <code>continueSession</code>，非法审批响应在路由前被拦截。</li>\n<li><strong>事件持久化与恢复</strong>：从持久化事件恢复被中断的 run、保持事件顺序，幂等键防止已完成的动作重复执行。</li>\n<li><strong>数据迁移兼容</strong>：LobsterAI 旧归档根目录在 WOS 品牌下可读可恢复，未知根目录拒绝并保留路径安全检查；新备份写入 WOS 根目录。</li>\n<li><strong>安全基线</strong>：渲染进程启用上下文隔离、禁用 Node 集成、开启沙箱，渲染层访问主进程只走 preload IPC；应用数据存本地 userData。</li>\n<li><strong>可选外部 Agent</strong>：Codex / Claude Code 是可选扩展而非运行前提，测试层同时覆盖&quot;有 Codex 用外部 Agent&quot;与&quot;无 Codex 回退原生执行&quot;两条路径。</li>\n</ul>\n<h2>当前状态</h2>\n<p>P0 验收结论&quot;有条件通过&quot;：固定 P0 回归 270/270、Agent 编排 257/257、数据迁移 20/20 通过，Electron 主进程编译与渲染层构建通过，首页、高级执行选项与 Sidebar&quot;运行中/待复核&quot;投影有真实启动截图佐证。未验证项如实列在验收报告中：真实任务端到端（缺 provider 与运行时）、Windows 安装包、签名与自动更新、Computer Use 与紧急停止、会话页端到端等——这些是进入 P1 前必须补齐的清单。</p>\n"
-    },
-    {
-      "name": "riley-auth",
-      "title": "睿狸账号中心 Riley Auth",
-      "tagline": "独立账号认证服务与 Web 管理后台",
-      "status": "shipped",
-      "category": "ai",
-      "role": "独立开发",
-      "stack": [
-        "Fastify",
-        "TypeScript",
-        "Prisma",
-        "PostgreSQL",
-        "React 18"
-      ],
-      "highlights": [
-        "不透明双令牌：accessToken 2 小时 / refreshToken 30 天轮换作废，数据库只存 SHA-256 哈希，可即时吊销",
-        "应用作用域授权：角色绑定\"可登录应用\"，登录时校验角色是否覆盖目标应用，新应用注册数据即可接入",
-        "Web 管理后台：账号/角色/权限点/应用/科室/团队管理与真实分页审计日志",
-        "个人改密保留当前会话、吊销其它设备会话，丢号风险可控",
-        "自助注册页按应用编码自动绑定成员角色，公开路由直接可用"
-      ],
-      "links": {},
-      "screenshots": [
-        "assets/screenshots/rileyauth/demo.gif",
-        "assets/screenshots/rileyauth/02-accounts.png",
-        "assets/screenshots/rileyauth/04-roles.png",
-        "assets/screenshots/rileyauth/07-audit.png"
-      ],
-      "order": 6,
-      "biz": [
-        "给自研的多个应用提供一套统一登录与权限底座：账号、角色、审计集中在一个后台管，新应用注册即接入，不用每个系统各写一套认证。"
-      ],
-      "narrativeHtml": "<p>自研应用一多，每个系统各写一套登录、角色、审计很快就失控。睿狸账号中心（Riley Auth）是一套独立的账号认证服务 + Web 管理后台：账号、科室、团队、角色、审计集中管理，agent-os、ai-agent 等应用按&quot;应用编码&quot;接入，用户一次注册、按角色决定能进哪些应用。</p>\n<h2>它解决什么问题</h2>\n<p>多应用共用账号的常见做法是把用户表复制来复制去，权限口径很快对不上。Riley Auth 把&quot;谁能登录哪个应用&quot;做成显式建模：角色绑定应用，登录时校验用户角色是否覆盖目标应用（<code>APP_NOT_ALLOWED</code> 直接拒绝）；所有管理动作进审计日志，改密、重置、启停都有据可查。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>认证设计</strong>：不透明双令牌——accessToken 2 小时、refreshToken 30 天且轮换作废；数据库只存 SHA-256 哈希，令牌可即时吊销；统一错误码（INVALID_CREDENTIALS / ACCOUNT_DISABLED / APP_NOT_ALLOWED / TOKEN_EXPIRED 等）中文化返回。</li>\n<li><strong>应用作用域授权</strong>：注册应用 → 角色关联应用 → 用户绑定角色三步接入新应用，不改认证代码；自助注册页 <code>/#/register?app=&lt;编码&gt;</code> 为公开路由，注册即自动绑定对应成员角色。</li>\n<li><strong>管理后台</strong>（React 18 + Vite）：账号管理（分页搜索、新建/编辑/重置密码/启停）、角色与权限点配置、应用注册、科室树与团队、审计日志、顶栏个人改密与退出。</li>\n<li><strong>设计系统</strong>：oklch 设计 token、浅色/深色一键切换、品牌 Logo，最低适配 1024px。</li>\n<li><strong>部署形态</strong>：Fastify API 无构建步骤（tsx 直跑 TypeScript），管理后台构建为静态站点；Nginx 统一入口，静态文件直出、<code>/auth</code> <code>/admin</code> <code>/api</code> 前缀反代到 API。</li>\n</ul>\n<h2>当前状态</h2>\n<p>M1（服务骨架：认证接口、自助注册、应用作用域校验、审计埋点与查询）与 M3（Web 管理后台全模块）完成，已作为 agent-os 等应用的统一登录入口运行；M4（微信/飞书登录）在规划中。线上作品集演示为示例数据。</p>\n"
-    },
-    {
-      "name": "timepick",
-      "title": "拾光 TimePick",
-      "tagline": "个人知识与资源管理系统",
-      "status": "shipped",
-      "category": "ai",
-      "role": "独立开发",
-      "stack": [
-        "React 19",
-        "TypeScript",
-        "Vite",
-        "Supabase",
-        "Tailwind CSS"
-      ],
-      "highlights": [
-        "网页、文档、图片、视频统一收藏、分类与检索",
-        "AI 智能分类自动识别并归类资源，减少手工整理",
-        "全文搜索快速定位已存内容",
-        "灵感速记与待办事项：记想法、管待尝试的链接和任务",
-        "Supabase 后端 + shadcn/ui，已上线 shiguang.app、仓库开源"
-      ],
-      "links": {
-        "demo": "https://shiguang.app",
-        "repo": "https://github.com/Lee0317-ai/TimePick"
-      },
-      "screenshots": [
-        "assets/screenshots/timepick/home.png"
-      ],
-      "order": 7,
-      "biz": [
-        "把散落在浏览器收藏夹和聊天记录里的资料收进一个可搜索的个人知识库，AI 自动分类省去手工整理，\"存下来\"的东西真的能被再次找到。"
-      ],
-      "narrativeHtml": "<p>网页、文档、图片、视频散落在浏览器收藏夹、聊天记录和本地文件夹里，想用的时候找不到。拾光（TimePick）把这些资源收进一个统一的个人知识库：收藏、分类、检索一条龙，配灵感速记与待办事项，让&quot;存下来&quot;的东西真的能被再次找到。</p>\n<h2>它解决什么问题</h2>\n<p>收藏夹的通病是&quot;存的时候随手一扔，找的时候大海捞针&quot;。拾光用 AI 智能分类替用户做归档动作，再用全文搜索兜底；灵感速记和待办事项把&quot;以后再看&quot;的链接变成真正会被消化的任务，而不是越堆越长的列表。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>资源管理</strong>：网页、文档、图片、视频统一收藏、分类与检索，一套界面管理所有数字资源。</li>\n<li><strong>AI 智能分类</strong>：自动识别资源类型并归类，减少手工整理成本。</li>\n<li><strong>全文搜索</strong>：快速定位已存内容，不用逐个点开翻找。</li>\n<li><strong>灵感与待办</strong>：快速记录想法和灵感；管理待尝试链接和任务。</li>\n<li><strong>技术栈</strong>：React 19 + TypeScript + Vite + Tailwind CSS + shadcn/ui，Supabase 作为后端；站点已上线 shiguang.app，源码在 GitHub 开源。</li>\n</ul>\n<h2>当前状态</h2>\n<p>已上线（shiguang.app），源码在 GitHub 开源。</p>\n"
-    },
-    {
-      "name": "dreamchasers",
-      "title": "DreamChasers 梦想启航",
-      "tagline": "免费工具与小游戏门户",
-      "status": "wip",
-      "category": "ai",
-      "role": "独立开发",
-      "stack": [
-        "TypeScript",
-        "Next.js",
-        "PostgreSQL",
-        "Prisma",
-        "Cocos Creator"
-      ],
-      "highlights": [
-        "Monorepo 门户：Next.js 工具站 / 游戏站双入口分流，独立导航与视觉，部署在 Vercel",
-        "PDF 工具箱 MVP 第一轮落地：上传/预览/旋转/排序/拆分/下载，外加文字水印、签名、PDF 转 Word Beta、区域遮盖、图片扫描成 PDF",
-        "麻将 Roguelike「胡了卜」：从最小可玩 HTML 验证原型推进到 Cocos 正式工程（模板化牌山生成器、渐进难度试玩 Demo）",
-        "模块化协作规范：每个工具/游戏独立文档目录 + 独立代码目录，双人 + 多 AI 通过任务分片协作，`docs:sync` 自动汇总看板",
-        "统一账号中心第一阶段完成：账号密码登录、找回/修改密码，TimePick 等产品同账号接入"
-      ],
-      "links": {},
-      "screenshots": [
-        "assets/screenshots/placeholders/dreamchasers.svg"
-      ],
-      "order": 8,
-      "biz": [
-        "一个免费、好用、更新快的工具与小游戏门户：先用 PDF 工具箱拿搜索流量、用小游戏拉停留和回访，再接 AI 能力与订阅变现。"
-      ],
-      "narrativeHtml": "<p>DreamChasers（梦想启航）是一个免费工具 / 小游戏门户，用 monorepo 同时承载工具站和游戏站：第一阶段以&quot;免费、好用、更新快&quot;拿流量和停留，后续再接 AI 能力、订阅与 API 等变现能力。工具和游戏平级，每个小工具或游戏都按模块独立归档——独立的文档目录与独立的代码目录，支持多人多 AI 并行开发。</p>\n<h2>它解决什么问题</h2>\n<p>门户类产品的冷启动靠的是单点刚需和回访理由。DreamChasers 把第一阶段收敛成三个交付：PDF 工具箱吃搜索刚需（不调用模型的能力尽量免费）、AI 修图工具展示 AI 能力与付费空间（基础修图免费、AI 能力限次收费）、麻将 Roguelike 消除小游戏提升停留时长和回访。三件事共用一套平台底座和账号体系，避免每个小产品各起一套炉灶。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>平台底座</strong>：Monorepo + Next.js 主站 + PostgreSQL/Prisma + Docker Compose，Web 部署在 Vercel（含 standalone 自托管构建开关）；首页按工具站/游戏站左右分流，<code>/tools</code> 与 <code>/games</code> 独立导航。</li>\n<li><strong>PDF 工具箱</strong>：页面级处理第一轮完成——上传、预览、旋转、排序、删除、拆分、下载，并补齐文字水印、签名图片、PDF 转 Word Beta、区域遮盖和图片扫描成 PDF；完整在线编辑按边界规划不做。</li>\n<li><strong>麻将 Roguelike「胡了卜」</strong>：玩法为麻将消除 + 手动吃碰杠 + Roguelike 奖励构筑（槽位成长、能力池、体力与救场、词缀与 Boss）。推进路径是先用 HTML 验证原型跑通最小可玩闭环和观察指标，再进 Cocos Creator 正式工程：模板注册表与参数化牌山生成器、渐进难度 10 关朋友试玩 Demo；GDevelop 只作为 Web H5 原型通道。</li>\n<li><strong>账号与产品协同</strong>：统一账号中心第一阶段完成（账号密码登录、找回/修改密码），TimePick 等产品逐步切换到同账号 PostgreSQL 基座。</li>\n<li><strong>协作机制</strong>：双人 + 多 AI 的文档驱动协作——任务必须先领取、文件范围显式声明，任务分片落盘后由 <code>docs:sync</code> 脚本自动汇总主看板，降低多人提交冲突。</li>\n</ul>\n<h2>当前状态</h2>\n<p>平台基础（Monorepo 外壳、Next.js 应用、数据库与 Prisma、门户 UI、账号中心第一阶段）已完成；PDF 工具箱 MVP 核心功能第一轮落地、转图片与压缩在补；「胡了卜」推进到 Cocos 试玩 Demo 与模板化牌山生成器，正式 MVP 尚未冻结；AI 修图工具未开始。整体处于持续开发中（wip）。</p>\n"
-    },
-    {
-      "name": "novelverse",
-      "title": "NovelVerse 小说宇宙创作引擎",
-      "tagline": "长篇小说世界的设定管理与创作引擎",
-      "status": "wip",
-      "category": "ai",
-      "role": "独立开发",
-      "stack": [
-        "Python",
-        "FastAPI",
-        "PostgreSQL",
-        "pgvector",
-        "React",
-        "TypeScript",
-        "Tauri 2"
-      ],
-      "highlights": [
-        "短篇 / 架构师 / 园丁三种写作模式，模式只影响引导顺序，随时可切换、不限制手写或 AI 共创",
-        "创作链可追溯：章节计划、正文、角色决策、监督报告与模型调用记录存为可追踪版本，锁定章节沉淀摘要、角色状态、伏笔与时间线记忆",
-        "角色 Agent 决策分级：绿/黄/红三级确认规则，角色可自主决策，作者保留最终否决与回滚权",
-        "本地优先与密钥安全：API Key 只存系统凭据库，数据库、导出与备份均不落密钥；macOS 版自带私有 PostgreSQL + pgvector 运行时",
-        "多模型按任务路由：灵感/规划/正文/修订/审稿/Embedding 各设默认模型，支持单次临时切换，Embedding 索引原子激活"
-      ],
-      "links": {},
-      "screenshots": [
-        "assets/screenshots/placeholders/novelverse.svg"
-      ],
-      "order": 9,
-      "biz": [
-        "给长篇创作者一个\"设定不崩、过程可追溯\"的写作底座：世界观、角色与章节版本集中管理，AI 只出候选、每一步由作者确认，长篇不因记忆丢失而崩设定。"
-      ],
-      "narrativeHtml": "<p>NovelVerse 是一个本地优先、面向中文小说创作的 AI 写作工作台。它的核心不是让 AI 一次写完一本书，而是把每一步的意图、草稿、确认版本和后续影响放在同一条可追溯的创作链上：章节计划、正文、角色决策、监督报告、记忆和模型调用记录全部存为可追踪的版本。不配置模型也能完整手写、自动保存、锁章、恢复和导出。</p>\n<h2>它解决什么问题</h2>\n<p>长篇创作的两个老大难：设定崩坏（写着写着忘了伏笔、角色状态漂移）和 AI 代写失控（生成内容静默覆盖作者文本）。NovelVerse 用&quot;记忆层 + 版本快照 + 确认关卡&quot;正面处理这两件事——AI 结果一律以工作草稿/变体出现、由作者挑选采用，已锁定的正文和正史绝不被自动重写。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>写作台</strong>：短篇、架构师（总纲 → 卷纲 → 章卡 → 正文）、园丁（先写场景再回填结构）三种模式共享同一套资产；&quot;当前最重要的一步&quot;作为唯一主入口驱动推进，离开时保护现场、异常退出可恢复本地未保存内容。</li>\n<li><strong>版本与回滚</strong>：每章锁定时保存记忆层快照（摘要 + 角色状态 + 伏笔台账），回滚到第 N 章即加载该快照、其后章节进归档分支保留可对比，不破坏主线；上游设定修改会提示受影响的下游内容，由作者决定同步或保留。</li>\n<li><strong>角色 Agent</strong>：角色作为带人格档案的 sub-agent 可自主决策，决策按绿/黄/红三级确认（红级如角色生死、主线节点必须执行前确认）；叙事层（作者）优先级高于角色层（按设计）。</li>\n<li><strong>长篇记忆</strong>：章节摘要、角色状态、伏笔与时间线入记忆中心，PostgreSQL + pgvector 向量检索支撑超长篇上下文；Prompt 版本管理、模型用量与费用记录。</li>\n<li><strong>工程形态</strong>：FastAPI Core + React/TypeScript/Vite 前端 + Tauri 2 桌面壳；模型密钥只存系统凭据库（macOS Keychain / Windows Credential Manager），macOS 发行版自带私有 PostgreSQL + pgvector 运行时，无需用户自行装库。</li>\n</ul>\n<h2>当前状态</h2>\n<p>架构底座与小说创作闭环已实现：中文小说初始化、章节规划、生成、修订、监督与锁定，构思资产（作品 DNA / 角色 / 世界观 / 情节蓝图）逐项确认后原子创建作品，短篇/架构师/园丁三模式、章节回滚与分支、pgvector 记忆检索、Markdown/TXT 导出与备份恢复均可用，配套 P1 统一验证脚本。汇聚宇宙、去 AI 味层等能力已在领域设计文档中定稿，属后续方向。</p>\n"
-    },
-    {
       "name": "workevidence",
       "title": "workEvidence 工程资料证据链引擎",
       "tagline": "合同解析、版式级比对、风险审查与证据报告的桌面引擎",
-      "status": "wip",
-      "category": "ai",
+      "status": "shipped",
+      "category": "app",
       "role": "独立开发",
       "stack": [
         "Tauri 2",
@@ -385,37 +188,112 @@
         "assets/screenshots/workevidence/rules-center.png",
         "assets/screenshots/workevidence/dashboard.png"
       ],
-      "order": 10,
+      "order": 2,
       "biz": [
         "把工程师\"多版本合同反复肉眼比对\"的数小时工作压到几分钟，差异可追溯、风险可复核、报告可直接交付，产出结果供 workOperator 回写业务系统。"
       ],
-      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>合同审阅里最耗时的环节是&quot;找不同&quot;：两份几十页的合同，人工逐页比对既慢又容易漏——漏掉的\n一条付款比例改动，可能就是结算时几十万的争议。workEvidence 把这件事产品化：\n上传标准合同与待审合同，OCR 解析、页面对齐、条款级差异比对、规则风险标注一次完成，\n再以双页对照视图逐条复核，最后生成可下载的复核报告。</p>\n<h2>核心功能</h2>\n<ul>\n<li><strong>差异复核（双页对照）</strong>：按页组导航（每组显示差异计数与需复核状态），标准合同与待审合同\n双页对照，差异以红绿标注高亮；右侧风险面板按高风险 / 中风险 / 低风险分级过滤，\n逐项展示差异类型（修改 / 新增 / 删除）与原文对照；本组复核支持已确认风险、已接受差异、\n误报（忽略）、需法务处理四种结论，负责人与批注可留痕。</li>\n<li><strong>条款审查</strong>：单份合同条款级 AI 审查——按违约责任、结算、生效条款等类别给出规则命中、\n合同原文引用与修改建议（如&quot;发票违约金 100% 畸高，建议调整到不超过实际损失 30%&quot;），\n支持已有任务待审合同或新上传扫描件（gooyoo-ocr 本地服务识别），历史审查可重试与删除。</li>\n<li><strong>复核报告</strong>：差异与复核按页组汇总，差异项 / 高风险 / 中风险 / 低风险分级统计，\n一键下载 HTML / PDF 交付。</li>\n<li><strong>规则中心</strong>：系统基准规则、企业规则、候选规则三级体系（如 LIAB-001 违约金过分高于实际损失、\nQUAL-001 质量保修期低于法定最低期限），规则支持编辑、克隆、停用与全国版本化管理。</li>\n<li><strong>比对实验室与工作台</strong>：工作台聚合处理中 / 待复核 / 高风险待处理 / 本周完成四类指标，\n我的待复核、最近任务、最近报告与最近条款审查直达。</li>\n</ul>\n<h2>技术实现</h2>\n<ul>\n<li><strong>三层架构</strong>：Vue3 前端工作台 → Spring Boot Java 网关（鉴权、参数校验、产物代理）→\nFastAPI Python 服务（OCR、文档预处理、差异比对、风险判定、坐标精修）。</li>\n<li><strong>比对引擎</strong>：PaddleOCR 在线 / gooyoo-ocr 本地服务可切换，layout / text / LLM 三模式比对，\n页面对齐（page-aligned）后逐条输出带坐标的差异项，支持水印比对开关与重新比对。</li>\n<li><strong>实时流水线</strong>：比对进度经事件通道推送前端；差异复核状态写入审计，报告由复核结论收敛生成。</li>\n<li><strong>本地优先</strong>：Tauri 2 桌面端，资料与中间结果全部落本地；金额、坐标等关键数据以结构化\nJSON 存储供上层系统复用。</li>\n</ul>\n<h2>当前状态</h2>\n<p>MVP 已跑通真实合同审阅闭环：双文档比对、条款审查、规则中心、复核报告均已可用（见截图中的\n材料购销合同审阅示例）。图纸（CAD）证据与计量证据在路线图中。桌面端应用，暂以真实系统\n截图展示。</p>\n"
+      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>合同审阅里最耗时的环节是&quot;找不同&quot;：两份几十页的合同，人工逐页比对既慢又容易漏——漏掉的\n一条付款比例改动，可能就是结算时几十万的争议。workEvidence 把这件事产品化：\n上传标准合同与待审合同，OCR 解析、页面对齐、条款级差异比对、规则风险标注一次完成，\n再以双页对照视图逐条复核，最后生成可下载的复核报告。</p>\n<h2>核心功能</h2>\n<ul>\n<li><strong>差异复核（双页对照）</strong>：按页组导航（每组显示差异计数与需复核状态），标准合同与待审合同\n双页对照，差异以红绿标注高亮；右侧风险面板按高风险 / 中风险 / 低风险分级过滤，\n逐项展示差异类型（修改 / 新增 / 删除）与原文对照；本组复核支持已确认风险、已接受差异、\n误报（忽略）、需法务处理四种结论，负责人与批注可留痕。</li>\n<li><strong>条款审查</strong>：单份合同条款级 AI 审查——按违约责任、结算、生效条款等类别给出规则命中、\n合同原文引用与修改建议（如&quot;发票违约金 100% 畸高，建议调整到不超过实际损失 30%&quot;），\n支持已有任务待审合同或新上传扫描件（gooyoo-ocr 本地服务识别），历史审查可重试与删除。</li>\n<li><strong>复核报告</strong>：差异与复核按页组汇总，差异项 / 高风险 / 中风险 / 低风险分级统计，\n一键下载 HTML / PDF 交付。</li>\n<li><strong>规则中心</strong>：系统基准规则、企业规则、候选规则三级体系（如 LIAB-001 违约金过分高于实际损失、\nQUAL-001 质量保修期低于法定最低期限），规则支持编辑、克隆、停用与全国版本化管理。</li>\n<li><strong>比对实验室与工作台</strong>：工作台聚合处理中 / 待复核 / 高风险待处理 / 本周完成四类指标，\n我的待复核、最近任务、最近报告与最近条款审查直达。</li>\n</ul>\n<h2>技术实现</h2>\n<ul>\n<li><strong>三层架构</strong>：Vue3 前端工作台 → Spring Boot Java 网关（鉴权、参数校验、产物代理）→\nFastAPI Python 服务（OCR、文档预处理、差异比对、风险判定、坐标精修）。</li>\n<li><strong>比对引擎</strong>：PaddleOCR 在线 / gooyoo-ocr 本地服务可切换，layout / text / LLM 三模式比对，\n页面对齐（page-aligned）后逐条输出带坐标的差异项，支持水印比对开关与重新比对。</li>\n<li><strong>实时流水线</strong>：比对进度经事件通道推送前端；差异复核状态写入审计，报告由复核结论收敛生成。</li>\n<li><strong>本地优先</strong>：Tauri 2 桌面端，资料与中间结果全部落本地；金额、坐标等关键数据以结构化\nJSON 存储供上层系统复用。</li>\n</ul>\n<h2>当前状态</h2>\n<p>已完成：双文档比对、条款审查、规则中心、复核报告、比对实验室全模块可用，已在真实合同\n审阅场景跑通完整闭环（见截图示例）。图纸（CAD）证据与计量证据在路线图中。</p>\n"
     },
     {
-      "name": "dotnet-medical",
-      "title": "医疗行业 .NET 产品线（HIS / EMR / 排队叫号）",
-      "tagline": "参与开发的医院信息化产品线：HIS、电子病历与门诊排队叫号",
+      "name": "workscribe",
+      "title": "工作记叙 WorkScribe",
+      "tagline": "本地优先的工作记录与汇报工具",
       "status": "shipped",
-      "category": "dotnet",
-      "role": "团队开发（参与）",
+      "category": "app",
+      "role": "独立开发",
       "stack": [
-        ".NET",
-        "C#",
-        "SQL Server"
+        "TypeScript",
+        "React 19",
+        "Tauri 2",
+        "Rust",
+        "SQLite"
       ],
       "highlights": [
-        "HIS 医院信息系统：覆盖门诊挂号、收费、药房与住院管理等医院核心业务流程",
-        "EMR 电子病历：面向医生的结构化病历书写、模板管理与病历质控",
-        "排队叫号系统：分诊排队、叫号屏与语音播报联动，打通门诊就诊动线",
-        "团队持续交付的医院客户产品线，参与多模块功能开发与迭代"
+        "全局快捷键 Ctrl+Shift+L 随手记录文字与截图，AI 先整理、用户确认后才保存",
+        "任务梳理 Agent 自动拆分待办/已完成/待澄清，模糊事项可追问确认",
+        "日报/周报/月报/绩效 HTML 报告生成，支持模板、应用内预览与下载；独立工作汇报模式",
+        "飞书集成：待办同步 WorkLog 日历，带同步日志保留策略",
+        "本地 SQLite + 自动备份（24 小时快照、保留最近 5 份）、导入导出与完整性检查"
       ],
       "links": {},
-      "screenshots": [],
-      "order": 1,
-      "biz": [
-        "为医院客户提供的核心业务系统产品线：HIS 支撑日常诊疗运转，EMR 沉淀电子病历资产，排队叫号改善患者就诊体验。"
+      "screenshots": [
+        "assets/screenshots/workscribe/demo.gif",
+        "assets/screenshots/workscribe/03-ai-result.png",
+        "assets/screenshots/workscribe/08-schedule.png",
+        "assets/screenshots/workscribe/07-report-preview.png"
       ],
-      "narrativeHtml": "<h2>项目简介</h2>\n<p>医疗行业客户的院内信息化产品线，由团队持续开发与迭代，我参与其中多个模块的功能开发：</p>\n<ul>\n<li><strong>HIS（医院信息系统）</strong>：医院的核心业务系统，覆盖门诊挂号、收费、药房与住院管理等流程，\n是院内各业务线的数据与流程中枢。</li>\n<li><strong>EMR（电子病历）</strong>：面向医生的结构化病历书写工具，提供模板管理与病历质控能力，\n把病历从纸质搬运变成可检索、可质控的结构化资产。</li>\n<li><strong>排队叫号系统</strong>：与门诊就诊动线联动的分诊排队与叫号屏播报，减少患者无效等待。</li>\n</ul>\n<h2>当前状态</h2>\n<p>团队持续交付的医院客户产品线。因涉及医院业务数据，暂不展示系统截图。</p>\n"
+      "order": 3,
+      "biz": [
+        "零碎工作做完就忘、汇报前反复翻记录——一键记录加 AI 整理，把周报月报的准备压到几分钟，数据全部留在本机，不怕敏感信息出域。"
+      ],
+      "narrativeHtml": "<p>日常工作零碎：做完就忘，月底回忆成本高；待办、日程、工作记录分散在各处，周会汇报前要反复整理；报告内容还要排除个人事项。工作记叙（WorkScribe）把&quot;记 → 理 → 报&quot;做成一条本地流水线：随手记下工作片段，AI 整理成结构化事项，再一键生成日报、周报、月报、绩效报告和会议汇报。</p>\n<h2>它解决什么问题</h2>\n<p>工作记录工具的通病是&quot;记了不看、看了不用&quot;：记录和待办两张皮，和汇报更是断开的。WorkScribe 让记录直接长成汇报——每次随手记的内容都被 AI 拆进待办/已完成/待澄清，生成报告时按时间范围汇总，还能屏蔽不需要的条目；数据本地存储，适合对数据出域敏感的团队和个人。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>快速记录</strong>：全局快捷键 Ctrl+Shift+L 唤出，支持文字与截图输入；AI 先整理，用户确认后才保存，避免 AI 自作主张。</li>\n<li><strong>任务与日程</strong>：待办支持优先级、分类、截止日期、重复任务与完成/重开；日程视图按日/周/月排布，dnd-kit 拖拽调整日期与时间，状态与优先级颜色区分。</li>\n<li><strong>报告与汇报</strong>：生成日报、周报、月报和绩效 HTML 报告，支持报告模板、应用内预览、保存 HTML；独立&quot;工作汇报&quot;模式整理&quot;正在做 / 已完成 / 下周继续&quot;，可手动补充与屏蔽记录。</li>\n<li><strong>飞书集成</strong>：账号绑定、待办同步到 WorkLog 日历（只同步有截止时间的顶层待办）、同步日志只保留最近 10 条、报告发布。</li>\n<li><strong>本地优先与模型</strong>：Tauri v2 + Rust，SQLite（rusqlite）存储；启动时距上次备份超 24 小时自动快照并保留最近 5 份，支持导入导出与 <code>PRAGMA integrity_check</code> 完整性检查；LLM 层统一封装 OpenAI 兼容与 Claude 原生格式，支持 Ollama、通义等多模型配置与默认切换。</li>\n</ul>\n<h2>当前状态</h2>\n<p>开发已完成：记录、待办、日程（日/周/月视图与拖拽排期）、搜索、报告、工作汇报、报告模板、知识库、飞书集成与本地数据保障全部落地，打包走版本号自动更新 + release notes 流程（<code>npm run package</code>）。线上作品集演示为示例数据。</p>\n"
+    },
+    {
+      "name": "timepick",
+      "title": "拾光 TimePick",
+      "tagline": "个人知识与资源管理系统",
+      "status": "shipped",
+      "category": "app",
+      "role": "独立开发",
+      "stack": [
+        "React 19",
+        "TypeScript",
+        "Vite",
+        "Supabase",
+        "Tailwind CSS"
+      ],
+      "highlights": [
+        "网页、文档、图片、视频统一收藏、分类与检索",
+        "AI 智能分类自动识别并归类资源，减少手工整理",
+        "全文搜索快速定位已存内容",
+        "灵感速记与待办事项：记想法、管待尝试的链接和任务",
+        "Supabase 后端 + shadcn/ui，已上线 shiguang.app、仓库开源"
+      ],
+      "links": {
+        "demo": "https://shiguang.app",
+        "repo": "https://github.com/Lee0317-ai/TimePick"
+      },
+      "screenshots": [
+        "assets/screenshots/timepick/home.png"
+      ],
+      "order": 4,
+      "biz": [
+        "把散落在浏览器收藏夹和聊天记录里的资料收进一个可搜索的个人知识库，AI 自动分类省去手工整理，\"存下来\"的东西真的能被再次找到。"
+      ],
+      "narrativeHtml": "<p>网页、文档、图片、视频散落在浏览器收藏夹、聊天记录和本地文件夹里，想用的时候找不到。拾光（TimePick）把这些资源收进一个统一的个人知识库：收藏、分类、检索一条龙，配灵感速记与待办事项，让&quot;存下来&quot;的东西真的能被再次找到。</p>\n<h2>它解决什么问题</h2>\n<p>收藏夹的通病是&quot;存的时候随手一扔，找的时候大海捞针&quot;。拾光用 AI 智能分类替用户做归档动作，再用全文搜索兜底；灵感速记和待办事项把&quot;以后再看&quot;的链接变成真正会被消化的任务，而不是越堆越长的列表。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>资源管理</strong>：网页、文档、图片、视频统一收藏、分类与检索，一套界面管理所有数字资源。</li>\n<li><strong>AI 智能分类</strong>：自动识别资源类型并归类，减少手工整理成本。</li>\n<li><strong>全文搜索</strong>：快速定位已存内容，不用逐个点开翻找。</li>\n<li><strong>灵感与待办</strong>：快速记录想法和灵感；管理待尝试链接和任务。</li>\n<li><strong>技术栈</strong>：React 19 + TypeScript + Vite + Tailwind CSS + shadcn/ui，Supabase 作为后端；站点已上线 shiguang.app，源码在 GitHub 开源。</li>\n</ul>\n<h2>当前状态</h2>\n<p>已上线（shiguang.app），源码在 GitHub 开源。</p>\n"
+    },
+    {
+      "name": "novelverse",
+      "title": "NovelVerse 小说宇宙创作引擎",
+      "tagline": "长篇小说世界的设定管理与创作引擎",
+      "status": "wip",
+      "category": "app",
+      "role": "独立开发",
+      "stack": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "pgvector",
+        "React",
+        "TypeScript",
+        "Tauri 2"
+      ],
+      "highlights": [
+        "短篇 / 架构师 / 园丁三种写作模式，模式只影响引导顺序，随时可切换、不限制手写或 AI 共创",
+        "创作链可追溯：章节计划、正文、角色决策、监督报告与模型调用记录存为可追踪版本，锁定章节沉淀摘要、角色状态、伏笔与时间线记忆",
+        "角色 Agent 决策分级：绿/黄/红三级确认规则，角色可自主决策，作者保留最终否决与回滚权",
+        "本地优先与密钥安全：API Key 只存系统凭据库，数据库、导出与备份均不落密钥；macOS 版自带私有 PostgreSQL + pgvector 运行时",
+        "多模型按任务路由：灵感/规划/正文/修订/审稿/Embedding 各设默认模型，支持单次临时切换，Embedding 索引原子激活"
+      ],
+      "links": {},
+      "screenshots": [
+        "assets/screenshots/placeholders/novelverse.svg"
+      ],
+      "order": 5,
+      "biz": [
+        "给长篇创作者一个\"设定不崩、过程可追溯\"的写作底座：世界观、角色与章节版本集中管理，AI 只出候选、每一步由作者确认，长篇不因记忆丢失而崩设定。"
+      ],
+      "narrativeHtml": "<p>NovelVerse 是一个本地优先、面向中文小说创作的 AI 写作工作台。它的核心不是让 AI 一次写完一本书，而是把每一步的意图、草稿、确认版本和后续影响放在同一条可追溯的创作链上：章节计划、正文、角色决策、监督报告、记忆和模型调用记录全部存为可追踪的版本。不配置模型也能完整手写、自动保存、锁章、恢复和导出。</p>\n<h2>它解决什么问题</h2>\n<p>长篇创作的两个老大难：设定崩坏（写着写着忘了伏笔、角色状态漂移）和 AI 代写失控（生成内容静默覆盖作者文本）。NovelVerse 用&quot;记忆层 + 版本快照 + 确认关卡&quot;正面处理这两件事——AI 结果一律以工作草稿/变体出现、由作者挑选采用，已锁定的正文和正史绝不被自动重写。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>写作台</strong>：短篇、架构师（总纲 → 卷纲 → 章卡 → 正文）、园丁（先写场景再回填结构）三种模式共享同一套资产；&quot;当前最重要的一步&quot;作为唯一主入口驱动推进，离开时保护现场、异常退出可恢复本地未保存内容。</li>\n<li><strong>版本与回滚</strong>：每章锁定时保存记忆层快照（摘要 + 角色状态 + 伏笔台账），回滚到第 N 章即加载该快照、其后章节进归档分支保留可对比，不破坏主线；上游设定修改会提示受影响的下游内容，由作者决定同步或保留。</li>\n<li><strong>角色 Agent</strong>：角色作为带人格档案的 sub-agent 可自主决策，决策按绿/黄/红三级确认（红级如角色生死、主线节点必须执行前确认）；叙事层（作者）优先级高于角色层（按设计）。</li>\n<li><strong>长篇记忆</strong>：章节摘要、角色状态、伏笔与时间线入记忆中心，PostgreSQL + pgvector 向量检索支撑超长篇上下文；Prompt 版本管理、模型用量与费用记录。</li>\n<li><strong>工程形态</strong>：FastAPI Core + React/TypeScript/Vite 前端 + Tauri 2 桌面壳；模型密钥只存系统凭据库（macOS Keychain / Windows Credential Manager），macOS 发行版自带私有 PostgreSQL + pgvector 运行时，无需用户自行装库。</li>\n</ul>\n<h2>当前状态</h2>\n<p>架构底座与小说创作闭环已实现：中文小说初始化、章节规划、生成、修订、监督与锁定，构思资产（作品 DNA / 角色 / 世界观 / 情节蓝图）逐项确认后原子创建作品，短篇/架构师/园丁三模式、章节回滚与分支、pgvector 记忆检索、Markdown/TXT 导出与备份恢复均可用，配套 P1 统一验证脚本。汇聚宇宙、去 AI 味层等能力已在领域设计文档中定稿，属后续方向。</p>\n"
     },
     {
       "name": "gooyoo-platform",
@@ -538,6 +416,97 @@
         "为客户交付的线上拍卖业务系统：1000+ 竞买人同时在线抢单件拍品，系统保证\"价高者得、一件只卖一人\"，运营方从专场搭建到成交归档全程闭环。"
       ],
       "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>线上拍卖最要命的不是页面好不好看，而是<strong>出价那一刻的并发正确性</strong>：几百上千人同时出价，\n系统必须保证三件事——出价便宜的立刻被驳回并告知原因、同一个拍品永远只有一个赢家（不超卖）、\n网络重试不会产生重复出价。传统&quot;查一下当前价再更新&quot;的写法在并发下必然出错。</p>\n<p>rhein 拍卖系统把整个出价决策做成了一个 <strong>Redis Lua 原子脚本</strong>：校验与写入在 Redis 内一次性完成，\n中间不存在被并发插入的时间窗口。1000+ 人同时竞价，每一次出价的结果都是确定性的。</p>\n<h2>核心技术：Lua 原子出价引擎</h2>\n<p>一次出价 = 一次 Lua 脚本执行，全部决策在 Redis 内原子完成：</p>\n<ol>\n<li><strong>幂等去重</strong>：requestId 查重，24 小时内相同请求直接返回原结果（网络重试不重复出价）</li>\n<li><strong>状态与时间校验</strong>：拍品状态是否允许出价、是否已过结束时间，不允许则返回明确原因</li>\n<li><strong>价高者得规则</strong>：首次出价须 ≥ 起拍价；后续出价须 ≥ 当前价 + 加价幅度，且必须是加价幅度的\n整数倍——低价出价毫秒级驳回，错误原因中文化返回</li>\n<li><strong>延时周期</strong>：出价时间落入延时窗口（如结束前 30 秒）自动顺延结束时间（次数可配），杜绝卡秒抢单</li>\n<li><strong>原子写入</strong>：INCR 出价序号 → HSET 最新价 / 最新竞买人 / 出价次数 → LPUSH 出价记录 →\nXADD 事件流（BID_ACCEPTED）→ 返回最新结果，全链条无锁、无竞态</li>\n</ol>\n<p>配套设计：金额全链路以&quot;分&quot;（Cent）整数计算规避浮点误差；lotKey 使用 hash tag 保证 Redis Cluster\n下同一拍品的键落在同一 slot；出价记录以 Redis Stream 发布，前端实时刷新当前价与竞价倒计时。</p>\n<h2>业务功能</h2>\n<ul>\n<li><strong>竞拍大厅</strong>：拍品按进行中 / 即将开始 / 已完成分组，实时当前价、竞价人数、倒计时</li>\n<li><strong>竞拍详情</strong>：拍品介绍、当前价、最小涨幅、延时周期、逐笔出价记录（金额递进、竞买人脱敏）</li>\n<li><strong>业务闭环</strong>：专场管理、拍品管理（含导入与错误重试导出）、竞价记录、成交结果、提货管理，\n审批环节接入 BPM 工作流</li>\n<li><strong>接口集成与数据脱敏</strong>：与客户自有平台打通注册 / 会员 / 消息链路；生产数据脱敏 runbook\n（备份 → 脱敏 → 校验 → 人工确认 → 回滚预案）</li>\n</ul>\n<h2>当前状态</h2>\n<p>已交付客户上线运行（客户品牌已脱敏为示例名称）。以上截图为示例数据演示。</p>\n"
+    },
+    {
+      "name": "riley-auth",
+      "title": "睿狸账号中心 Riley Auth",
+      "tagline": "独立账号认证服务与 Web 管理后台",
+      "status": "shipped",
+      "category": "java",
+      "role": "独立开发",
+      "stack": [
+        "Fastify",
+        "TypeScript",
+        "Prisma",
+        "PostgreSQL",
+        "React 18"
+      ],
+      "highlights": [
+        "不透明双令牌：accessToken 2 小时 / refreshToken 30 天轮换作废，数据库只存 SHA-256 哈希，可即时吊销",
+        "应用作用域授权：角色绑定\"可登录应用\"，登录时校验角色是否覆盖目标应用，新应用注册数据即可接入",
+        "Web 管理后台：账号/角色/权限点/应用/科室/团队管理与真实分页审计日志",
+        "个人改密保留当前会话、吊销其它设备会话，丢号风险可控",
+        "自助注册页按应用编码自动绑定成员角色，公开路由直接可用"
+      ],
+      "links": {},
+      "screenshots": [
+        "assets/screenshots/rileyauth/demo.gif",
+        "assets/screenshots/rileyauth/02-accounts.png",
+        "assets/screenshots/rileyauth/04-roles.png",
+        "assets/screenshots/rileyauth/07-audit.png"
+      ],
+      "order": 4,
+      "biz": [
+        "给自研的多个应用提供一套统一登录与权限底座：账号、角色、审计集中在一个后台管，新应用注册即接入，不用每个系统各写一套认证。"
+      ],
+      "narrativeHtml": "<p>自研应用一多，每个系统各写一套登录、角色、审计很快就失控。睿狸账号中心（Riley Auth）是一套独立的账号认证服务 + Web 管理后台：账号、科室、团队、角色、审计集中管理，agent-os、ai-agent 等应用按&quot;应用编码&quot;接入，用户一次注册、按角色决定能进哪些应用。</p>\n<h2>它解决什么问题</h2>\n<p>多应用共用账号的常见做法是把用户表复制来复制去，权限口径很快对不上。Riley Auth 把&quot;谁能登录哪个应用&quot;做成显式建模：角色绑定应用，登录时校验用户角色是否覆盖目标应用（<code>APP_NOT_ALLOWED</code> 直接拒绝）；所有管理动作进审计日志，改密、重置、启停都有据可查。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>认证设计</strong>：不透明双令牌——accessToken 2 小时、refreshToken 30 天且轮换作废；数据库只存 SHA-256 哈希，令牌可即时吊销；统一错误码（INVALID_CREDENTIALS / ACCOUNT_DISABLED / APP_NOT_ALLOWED / TOKEN_EXPIRED 等）中文化返回。</li>\n<li><strong>应用作用域授权</strong>：注册应用 → 角色关联应用 → 用户绑定角色三步接入新应用，不改认证代码；自助注册页 <code>/#/register?app=&lt;编码&gt;</code> 为公开路由，注册即自动绑定对应成员角色。</li>\n<li><strong>管理后台</strong>（React 18 + Vite）：账号管理（分页搜索、新建/编辑/重置密码/启停）、角色与权限点配置、应用注册、科室树与团队、审计日志、顶栏个人改密与退出。</li>\n<li><strong>设计系统</strong>：oklch 设计 token、浅色/深色一键切换、品牌 Logo，最低适配 1024px。</li>\n<li><strong>部署形态</strong>：Fastify API 无构建步骤（tsx 直跑 TypeScript），管理后台构建为静态站点；Nginx 统一入口，静态文件直出、<code>/auth</code> <code>/admin</code> <code>/api</code> 前缀反代到 API。</li>\n</ul>\n<h2>当前状态</h2>\n<p>M1（服务骨架：认证接口、自助注册、应用作用域校验、审计埋点与查询）与 M3（Web 管理后台全模块）完成，已作为 agent-os 等应用的统一登录入口运行；M4（微信/飞书登录）在规划中。线上作品集演示为示例数据。</p>\n"
+    },
+    {
+      "name": "dreamchasers",
+      "title": "DreamChasers 梦想启航",
+      "tagline": "免费工具与小游戏门户",
+      "status": "wip",
+      "category": "software",
+      "role": "独立开发",
+      "stack": [
+        "TypeScript",
+        "Next.js",
+        "PostgreSQL",
+        "Prisma",
+        "Cocos Creator"
+      ],
+      "highlights": [
+        "Monorepo 门户：Next.js 工具站 / 游戏站双入口分流，独立导航与视觉，部署在 Vercel",
+        "PDF 工具箱 MVP 第一轮落地：上传/预览/旋转/排序/拆分/下载，外加文字水印、签名、PDF 转 Word Beta、区域遮盖、图片扫描成 PDF",
+        "麻将 Roguelike「胡了卜」：从最小可玩 HTML 验证原型推进到 Cocos 正式工程（模板化牌山生成器、渐进难度试玩 Demo）",
+        "模块化协作规范：每个工具/游戏独立文档目录 + 独立代码目录，双人 + 多 AI 通过任务分片协作，`docs:sync` 自动汇总看板",
+        "统一账号中心第一阶段完成：账号密码登录、找回/修改密码，TimePick 等产品同账号接入"
+      ],
+      "links": {},
+      "screenshots": [
+        "assets/screenshots/placeholders/dreamchasers.svg"
+      ],
+      "order": 1,
+      "biz": [
+        "一个免费、好用、更新快的工具与小游戏门户：先用 PDF 工具箱拿搜索流量、用小游戏拉停留和回访，再接 AI 能力与订阅变现。"
+      ],
+      "narrativeHtml": "<p>DreamChasers（梦想启航）是一个免费工具 / 小游戏门户，用 monorepo 同时承载工具站和游戏站：第一阶段以&quot;免费、好用、更新快&quot;拿流量和停留，后续再接 AI 能力、订阅与 API 等变现能力。工具和游戏平级，每个小工具或游戏都按模块独立归档——独立的文档目录与独立的代码目录，支持多人多 AI 并行开发。</p>\n<h2>它解决什么问题</h2>\n<p>门户类产品的冷启动靠的是单点刚需和回访理由。DreamChasers 把第一阶段收敛成三个交付：PDF 工具箱吃搜索刚需（不调用模型的能力尽量免费）、AI 修图工具展示 AI 能力与付费空间（基础修图免费、AI 能力限次收费）、麻将 Roguelike 消除小游戏提升停留时长和回访。三件事共用一套平台底座和账号体系，避免每个小产品各起一套炉灶。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>平台底座</strong>：Monorepo + Next.js 主站 + PostgreSQL/Prisma + Docker Compose，Web 部署在 Vercel（含 standalone 自托管构建开关）；首页按工具站/游戏站左右分流，<code>/tools</code> 与 <code>/games</code> 独立导航。</li>\n<li><strong>PDF 工具箱</strong>：页面级处理第一轮完成——上传、预览、旋转、排序、删除、拆分、下载，并补齐文字水印、签名图片、PDF 转 Word Beta、区域遮盖和图片扫描成 PDF；完整在线编辑按边界规划不做。</li>\n<li><strong>麻将 Roguelike「胡了卜」</strong>：玩法为麻将消除 + 手动吃碰杠 + Roguelike 奖励构筑（槽位成长、能力池、体力与救场、词缀与 Boss）。推进路径是先用 HTML 验证原型跑通最小可玩闭环和观察指标，再进 Cocos Creator 正式工程：模板注册表与参数化牌山生成器、渐进难度 10 关朋友试玩 Demo；GDevelop 只作为 Web H5 原型通道。</li>\n<li><strong>账号与产品协同</strong>：统一账号中心第一阶段完成（账号密码登录、找回/修改密码），TimePick 等产品逐步切换到同账号 PostgreSQL 基座。</li>\n<li><strong>协作机制</strong>：双人 + 多 AI 的文档驱动协作——任务必须先领取、文件范围显式声明，任务分片落盘后由 <code>docs:sync</code> 脚本自动汇总主看板，降低多人提交冲突。</li>\n</ul>\n<h2>当前状态</h2>\n<p>平台基础（Monorepo 外壳、Next.js 应用、数据库与 Prisma、门户 UI、账号中心第一阶段）已完成；PDF 工具箱 MVP 核心功能第一轮落地、转图片与压缩在补；「胡了卜」推进到 Cocos 试玩 Demo 与模板化牌山生成器，正式 MVP 尚未冻结；AI 修图工具未开始。整体处于持续开发中（wip）。</p>\n"
+    },
+    {
+      "name": "dotnet-medical",
+      "title": "医疗行业 .NET 产品线（HIS / EMR / 排队叫号）",
+      "tagline": "参与开发的医院信息化产品线：HIS、电子病历与门诊排队叫号",
+      "status": "shipped",
+      "category": "dotnet",
+      "role": "团队开发（参与）",
+      "stack": [
+        ".NET",
+        "C#",
+        "SQL Server"
+      ],
+      "highlights": [
+        "HIS 医院信息系统：覆盖门诊挂号、收费、药房与住院管理等医院核心业务流程",
+        "EMR 电子病历：面向医生的结构化病历书写、模板管理与病历质控",
+        "排队叫号系统：分诊排队、叫号屏与语音播报联动，打通门诊就诊动线",
+        "团队持续交付的医院客户产品线，参与多模块功能开发与迭代"
+      ],
+      "links": {},
+      "screenshots": [],
+      "order": 1,
+      "biz": [
+        "为医院客户提供的核心业务系统产品线：HIS 支撑日常诊疗运转，EMR 沉淀电子病历资产，排队叫号改善患者就诊体验。"
+      ],
+      "narrativeHtml": "<h2>项目简介</h2>\n<p>医疗行业客户的院内信息化产品线，由团队持续开发与迭代，我参与其中多个模块的功能开发：</p>\n<ul>\n<li><strong>HIS（医院信息系统）</strong>：医院的核心业务系统，覆盖门诊挂号、收费、药房与住院管理等流程，\n是院内各业务线的数据与流程中枢。</li>\n<li><strong>EMR（电子病历）</strong>：面向医生的结构化病历书写工具，提供模板管理与病历质控能力，\n把病历从纸质搬运变成可检索、可质控的结构化资产。</li>\n<li><strong>排队叫号系统</strong>：与门诊就诊动线联动的分诊排队与叫号屏播报，减少患者无效等待。</li>\n</ul>\n<h2>当前状态</h2>\n<p>团队持续交付的医院客户产品线。因涉及医院业务数据，暂不展示系统截图。</p>\n"
     }
   ]
 }

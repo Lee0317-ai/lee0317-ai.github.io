@@ -3,7 +3,7 @@ name: workscribe
 title: 工作记叙 WorkScribe
 tagline: 本地优先的工作记录与汇报工具
 status: shipped
-category: ai
+category: app
 role: 独立开发
 stack: [TypeScript, React 19, Tauri 2, Rust, SQLite]
 highlights:
@@ -18,7 +18,7 @@ screenshots:
   - assets/screenshots/workscribe/03-ai-result.png
   - assets/screenshots/workscribe/08-schedule.png
   - assets/screenshots/workscribe/07-report-preview.png
-order: 4
+order: 3
 biz:
   - 零碎工作做完就忘、汇报前反复翻记录——一键记录加 AI 整理，把周报月报的准备压到几分钟，数据全部留在本机，不怕敏感信息出域。
 ---

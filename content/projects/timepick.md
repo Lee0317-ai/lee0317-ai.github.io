@@ -3,7 +3,7 @@ name: timepick
 title: 拾光 TimePick
 tagline: 个人知识与资源管理系统
 status: shipped
-category: ai
+category: app
 role: 独立开发
 stack: [React 19, TypeScript, Vite, Supabase, Tailwind CSS]
 highlights:
@@ -17,7 +17,7 @@ links:
   repo: "https://github.com/Lee0317-ai/TimePick"
 screenshots:
   - assets/screenshots/timepick/home.png
-order: 7
+order: 4
 biz:
   - 把散落在浏览器收藏夹和聊天记录里的资料收进一个可搜索的个人知识库，AI 自动分类省去手工整理，"存下来"的东西真的能被再次找到。
 ---

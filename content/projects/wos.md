@@ -3,7 +3,7 @@ name: wos
 title: WOS 桌面 Agent
 tagline: 基于 LobsterAI 深度改编的桌面 Agent 工作台
 status: adapted
-category: ai
+category: agent
 role: 改编维护
 stack: [Electron 40, React 18, TypeScript]
 highlights:
@@ -14,8 +14,8 @@ highlights:
   - P0 回归 270/270、Agent 编排 257/257、数据迁移 20/20 通过；未验证项在验收报告中如实留档
 links: {}
 screenshots:
-  - assets/screenshots/placeholders/wos.svg
-order: 5
+  - assets/screenshots/wos/brand.png
+order: 2
 biz:
   - 在开源桌面 Agent 基础上改编出一套"做完必须有证据、高危必须人确认"的可控工作台：任务验收有据可查，适合真正拿来干活而不是演示。
 ---
@@ -33,8 +33,9 @@ fork 一个开源项目容易，让它在自己的场景里"可信任"难。WOS 
 - **事件持久化与恢复**：从持久化事件恢复被中断的 run、保持事件顺序，幂等键防止已完成的动作重复执行。
 - **数据迁移兼容**：LobsterAI 旧归档根目录在 WOS 品牌下可读可恢复，未知根目录拒绝并保留路径安全检查；新备份写入 WOS 根目录。
 - **安全基线**：渲染进程启用上下文隔离、禁用 Node 集成、开启沙箱，渲染层访问主进程只走 preload IPC；应用数据存本地 userData。
+- **自建认证接入（实验）**：已实验性接入睿狸账号中心（riley-auth）账号密码登录，令牌经 Electron safeStorage 加密存储，与登录态体系打通。
 - **可选外部 Agent**：Codex / Claude Code 是可选扩展而非运行前提，测试层同时覆盖"有 Codex 用外部 Agent"与"无 Codex 回退原生执行"两条路径。
 
 ## 当前状态
 
-P0 验收结论"有条件通过"：固定 P0 回归 270/270、Agent 编排 257/257、数据迁移 20/20 通过，Electron 主进程编译与渲染层构建通过，首页、高级执行选项与 Sidebar"运行中/待复核"投影有真实启动截图佐证。未验证项如实列在验收报告中：真实任务端到端（缺 provider 与运行时）、Windows 安装包、签名与自动更新、Computer Use 与紧急停止、会话页端到端等——这些是进入 P1 前必须补齐的清单。
+P0 验收结论"有条件通过"：固定 P0 回归 270/270、Agent 编排 257/257、数据迁移 20/20 通过，Electron 主进程编译与渲染层构建通过，首页、高级执行选项与 Sidebar"运行中/待复核"投影有真实启动截图佐证。未验证项如实列在验收报告中：真实任务端到端（缺 provider 与运行时）、Windows 安装包、签名与自动更新、Computer Use 与紧急停止、会话页端到端等——这些是进入 P1 前必须补齐的清单。当前截图为品牌视觉稿，应用界面截图将在 P1 后补充。

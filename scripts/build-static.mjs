@@ -33,13 +33,13 @@ function card(p) {
     </div></a>`;
 }
 
-const CATEGORY_LABELS = { ai: 'AI 应用与智能体', java: '企业级 Java 全栈', dotnet: '.NET 医疗行业产品' };
+const CATEGORY_LABELS = { agent: 'AI 智能体', app: 'AI 应用', java: '企业级 Java 全栈', software: '软件产品', dotnet: '.NET 医疗行业产品' };
 
 export function renderHome(data) {
   const skills = data.profile.skills.map(s =>
     s.items.map(i => `<span class="chip">${i}</span>`).join('')).join('');
   const groups = Object.entries(CATEGORY_LABELS)
-    .map(([key, label]) => ({ key, label, items: data.projects.filter(p => (p.category ?? 'ai') === key) }))
+    .map(([key, label]) => ({ key, label, items: data.projects.filter(p => (p.category ?? 'app') === key) }))
     .filter(g => g.items.length > 0);
   const sections = groups.map((g, i) => `
 <h2 class="section"${i === 0 ? ' id="projects"' : ''}>${g.label}（${g.items.length}）</h2>

@@ -3,7 +3,7 @@ name: novelverse
 title: NovelVerse 小说宇宙创作引擎
 tagline: 长篇小说世界的设定管理与创作引擎
 status: wip
-category: ai
+category: app
 role: 独立开发
 stack: [Python, FastAPI, PostgreSQL, pgvector, React, TypeScript, Tauri 2]
 highlights:
@@ -15,7 +15,7 @@ highlights:
 links: {}
 screenshots:
   - assets/screenshots/placeholders/novelverse.svg
-order: 9
+order: 5
 biz:
   - 给长篇创作者一个"设定不崩、过程可追溯"的写作底座：世界观、角色与章节版本集中管理，AI 只出候选、每一步由作者确认，长篇不因记忆丢失而崩设定。
 ---

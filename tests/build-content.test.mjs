@@ -54,7 +54,7 @@ test('parseProject 拒绝缺失 frontmatter', () => {
 });
 
 test('category 缺省为 ai，非法值报错', () => {
-  assert.equal(parseProject(SAMPLE).category, 'ai');
+  assert.equal(parseProject(SAMPLE).category, 'app');
   assert.throws(() => parseProject(SAMPLE.replace('order: 3', 'category: go\norder: 3')), /category/);
 });
 

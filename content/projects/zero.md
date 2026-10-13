@@ -3,7 +3,7 @@ name: zero
 title: Zero 个人智能工作台
 tagline: 一人公司 OS / 本地优先的个人成长引擎
 status: wip
-category: ai
+category: app
 role: 独立开发
 stack: [Tauri 2, Rust, TypeScript, React]
 highlights:
@@ -15,7 +15,7 @@ highlights:
 links: {}
 screenshots:
   - assets/screenshots/placeholders/zero.svg
-order: 3
+order: 1
 biz:
   - 把"一人公司"的日常运营拆成可审批的员工任务流：素材自动采集提炼、内容经老板审批后才产出，重要动作全部留痕、可回溯。
 ---

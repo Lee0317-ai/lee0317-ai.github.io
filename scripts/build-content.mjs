@@ -4,7 +4,7 @@ import { readFile, readdir, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
 const STATUSES = new Set(['shipped', 'wip', 'planned', 'adapted']);
-const CATEGORIES = new Set(['ai', 'java', 'dotnet']);
+const CATEGORIES = new Set(['agent', 'app', 'java', 'software', 'dotnet']);
 
 export function parseProject(source) {
   const m = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
@@ -16,7 +16,7 @@ export function parseProject(source) {
   const biz = meta.biz == null ? [] : (Array.isArray(meta.biz) ? meta.biz : [meta.biz]);
   return {
     ...meta,
-    category: meta.category == null ? 'ai' : meta.category,
+    category: meta.category == null ? 'app' : meta.category,
     links: meta.links == null ? {} : meta.links,
     screenshots: meta.screenshots == null ? [] : (Array.isArray(meta.screenshots) ? meta.screenshots : [meta.screenshots]),
     stack: meta.stack == null ? [] : (Array.isArray(meta.stack) ? meta.stack : [meta.stack]),
@@ -34,7 +34,7 @@ export async function buildData(contentDir) {
   for (const f of files) {
     projects.push(parseProject(await readFile(path.join(dir, f), 'utf8')));
   }
-  const catRank = (c) => (c === 'ai' ? 0 : 1);
+  const catRank = (c) => ({ agent: 0, app: 1, java: 2, software: 3, dotnet: 4 }[c] ?? 9);
   projects.sort((a, b) => catRank(a.category) - catRank(b.category) || a.order - b.order);
   return { profile, projects };
 }

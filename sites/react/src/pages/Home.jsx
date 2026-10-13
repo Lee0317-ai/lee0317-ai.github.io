@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const LABEL = { shipped: '已上线', wip: '开发中', planned: '规划中', adapted: '改编维护' };
-const CATEGORY_LABELS = { ai: 'AI 应用与智能体', java: '企业级 Java 全栈', dotnet: '.NET 医疗行业产品' };
+const CATEGORY_LABELS = { agent: 'AI 智能体', app: 'AI 应用', java: '企业级 Java 全栈', software: '软件产品', dotnet: '.NET 医疗行业产品' };
 
 export default function Home({ data }) {
   const { profile, projects } = data;

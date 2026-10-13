@@ -3,7 +3,7 @@ name: dreamchasers
 title: DreamChasers 梦想启航
 tagline: 免费工具与小游戏门户
 status: wip
-category: ai
+category: software
 role: 独立开发
 stack: [TypeScript, Next.js, PostgreSQL, Prisma, Cocos Creator]
 highlights:
@@ -15,7 +15,7 @@ highlights:
 links: {}
 screenshots:
   - assets/screenshots/placeholders/dreamchasers.svg
-order: 8
+order: 1
 biz:
   - 一个免费、好用、更新快的工具与小游戏门户：先用 PDF 工具箱拿搜索流量、用小游戏拉停留和回访，再接 AI 能力与订阅变现。
 ---

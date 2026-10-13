@@ -2,8 +2,8 @@
 name: workevidence
 title: workEvidence 工程资料证据链引擎
 tagline: 合同解析、版式级比对、风险审查与证据报告的桌面引擎
-status: wip
-category: ai
+status: shipped
+category: app
 role: 独立开发
 stack: [Tauri 2, Rust, React, TypeScript, pdf.js, PaddleOCR, LLM]
 highlights:
@@ -22,7 +22,7 @@ screenshots:
   - assets/screenshots/workevidence/review-report.png
   - assets/screenshots/workevidence/rules-center.png
   - assets/screenshots/workevidence/dashboard.png
-order: 10
+order: 2
 biz: 把工程师"多版本合同反复肉眼比对"的数小时工作压到几分钟，差异可追溯、风险可复核、报告可直接交付，产出结果供 workOperator 回写业务系统。
 ---
 
@@ -61,6 +61,5 @@ biz: 把工程师"多版本合同反复肉眼比对"的数小时工作压到几�
 
 ## 当前状态
 
-MVP 已跑通真实合同审阅闭环：双文档比对、条款审查、规则中心、复核报告均已可用（见截图中的
-材料购销合同审阅示例）。图纸（CAD）证据与计量证据在路线图中。桌面端应用，暂以真实系统
-截图展示。
+已完成：双文档比对、条款审查、规则中心、复核报告、比对实验室全模块可用，已在真实合同
+审阅场景跑通完整闭环（见截图示例）。图纸（CAD）证据与计量证据在路线图中。

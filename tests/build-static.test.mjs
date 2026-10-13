@@ -27,9 +27,9 @@ test('renderHome 输出英雄区与项目卡片', () => {
 test('renderHome 按类别分组渲染', () => {
   const withJava = { ...DATA, projects: [...DATA.projects, { ...DATA.projects[0], name: 'boot', title: 'Java 平台', category: 'java' }] };
   const html = renderHome(withJava);
-  assert.ok(html.includes('AI 应用与智能体（1）'));
+  assert.ok(html.includes('AI 应用（1）'));
   assert.ok(html.includes('企业级 Java 全栈（1）'));
-  assert.ok(html.indexOf('AI 应用与智能体') < html.indexOf('企业级 Java 全栈'));
+  assert.ok(html.indexOf('AI 应用') < html.indexOf('企业级 Java 全栈'));
 });
 
 test('renderProject 输出详情与业务价值', () => {
