@@ -16,9 +16,12 @@ highlights:
   - P0 回归 270/270、Agent 编排 257/257、数据迁移 20/20 通过；未验证项在验收报告中如实留档
 links: {}
 screenshots:
+  - assets/screenshots/wos/demo.gif
   - assets/screenshots/wos/01-home.png
+  - assets/screenshots/wos/05-projects-expanded.png
+  - assets/screenshots/wos/06-session-folder-check.png
+  - assets/screenshots/wos/07-session-fix.png
   - assets/screenshots/wos/03-skills.png
-  - assets/screenshots/wos/brand.png
 order: 2
 biz:
   - 在开源桌面 Agent 基础上改编出一套"做完必须有证据、高危必须人确认"的可控工作台：任务验收有据可查，适合真正拿来干活而不是演示。
@@ -27,8 +30,10 @@ biz:
 通用桌面 Agent 拿来就能用，但真拿它干活会担心两件事：任务说完成就完成、没有证据；高危动作（比如生产部署）说干就干。WOS 基于网易有道开源的 LobsterAI（MIT 协议）深度改编，目标是一个改编可控、验收有据的桌面 Agent 工作台：品牌、数据目录与验收体系完整迁移到 WOS，同时完整保留上游许可与署名。
 
 打开 WOS：问候语、全场景办公输入框、八类任务模式一键切换（代码开发 / 日常办公 / 研究分析 / 设计创作 /
-制作幻灯片 / 数据分析 / 文档写作 / 创建网站）；左侧是我的项目（每个项目绑定独立工作区与技能包）
-和我的 Agent（灵狐、coding小熊）；AI 引擎本地启动，OpenClaw 网关就绪后即可接活。
+制作幻灯片 / 数据分析 / 文档写作 / 创建网站）；左侧是我的项目（测试工作、riley-auth、project——
+每个项目关联一个工作目录，会话按项目归档，随时回看历史）和我的 Agent（灵狐、coding小熊）；
+AI 引擎本地启动，OpenClaw 网关就绪后即可接活。每次任务结束，Agent 自动产出"今日产出物"清单
+（技术报告、验证项目、脚本、资料快照）与"待办 / 遗留"，工作痕迹完整可回溯。
 
 ## 它解决什么问题
 
@@ -58,4 +63,4 @@ P0 验收结论"有条件通过"：固定 P0 回归 270/270、Agent 编排 257/2
 Electron 主进程编译与渲染层构建通过，首页、高级执行选项与 Sidebar"运行中/待复核"投影有真实启动
 截图佐证。未验证项如实列在验收报告中：真实任务端到端（缺 provider 与运行时）、Windows 安装包、
 签名与自动更新、Computer Use 与紧急停止、会话页端到端等——这些是进入 P1 前必须补齐的清单。
-页面截图来自本机真实启动（OpenClaw 网关 + 渲染层）。
+页面截图来自本机真实启动与真实工作会话。
