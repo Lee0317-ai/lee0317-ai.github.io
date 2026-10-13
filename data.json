@@ -368,24 +368,28 @@
         "LLM"
       ],
       "highlights": [
-        "双文档版式级比对：PDF/Word 解析、页面对齐、段落与条款级差异高亮，layout / text / LLM 三引擎可切换",
+        "双文档版式级比对：PDF/Word 解析、页面对齐、段落与条款级差异高亮，layout / text / LLM 三引擎可切换，支持水印比对开关",
         "规则引擎驱动风险审查：付款、工期、质保、变更签证等规则命中生成风险清单，复核结论全流程留痕（待复核 / 已确认 / 误报 / 需法务）",
-        "条款审查模式：单份合同条款级 AI 审查，与双文档比对互补，覆盖无标准范本的场景",
-        "合同模板库与比对参数预设：范本版本管理、参数 schema 化调参、试运行预览命中统计",
-        "本地优先：资料、中间结果与报告全部落本地，OCR 支持本地服务（gooyoo-ocr / PaddleOCR）与 LLM 兜底"
+        "条款审查模式：单份合同条款级 AI 审查，规则命中给出合同原文 + 修改建议（如发票违约金比例畸高、付款期限超审核上限），支持 gooyoo-ocr 本地服务识别扫描件",
+        "复核报告一键生成：差异与复核按页组汇总、高风险分级统计，支持下载 HTML / PDF",
+        "规则中心三级体系：系统基准规则 / 企业规则 / 候选规则，规则可编辑、克隆、停用，全国版本化管理",
+        "本地优先：资料、中间结果与报告全部落本地，OCR 支持本地服务（gooyoo-ocr / PaddleOCR 在线）与 LLM 兜底"
       ],
       "links": {},
       "screenshots": [
         "assets/screenshots/workevidence/demo.gif",
-        "assets/screenshots/workevidence/diff.png",
-        "assets/screenshots/workevidence/risk.png",
+        "assets/screenshots/workevidence/diff-review-p1.png",
+        "assets/screenshots/workevidence/diff-review-p6.png",
+        "assets/screenshots/workevidence/clause-review.png",
+        "assets/screenshots/workevidence/review-report.png",
+        "assets/screenshots/workevidence/rules-center.png",
         "assets/screenshots/workevidence/dashboard.png"
       ],
       "order": 10,
       "biz": [
         "把工程师\"多版本合同反复肉眼比对\"的数小时工作压到几分钟，差异可追溯、风险可复核、报告可直接交付，产出结果供 workOperator 回写业务系统。"
       ],
-      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>施工企业的合同与工程资料管理里有一个高频痛点：投标稿、补充协议、变更单在标准范本之间反复横跳，\n人工比对既慢又容易漏——而漏掉的那一条付款比例改动，可能就是结算时几十万的争议。</p>\n<p>workEvidence 专门做这件事：把两份合同（或任意工程资料）解析成结构化文本，做页面对齐和条款级差异，\n再由规则引擎和 LLM 标注风险等级，最后生成可复核、可追溯的证据报告。它不做个人工作台，也不替代业务系统，\n只产出&quot;可追溯的证据和结构化结果&quot;——下游由 workOperator 回写业务系统，或在 WorkScribe 工作流里被引用。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>Tauri 2 + Rust 桌面引擎</strong>：文档解析、页面对齐、比对流水线在本地 Rust 侧运行，资料不出本机；\n前端 React + React Router，比对进度通过事件通道（compare:event）实时推送。</li>\n<li><strong>三比对引擎</strong>：gooyoo-ocr 本地 OCR 版式比对（默认）、PaddleOCR 云端比对、LLM 兜底比对，\n按 <code>check_ocr_health</code> 健康探测自动感知可用性；差异按页配对（PagePair）组织，支持重新对齐。</li>\n<li><strong>规则与审查流</strong>：规则中心管理 PAY/QUA/CHG 等规则包（作用域、条款类型、严重度、版本、发布态），\n命中结果进入风险复核面板——系统规则解释、AI 建议、联网参考、复核结论四段式，复核动作写审计记录。</li>\n<li><strong>报告链</strong>：比对完成一键生成 HTML 报告（报告中心版本化管理），&quot;完成并出报告&quot;把差异复核状态收敛进报告。</li>\n</ul>\n<h2>当前状态</h2>\n<p>MVP 可用（v0.1）：双文档比对、风险审查、规则中心、报告中心、条款审查主链路已跑通；\n图纸（CAD）证据与计量证据在路线图中，是刻意避开的深水区（见项目 PRD 的分阶段策略）。\n当前为私有仓库，界面演示为示例数据。</p>\n"
+      "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>合同审阅里最耗时的环节是&quot;找不同&quot;：两份几十页的合同，人工逐页比对既慢又容易漏——漏掉的\n一条付款比例改动，可能就是结算时几十万的争议。workEvidence 把这件事产品化：\n上传标准合同与待审合同，OCR 解析、页面对齐、条款级差异比对、规则风险标注一次完成，\n再以双页对照视图逐条复核，最后生成可下载的复核报告。</p>\n<h2>核心功能</h2>\n<ul>\n<li><strong>差异复核（双页对照）</strong>：按页组导航（每组显示差异计数与需复核状态），标准合同与待审合同\n双页对照，差异以红绿标注高亮；右侧风险面板按高风险 / 中风险 / 低风险分级过滤，\n逐项展示差异类型（修改 / 新增 / 删除）与原文对照；本组复核支持已确认风险、已接受差异、\n误报（忽略）、需法务处理四种结论，负责人与批注可留痕。</li>\n<li><strong>条款审查</strong>：单份合同条款级 AI 审查——按违约责任、结算、生效条款等类别给出规则命中、\n合同原文引用与修改建议（如&quot;发票违约金 100% 畸高，建议调整到不超过实际损失 30%&quot;），\n支持已有任务待审合同或新上传扫描件（gooyoo-ocr 本地服务识别），历史审查可重试与删除。</li>\n<li><strong>复核报告</strong>：差异与复核按页组汇总，差异项 / 高风险 / 中风险 / 低风险分级统计，\n一键下载 HTML / PDF 交付。</li>\n<li><strong>规则中心</strong>：系统基准规则、企业规则、候选规则三级体系（如 LIAB-001 违约金过分高于实际损失、\nQUAL-001 质量保修期低于法定最低期限），规则支持编辑、克隆、停用与全国版本化管理。</li>\n<li><strong>比对实验室与工作台</strong>：工作台聚合处理中 / 待复核 / 高风险待处理 / 本周完成四类指标，\n我的待复核、最近任务、最近报告与最近条款审查直达。</li>\n</ul>\n<h2>技术实现</h2>\n<ul>\n<li><strong>三层架构</strong>：Vue3 前端工作台 → Spring Boot Java 网关（鉴权、参数校验、产物代理）→\nFastAPI Python 服务（OCR、文档预处理、差异比对、风险判定、坐标精修）。</li>\n<li><strong>比对引擎</strong>：PaddleOCR 在线 / gooyoo-ocr 本地服务可切换，layout / text / LLM 三模式比对，\n页面对齐（page-aligned）后逐条输出带坐标的差异项，支持水印比对开关与重新比对。</li>\n<li><strong>实时流水线</strong>：比对进度经事件通道推送前端；差异复核状态写入审计，报告由复核结论收敛生成。</li>\n<li><strong>本地优先</strong>：Tauri 2 桌面端，资料与中间结果全部落本地；金额、坐标等关键数据以结构化\nJSON 存储供上层系统复用。</li>\n</ul>\n<h2>当前状态</h2>\n<p>MVP 已跑通真实合同审阅闭环：双文档比对、条款审查、规则中心、复核报告均已可用（见截图中的\n材料购销合同审阅示例）。图纸（CAD）证据与计量证据在路线图中。桌面端应用，暂以真实系统\n截图展示。</p>\n"
     },
     {
       "name": "dotnet-medical",
