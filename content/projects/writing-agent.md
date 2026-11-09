@@ -15,6 +15,10 @@ highlights:
 links: {}
 screenshots:
   - assets/screenshots/writing-agent/home.png
+  - assets/screenshots/writing-agent/thinking.png
+  - assets/screenshots/writing-agent/cards.png
+  - assets/screenshots/writing-agent/discover.png
+  - assets/screenshots/writing-agent/discover-mobile.png
 order: 3
 biz:
   - 把日常聊天式的写作素材自动沉淀成可找回、可复用的私有卡片库，写作从"翻聊天记录"变成"调自己的素材"。

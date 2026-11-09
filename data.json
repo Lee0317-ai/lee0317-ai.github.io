@@ -198,7 +198,11 @@
       ],
       "links": {},
       "screenshots": [
-        "assets/screenshots/writing-agent/home.png"
+        "assets/screenshots/writing-agent/home.png",
+        "assets/screenshots/writing-agent/thinking.png",
+        "assets/screenshots/writing-agent/cards.png",
+        "assets/screenshots/writing-agent/discover.png",
+        "assets/screenshots/writing-agent/discover-mobile.png"
       ],
       "order": 3,
       "biz": [
