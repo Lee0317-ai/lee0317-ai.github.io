@@ -21,9 +21,9 @@ highlights:
   - 多租户与细粒度权限：租户隔离、角色权限、数据权限与审计贯穿全部子系统
 links: {}
 screenshots:
-  - assets/screenshots/gooyoo/demo.gif
   - assets/screenshots/gooyoo/02-home.png
   - assets/screenshots/gooyoo/sys-certificate.png
+  - assets/screenshots/gooyoo/sys-crm.png
   - assets/screenshots/gooyoo/sys-LOT.png
   - assets/screenshots/gooyoo/sys-bidding.png
   - assets/screenshots/gooyoo/sys-project.png
@@ -32,7 +32,6 @@ screenshots:
   - assets/screenshots/gooyoo/sys-platform.png
   - assets/screenshots/gooyoo/crm-customer.png
   - assets/screenshots/gooyoo/crm-contract.png
-  - assets/screenshots/gooyoo/10-m-workbench.png
 order: 1
 biz: 为建筑工程企业交付的数字化底座：从投标拿单、项目立项、产值回款，到证书资质、印章物电、工程检测、资料归档，全业务链条一个平台管到底，并按客户需求模块化定制交付。
 ---
