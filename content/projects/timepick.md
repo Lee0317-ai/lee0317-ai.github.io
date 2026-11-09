@@ -11,7 +11,6 @@ highlights:
   - AI 智能分类自动识别并归类资源，减少手工整理
   - 全文搜索快速定位已存内容
   - 灵感速记与待办事项：记想法、管待尝试的链接和任务
-  - Supabase 后端 + shadcn/ui，已上线 shiguang.app、仓库开源
 links:
   demo: "https://shiguang.app"
   repo: "https://github.com/Lee0317-ai/TimePick"
