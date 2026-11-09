@@ -18,6 +18,8 @@ screenshots:
   - assets/screenshots/novel-agent/demo.gif
   - assets/screenshots/novel-agent/01-bookshelf.png
   - assets/screenshots/novel-agent/02-write.png
+  - assets/screenshots/novel-agent/08-prose.png
+  - assets/screenshots/novel-agent/09-agent-chat.png
   - assets/screenshots/novel-agent/03-agents.png
   - assets/screenshots/novel-agent/04-skills.png
   - assets/screenshots/novel-agent/05-memory.png
@@ -57,6 +59,7 @@ novel-agent 的回答是一条架构约束：**对话 + 工具 + 文件的三位
 
 - 单文件 React（本地 vendor 的 react + babel-standalone）+ FastAPI，REST + SSE 实时流；
 - 11 个模块：书架、写作台、Agents、Skills、方案预设、资料库、拆书、记忆、风格库、系统设置、版本管理；
+- 对话与正文同屏：每轮 Agent 执行折叠成一行摘要（N 条思考 · M 次工具 · 含子代理），展开可逐条看思考过程、工具参数与结果、子代理对话；
 - 书架"文件即真相"：封面卡只读目录元数据（合同已立、章节数、连载状态），删书先进回收站可恢复；
 - 方案预设按 kind 管理 Prompt 预设，带使用统计、停用与恢复。
 
