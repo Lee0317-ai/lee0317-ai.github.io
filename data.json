@@ -176,6 +176,37 @@
       "narrativeHtml": "<h2>它解决什么问题</h2>\n<p>中文长篇的 AI 协作写作，卡点从来不是&quot;模型写不出来&quot;，而是三件事：写到 30 章忘了第 5 章埋的伏笔；AI 一步到位改了不该改的东西；所有状态锁在数据库或云服务里，作者失去对自己稿子的控制权。</p>\n<p>novel-agent 的回答是一条架构约束：<strong>对话 + 工具 + 文件的三位一体</strong>。所有功能都必须从这三件事派生，不允许出现&quot;绕过 Agent 直接改数据&quot;的路径。一本书就是一个普通目录——chapters/ 正文、setting/ 设定正史、memory/ 记忆、journal/ 会话日志，全部是 Markdown 和 JSONL，git 可以直接管，备份就是复制目录。</p>\n<h2>技术实现</h2>\n<h3>Agent 核心 SDK（不感知写作业务）</h3>\n<ul>\n<li><strong>Journal 单一事实源</strong>：消息、工具调用、事件全部以 JSONL 持久化，冷启动可恢复；</li>\n<li><strong>Session / Run / SubAgent 任务树</strong>：主 Agent 可委派 SubAgent（读者审读、通用任务），parent/child Session 绑定，会话与书籍工作区对应；</li>\n<li><strong>权限三级 allow / confirm / deny</strong>：高危动作必须人确认，拒绝直接返回不推进状态；</li>\n<li><strong>上下文治理</strong>：旧工具结果 60% 清理（elision）、85% 触发模型生成摘要（compaction）、大结果落为不可变 artifact；</li>\n<li><strong>双 Runtime</strong>：内嵌 Python 引擎默认可用；Codex CLI / Claude Code 可作为可选子进程 Runtime，复用其工具生态——没装外部 CLI 也不影响使用。</li>\n</ul>\n<h3>写作业务层</h3>\n<ul>\n<li><strong>20 个写作技能</strong>：book-setup 立意开书、volume-planning 分卷、novel-standard / novel-lite 正文、opening-polish 开篇打磨、rewrite 重写、review 审读、reader-review 读者视角审读、de-ai-flavor / humanizer-zh 去 AI 味、style-distillation 风格蒸馏等，按需渐进披露，不一次性塞进 system prompt；</li>\n<li><strong>伏笔台账</strong>：伏笔登记 + 告警，跨章节追踪&quot;埋了没兑现&quot;的线；</li>\n<li><strong>世界脉动</strong>：让小说世界在主角视野外自行演化。裸模型生成候选事件，代码侧确定性完成节奏判断、解析与落盘——绿色事件自动追加正史（每次最多 1 条防刷屏），黄色事件要满足&quot;距上次脉动满 2 章&quot;的张力门槛并进入待裁决队列，红色事件永不自动生成、需作者裁决解锁；</li>\n<li><strong>角色决策沙盘</strong>：剧情瓶颈时代入角色视角重演决策点，认知边界由代码强制——只喂该角色认知范围内的材料，不喂全书大纲、其他角色的秘密状态和伏笔表。产出分叉卡，作者裁决后才兑现，永不直接改写已发布章节；</li>\n<li><strong>作者记忆</strong>：跨书的经验沉淀池，采纳才写入，支持合并、冲突标记、停用保留；</li>\n<li><strong>风格库与拆书</strong>：风格样本沉淀 → 蒸馏成风格卡 → 写作时注入；导入拆解的书目可沉到风格样本、方案预设或记忆。</li>\n</ul>\n<h3>Web 工作台</h3>\n<ul>\n<li>单文件 React（本地 vendor 的 react + babel-standalone）+ FastAPI，REST + SSE 实时流；</li>\n<li>11 个模块：书架、写作台、Agents、Skills、方案预设、资料库、拆书、记忆、风格库、系统设置、版本管理；</li>\n<li>对话与正文同屏：每轮 Agent 执行折叠成一行摘要（N 条思考 · M 次工具 · 含子代理），展开可逐条看思考过程、工具参数与结果、子代理对话；</li>\n<li>书架&quot;文件即真相&quot;：封面卡只读目录元数据（合同已立、章节数、连载状态），删书先进回收站可恢复；</li>\n<li>方案预设按 kind 管理 Prompt 预设，带使用统计、停用与恢复。</li>\n</ul>\n<h2>当前状态</h2>\n<p><strong>状态：进行中（wip）。</strong> 251 个测试全部通过；本机已有两部真实作品在持续写作（《我在网游里修仙》已 10+ 章），书架、写作台、记忆、风格库、拆书全流程日常可用。页面截图来自本机真实运行实例与真实书稿。</p>\n<p>已知边界：仓库私有未开源；当前形态是单机本地工作台，桌面分发与多用户未做。</p>\n"
     },
     {
+      "name": "writing-agent",
+      "title": "写作搭子 Writing Agent",
+      "tagline": "本机运行、隐私优先的 AI 写作伙伴",
+      "status": "wip",
+      "category": "agent",
+      "role": "独立开发",
+      "stack": [
+        "Python 3.11",
+        "FastAPI",
+        "Pydantic",
+        "原生 HTML/JS",
+        "OpenAI/Anthropic 兼容接口"
+      ],
+      "highlights": [
+        "项目制对话 + \"今天到这\"摘要沉淀，卡片需用户确认才入库",
+        "范文九维手法拆解：引文必须出自原文，无依据的维度不能确认",
+        "多模型服务商管理，密钥只存本机，界面不回显",
+        "AIHOT 热点发现、今日建议与每日 Windows 通知提醒",
+        "对话附件、项目资料检索、上下文预算与压缩可审计"
+      ],
+      "links": {},
+      "screenshots": [
+        "assets/screenshots/writing-agent/home.png"
+      ],
+      "order": 3,
+      "biz": [
+        "把日常聊天式的写作素材自动沉淀成可找回、可复用的私有卡片库，写作从\"翻聊天记录\"变成\"调自己的素材\"。"
+      ],
+      "narrativeHtml": "<p>写作素材平时散落在聊天记录、备忘录和各个文档里，真到动笔时要么找不到，要么懒得翻。写作搭子是一个跑在自己电脑上的 AI 写作伙伴：在它里面聊想法，聊到一段落点一下&quot;今天到这&quot;，AI 把当天的聊天提取成摘要卡片，由用户逐条确认、选择类别后才沉淀进私有卡片库；之后写稿时可以按项目、按类别把素材找回来，甚至让 Agent 带着这些素材继续聊。</p>\n<h2>它解决什么问题</h2>\n<p>通用 AI 聊天工具的问题在于&quot;聊完就散&quot;：对话越长越难复用，素材没有归属，隐私还得交给云端。写作搭子把闭环做反了过来——先在本机沉淀，再由 AI 调用：卡片默认私有、公开性默认关闭；摘要只是预览，不确认不入库；模型密钥只保存在本机配置文件里，界面只显示&quot;是否已配置&quot;。写作这件事从一次性问答，变成可以持续积累的素材资产。</p>\n<h2>技术实现</h2>\n<ul>\n<li><strong>沉淀闭环</strong>：项目制对话 + &quot;今天到这&quot;触发提取子任务，摘要预览经用户确认、归类后才写入卡片库；手动整理的卡片不会被标成 AI 产物。</li>\n<li><strong>范文拆解与手法库</strong>：粘贴范文后按开头、结构、节奏、例证、转折、金句、结尾、情绪、人称九个维度拆解；引文必须来自原文，无依据的维度拒绝确认，勾选后才进入项目方法库并可引用回对话。</li>\n<li><strong>上下文治理</strong>：用户原话、助手回复、摘要带不同来源标记；未确认预览和工具输出不进入项目记忆；压缩只改变模型看到的摘要视图，原始日志完整保留，提取失败时阻止丢弃原文。</li>\n<li><strong>本机架构</strong>：Python 3.11 + FastAPI + 原生 HTML/JS，只绑定本机地址；数据全部落在本地 workspace/（会话追加日志、Markdown 卡片、预览、运行日志），支持 OpenAI 兼容与 Anthropic Messages 双协议服务商，逐模型设置上下文窗口。</li>\n<li><strong>发现与提醒</strong>：接入 AIHOT 只读公开源展示 24 小时精选；按项目、按自然日生成&quot;今日建议&quot;；每日 21:00 Windows 通知提醒，通知只含通用提示，不带私人题材。</li>\n</ul>\n<h2>当前状态</h2>\n<p>对话、沉淀、手法库、附件、发现、今日建议与每日提醒均已可用，配套 pytest 回归与浏览器验收脚本；沙箱执行（Windows 原生）与 MCP 工具接入在推进中。项目保持&quot;本机优先、确认才入库&quot;的边界持续迭代。</p>\n"
+    },
+    {
       "name": "zero",
       "title": "Zero 个人智能工作台",
       "tagline": "一人公司 OS / 本地优先的个人成长引擎",
