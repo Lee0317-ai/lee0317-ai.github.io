@@ -12,9 +12,14 @@ highlights:
   - 多模型服务商管理，密钥只存本机，界面不回显
   - AIHOT 热点发现、今日建议与每日 Windows 通知提醒
   - 对话附件、项目资料检索、上下文预算与压缩可审计
+  - 配图工作台：AI 规划封面与插图，逐项确认提示词后才生成，图片入资产库可复用
 links: {}
 screenshots:
   - assets/screenshots/writing-agent/home.png
+  - assets/screenshots/writing-agent/illustration.png
+  - assets/screenshots/writing-agent/illustration-editor.png
+  - assets/screenshots/writing-agent/assets.png
+  - assets/screenshots/writing-agent/preview.png
   - assets/screenshots/writing-agent/thinking.png
   - assets/screenshots/writing-agent/cards.png
   - assets/screenshots/writing-agent/discover.png
